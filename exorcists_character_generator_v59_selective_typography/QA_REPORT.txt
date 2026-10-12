@@ -1,0 +1,9 @@
+v59 / selective typography QA
+
+320x568: heading font mapping correct; book/player states/rules/ball load; 0 JS errors; no page overflow
+390x844: heading font mapping correct; book/player states/rules/ball load; 0 JS errors; no page overflow
+740x900: heading font mapping correct; book/player states/rules/ball load; 0 JS errors; no page overflow
+1440x900: heading font mapping correct; book/player states/rules/ball load; 0 JS errors; no page overflow
+Offline standalone HTML loads custom v58 face, game starts, and real 3D ball roll finishes normally
+
+Confirmed in Chromium mobile emulation + desktop. Physical iPhone/WebKit and font CDN online loading were not verified.
