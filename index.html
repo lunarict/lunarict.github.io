@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="app-revision" content="v56-material-1.8.0">
+  <meta name="app-revision" content="v56-material-1.9.0">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#09080d">
   <meta name="color-scheme" content="dark">
@@ -7233,6 +7233,93 @@ body::before {
  }
 }
 
+
+/* =======================================================================
+   v56.1.9 / MOBILE COMPOSITOR FIX (original v56.1.8 choreography preserved)
+
+   Main problem in iOS-like pipelines: six independently alpha-masked 3D
+   cube faces, each with animated CSS blur, plus per-face SVG shadow filters,
+   are rasterized again every frame inside multiple nested circular clips.
+   The existing ink veil creates the soft optical fade without rerasterizing
+   those six expensive planes. Keep all glass & fluid circular containment.
+   Movement, timing, orbit, highlights and external silhouette are unchanged.
+   ======================================================================= */
+@media (max-width:800px), (hover:none) and (pointer:coarse) {
+  /* Only ONE clip around the entire cube/liquid remains (the established
+     round magic-ball-cube-clip), not six extra per-face alpha masks. */
+  #magic-ball-dialog .magic-cube-face {
+    -webkit-mask-image:none !important;
+    mask-image:none !important;
+    filter:none !important;
+  }
+  /* Blurring 18 SVG numeral layers during an animated CSS-3D rotation is a
+     common WebKit slow-path. Their cast/side shapes keep the relief. */
+  #magic-ball-dialog .magic-cube-face .cube-numeral-surface,
+  #magic-ball-dialog .magic-cube-face .cube-numeral-cast,
+  #magic-ball-dialog .magic-cube-face .cube-numeral-side {
+    -webkit-filter:none !important;
+    filter:none !important;
+  }
+  /* Real photographed glossy shell already includes micro scratches/grain.
+     This extra large blended pseudo layer doubles the mobile texture pass. */
+  #magic-ball-dialog .magic-ball::before {
+    content:none !important;
+    display:none !important;
+  }
+  /* Diffuse shadow is already soft radial ink; per-frame blur of a large
+     ellipse below the sphere is unnecessary and expensive on iOS. */
+  #magic-ball-dialog .magic-ball-stage .magic-ball-cast-shadow {
+    -webkit-filter:none !important;
+    filter:none !important;
+    /* A single softer falloff replaces the duplicated concentric ellipses. */
+    background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.66) 0%,rgba(0,0,0,.46) 18%,rgba(0,0,0,.24) 39%,rgba(0,0,0,.07) 59%,transparent 88%)!important;
+  }
+  #magic-ball-dialog .magic-ball-stage .magic-ball-cast-shadow::before {
+    content:none !important;
+    display:none !important;
+  }
+  /* Two compositor-friendly tracks carry the same original movement and
+     opacity as v44-die-dive/rise, omitting per-frame filter/custom-variable
+     interpolation across all cube faces. The ink veil still hides and
+     optically scatters the number as the blue liquid darkens. */
+  #magic-ball-dialog .magic-ball.ball-mixing .magic-ball-fluid {
+    animation:v5619-mobile-fluid-dive 1.11s ease-in-out 480ms both !important;
+    filter:none !important;
+  }
+  #magic-ball-dialog .magic-ball.ball-rising .magic-ball-fluid {
+    animation:v5619-mobile-fluid-rise 1.08s cubic-bezier(.18,.65,.24,1) both !important;
+    filter:none !important;
+  }
+  #magic-ball-dialog .magic-ball.ball-submerged .magic-ball-fluid {filter:none !important;}
+  /* The original room reflections and moving optics are kept, not frozen.
+     Release short-lived GPU hints once the throw stops. */
+  #magic-ball-dialog .magic-ball:not(.ball-mixing):not(.ball-rising) .magic-ball-liquid {will-change:auto!important;}
+  #magic-ball-dialog .magic-ball.ball-mixing .magic-ball-liquid,
+  #magic-ball-dialog .magic-ball.ball-rising .magic-ball-liquid {will-change:transform,opacity;}
+}
+@keyframes v5619-mobile-fluid-dive {
+  0%{transform:translate(-50%,-50%) translate3d(0,0,0) scale(1);opacity:1}
+  10%{transform:translate(-50%,-50%) translate3d(-5px,5px,0) scale(1);opacity:.985}
+  20%{transform:translate(-50%,-50%) translate3d(9px,-6px,0) scale(.995);opacity:.84}
+  29%{transform:translate(-50%,-50%) translate3d(-7px,7px,0) scale(.987);opacity:.55}
+  38%{transform:translate(-50%,-50%) translate3d(4px,5px,0) scale(.974);opacity:.20}
+  47%{transform:translate(-50%,-50%) translate3d(0,7px,0) scale(.965);opacity:.012}
+  54%,100%{transform:translate(-50%,-50%) translate3d(0,7px,0) scale(.965);opacity:0}
+}
+@keyframes v5619-mobile-fluid-rise {
+  0%{transform:translate(-50%,-50%) translate3d(0,7px,0) scale(.965);opacity:0}
+  16%{transform:translate(-50%,-50%) translate3d(2px,6px,0) scale(.970);opacity:.22}
+  34%{transform:translate(-50%,-50%) translate3d(-2px,3px,0) scale(.985);opacity:.70}
+  54%{transform:translate(-50%,-50%) translate3d(0,1px,0) scale(.995);opacity:.95}
+  72%{transform:translate(-50%,-50%) translate3d(0,-1px,0) scale(1.004);opacity:1}
+  87%{transform:translate(-50%,-50%) translate3d(0,.4px,0) scale(.999);opacity:1}
+  100%{transform:translate(-50%,-50%) translate3d(0,0,0) scale(1);opacity:1}
+}
+@media (prefers-reduced-motion:reduce) {
+  #magic-ball-dialog .magic-ball.ball-mixing .magic-ball-fluid,
+  #magic-ball-dialog .magic-ball.ball-rising .magic-ball-fluid {animation:none!important;}
+}
+
 </style>
   <title>Битва экзорцистов</title>
 </head>
@@ -8637,6 +8724,26 @@ const BALL_MIX_MS = 1720;
 const BALL_DARK_MS = 165;
 const BALL_RETURN_MS = 1080;
 
+/* Tactile cube inertia. The event fires after CSS's 480 ms animation delay,
+   not when the sphere first moves. Sensor-triggered and tap-triggered rolls
+   share this single path, so there is never a double vibration. */
+let cubeHapticFired = false;
+function handleCubeAnimationStart(event) {
+  if (event.target?.id !== 'magic-cube' ||
+      event.animationName !== 'v43-cube-tumble' ||
+      !magicBallBusy || cubeHapticFired) return;
+  cubeHapticFired = true;
+  if (!motionIsMobile() || document.hidden ||
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+  try {
+    if (typeof navigator.vibrate === 'function') {
+      // A brief double impact and one smaller follow-through, not constant buzz.
+      navigator.vibrate([16, 27, 20, 38, 11]);
+    }
+  } catch (_) { /* Unsupported iOS/WebKit and other browsers remain usable. */ }
+}
+
+
 function clearMagicBallTimers() {
   magicBallTimers.forEach(timer => clearTimeout(timer));
   magicBallTimers = [];
@@ -8649,6 +8756,7 @@ function orientCube(ball, prefix, value) {
 }
 
 function resetBallAnimation() {
+  cubeHapticFired = false;
   const ball = $('#magic-ball');
   if (!ball) return;
   ball.classList.remove('ball-mixing', 'ball-submerged', 'ball-rising', 'ball-diving', 'shaking', 'settled', 'omen-six', 'omen-one');
@@ -8705,6 +8813,8 @@ function motionVector(vector) {
 function handleMagicDeviceMotion(event) {
   const dialog = $('#magic-ball-dialog');
   if (!magicMotion.listening || !dialog?.open || document.hidden) return;
+  // DeviceMotion can fire ~100 times per second; pause work during a roll.
+  if (magicBallBusy || performance.now() < magicMotion.cooldownUntil) return;
   const direct = motionVector(event.acceleration);
   const includingGravity = motionVector(event.accelerationIncludingGravity);
   const rotation = event.rotationRate;
@@ -8736,10 +8846,6 @@ function handleMagicDeviceMotion(event) {
   const strength = Math.max(accelerationStrength / 9.5, rotationSpeed / 230);
 
   const now = performance.now();
-  if (magicBallBusy || now < magicMotion.cooldownUntil) {
-    clearMotionPeaks();
-    return;
-  }
   // Two distinct jolts within one second: a deliberate back-and-forth shake,
   // not an accidental nudge while holding or turning the phone.
   const high = strength >= 1;
@@ -8756,7 +8862,6 @@ function handleMagicDeviceMotion(event) {
       clearMotionPeaks();
       // Shake and tap intentionally call the exact same roll routine.
       rollMagicBall();
-      try { if (typeof navigator.vibrate === 'function') navigator.vibrate(12); } catch {}
     }
   }
   magicMotion.above = strength >= .64;
@@ -9191,6 +9296,7 @@ function setupEvents() {
   $('#open-magic-ball-home').addEventListener('click', openMagicBall);
   $('#open-magic-ball-game').addEventListener('click', openMagicBall);
   $('#magic-ball').addEventListener('click', rollMagicBall);
+  $('#magic-cube').addEventListener('animationstart', handleCubeAnimationStart);
   $('#enable-magic-motion').addEventListener('click', requestMagicMotionPermission);
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) stopMagicMotion();
