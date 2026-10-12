@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="app-revision" content="v56-material-1.5.0">
+  <meta name="app-revision" content="v56-material-1.6.0">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#09080d">
   <meta name="color-scheme" content="dark">
@@ -6359,67 +6359,223 @@ body::before {
   filter:blur(8px);
   opacity:.76;
 }
-/* Gentle depth pulse (approach/retreat from viewer), lateral inertia,
-   and a decaying angular recoil; identical 1.11 s roll timeline. */
+
+/* ============================================================================
+   v56.1.6 — CLASSIC MOTION PRINCIPLES / WEIGHTED, CURVED, RIGID-BODY SHAKE
+
+   Revised after analysing all 24 frames of v56.1.5 preview GIF. Problems:
+   1) Opposing 10-15%-long jolts gave every layer unrelated hard impulses.
+   2) Lens was squashed to 81% of its width during 3D orbit illusion.
+   3) Strong repeated specular flashes fought the ball's apparent weight.
+
+   Direction: subtle anticipation -> ONE primary impulse along a true curved
+   arc -> counterstroke -> damped secondary action / settle. Each pose has
+   shared beats; insert, light and shadow respond with SMALL phase delays.
+   40 piecewise LINEAR compositor keyframes sample smooth cubic Hermite
+   trajectories; the mathematical curves are C1 continuous at anchor poses,
+   so they have none of the velocity jumps from the previous version.
+   Only transforms and opacity animate; no JS loops, paint-heavy filters or
+   time changes to the cube/ink. A physically rigid sphere may only translate,
+   rotate in-plane, and UNIFORMLY scale. Glass and bezel remain concentric.
+   Max aperture foreshortening: .4%, previously 19%.
+   ============================================================================ */
+#magic-ball-dialog .magic-ball {transform-origin:50% 50%!important;}
+#magic-ball-dialog .magic-ball-orbit {transform-origin:50% 50%!important;transform:translate3d(0,0,0) scaleX(1);}
 #magic-ball-dialog .magic-ball.ball-mixing {
-  animation:v5615-body-shake 1.11s cubic-bezier(.27,.07,.35,.97) both!important;
+  animation:v5616-body-arc 1.11s linear both!important;
+  will-change:transform;
 }
 #magic-ball-dialog .magic-ball.ball-mixing .magic-ball-orbit {
-  animation:v5615-orbit-shake 1.11s cubic-bezier(.27,.07,.35,.97) both!important;
+  animation:v5616-optics-lag 1.11s linear both!important;
+  will-change:transform;
 }
 #magic-ball-dialog .magic-ball.ball-mixing .magic-ball-surface::after {
-  animation:v5615-specular-shift 1.11s cubic-bezier(.27,.07,.35,.97) both;
+  animation:v5616-light-follow 1.11s linear both!important;
+  will-change:transform,opacity;
 }
 #magic-ball-dialog .magic-ball-stage:has(.magic-ball.ball-mixing) .magic-ball-cast-shadow {
-  animation:v5615-cast-shadow 1.11s cubic-bezier(.27,.07,.35,.97) both!important;
+  animation:v5616-floor-shadow 1.11s linear both!important;
+  will-change:transform,opacity;
 }
-@keyframes v5615-body-shake {
-  0%   {transform:translate3d(0,0,0) rotate(0) scale(1)}
-  10%  {transform:translate3d(-7px,-11px,0) rotate(-4.1deg) scale(1.025)}
-  22%  {transform:translate3d(8px,8px,0) rotate(4.7deg) scale(.975)}
-  35%  {transform:translate3d(-8px,-12px,0) rotate(-5.1deg) scale(1.035)}
-  49%  {transform:translate3d(7px,6px,0) rotate(3.8deg) scale(.982)}
-  65%  {transform:translate3d(-5px,-4px,0) rotate(-2.4deg) scale(1.014)}
-  81%  {transform:translate3d(2px,1px,0) rotate(.9deg) scale(.997)}
-  93%  {transform:translate3d(-.7px,-.5px,0) rotate(-.35deg) scale(1.002)}
-  100% {transform:none}
+@keyframes v5616-body-arc {
+  0% {transform:translate3d(0%,0%,0) rotate(0deg) scale(1)}
+  2.5% {transform:translate3d(0.109%,0.078%,0) rotate(0.102deg) scale(1.0002)}
+  5% {transform:translate3d(0.35%,0.25%,0) rotate(0.325deg) scale(1.0005)}
+  7.5% {transform:translate3d(0.591%,0.422%,0) rotate(0.548deg) scale(1.0008)}
+  10% {transform:translate3d(0.7%,0.5%,0) rotate(0.65deg) scale(1.001)}
+  12.5% {transform:translate3d(0.556%,0.388%,0) rotate(0.502deg) scale(1.0015)}
+  15% {transform:translate3d(0.177%,0.095%,0) rotate(0.111deg) scale(1.0027)}
+  17.5% {transform:translate3d(-0.36%,-0.316%,0) rotate(-0.442deg) scale(1.0045)}
+  20% {transform:translate3d(-0.975%,-0.78%,0) rotate(-1.075deg) scale(1.0065)}
+  22.5% {transform:translate3d(-1.59%,-1.234%,0) rotate(-1.708deg) scale(1.0085)}
+  25% {transform:translate3d(-2.127%,-1.615%,0) rotate(-2.261deg) scale(1.0103)}
+  27.5% {transform:translate3d(-2.506%,-1.858%,0) rotate(-2.652deg) scale(1.0115)}
+  30% {transform:translate3d(-2.65%,-1.9%,0) rotate(-2.8deg) scale(1.012)}
+  32.5% {transform:translate3d(-2.468%,-1.723%,0) rotate(-2.612deg) scale(1.0115)}
+  35% {transform:translate3d(-1.985%,-1.387%,0) rotate(-2.113deg) scale(1.01)}
+  37.5% {transform:translate3d(-1.294%,-0.947%,0) rotate(-1.401deg) scale(1.0079)}
+  40% {transform:translate3d(-0.491%,-0.457%,0) rotate(-0.571deg) scale(1.0055)}
+  42.5% {transform:translate3d(0.331%,0.027%,0) rotate(0.277deg) scale(1.003)}
+  45% {transform:translate3d(1.078%,0.451%,0) rotate(1.048deg) scale(1.0008)}
+  47.5% {transform:translate3d(1.656%,0.762%,0) rotate(1.644deg) scale(0.999)}
+  50% {transform:translate3d(1.969%,0.903%,0) rotate(1.968deg) scale(0.9981)}
+  52.5% {transform:translate3d(1.947%,0.846%,0) rotate(1.949deg) scale(0.9981)}
+  55% {transform:translate3d(1.657%,0.677%,0) rotate(1.669deg) scale(0.9987)}
+  57.5% {transform:translate3d(1.187%,0.441%,0) rotate(1.214deg) scale(0.9996)}
+  60% {transform:translate3d(0.618%,0.173%,0) rotate(0.664deg) scale(1.0008)}
+  62.5% {transform:translate3d(0.033%,-0.09%,0) rotate(0.099deg) scale(1.0019)}
+  65% {transform:translate3d(-0.486%,-0.314%,0) rotate(-0.403deg) scale(1.003)}
+  67.5% {transform:translate3d(-0.858%,-0.463%,0) rotate(-0.763deg) scale(1.0037)}
+  70% {transform:translate3d(-1%,-0.5%,0) rotate(-0.9deg) scale(1.004)}
+  72.5% {transform:translate3d(-0.93%,-0.439%,0) rotate(-0.834deg) scale(1.0038)}
+  75% {transform:translate3d(-0.75%,-0.331%,0) rotate(-0.664deg) scale(1.0032)}
+  77.5% {transform:translate3d(-0.505%,-0.197%,0) rotate(-0.434deg) scale(1.0024)}
+  80% {transform:translate3d(-0.243%,-0.06%,0) rotate(-0.187deg) scale(1.0015)}
+  82.5% {transform:translate3d(-0.008%,0.057%,0) rotate(0.034deg) scale(1.0007)}
+  85% {transform:translate3d(0.154%,0.134%,0) rotate(0.187deg) scale(1.0002)}
+  87.5% {transform:translate3d(0.199%,0.148%,0) rotate(0.229deg) scale(1)}
+  90% {transform:translate3d(0.173%,0.123%,0) rotate(0.199deg) scale(1)}
+  92.5% {transform:translate3d(0.123%,0.085%,0) rotate(0.141deg) scale(1)}
+  95% {transform:translate3d(0.066%,0.045%,0) rotate(0.076deg) scale(1)}
+  97.5% {transform:translate3d(0.019%,0.013%,0) rotate(0.022deg) scale(1)}
+  100% {transform:translate3d(0%,0%,0) rotate(0deg) scale(1)}
 }
-@keyframes v5615-orbit-shake {
-  0%,100% {transform:translate3d(0,0,0) scaleX(1) scaleY(1) rotateZ(0)}
-  10%  {transform:translate3d(-16px,6px,0) scaleX(.84) scaleY(.955) rotateZ(-3deg)}
-  22%  {transform:translate3d(16px,-4px,0) scaleX(.86) scaleY(.96) rotateZ(3deg)}
-  35%  {transform:translate3d(-19px,7px,0) scaleX(.81) scaleY(.95) rotateZ(-3.8deg)}
-  49%  {transform:translate3d(15px,-5px,0) scaleX(.87) scaleY(.965) rotateZ(2.9deg)}
-  65%  {transform:translate3d(-9px,3px,0) scaleX(.94) scaleY(.985) rotateZ(-1.4deg)}
-  81%  {transform:translate3d(3px,-1px,0) scaleX(.99) scaleY(.997) rotateZ(.6deg)}
-  93%  {transform:translate3d(-.8px,.3px,0) scaleX(.998) scaleY(1) rotateZ(-.2deg)}
+@keyframes v5616-optics-lag {
+  0% {transform:translate3d(0%,0%,0) scaleX(1)}
+  2.5% {transform:translate3d(0.034%,0.013%,0) scaleX(0.9999)}
+  5% {transform:translate3d(0.117%,0.044%,0) scaleX(0.9997)}
+  7.5% {transform:translate3d(0.221%,0.083%,0) scaleX(0.9994)}
+  10% {transform:translate3d(0.321%,0.12%,0) scaleX(0.9992)}
+  12.5% {transform:translate3d(0.387%,0.145%,0) scaleX(0.999)}
+  15% {transform:translate3d(0.386%,0.152%,0) scaleX(0.999)}
+  17.5% {transform:translate3d(0.237%,0.169%,0) scaleX(0.9988)}
+  20% {transform:translate3d(-0.036%,0.202%,0) scaleX(0.9984)}
+  22.5% {transform:translate3d(-0.39%,0.244%,0) scaleX(0.9979)}
+  25% {transform:translate3d(-0.779%,0.293%,0) scaleX(0.9974)}
+  27.5% {transform:translate3d(-1.159%,0.342%,0) scaleX(0.9969)}
+  30% {transform:translate3d(-1.485%,0.388%,0) scaleX(0.9964)}
+  32.5% {transform:translate3d(-1.714%,0.426%,0) scaleX(0.9961)}
+  35% {transform:translate3d(-1.8%,0.45%,0) scaleX(0.996)}
+  37.5% {transform:translate3d(-1.679%,0.434%,0) scaleX(0.996)}
+  40% {transform:translate3d(-1.356%,0.365%,0) scaleX(0.9961)}
+  42.5% {transform:translate3d(-0.896%,0.258%,0) scaleX(0.9963)}
+  45% {transform:translate3d(-0.361%,0.13%,0) scaleX(0.9965)}
+  47.5% {transform:translate3d(0.188%,-0.005%,0) scaleX(0.9966)}
+  50% {transform:translate3d(0.685%,-0.131%,0) scaleX(0.9968)}
+  52.5% {transform:translate3d(1.07%,-0.232%,0) scaleX(0.9969)}
+  55% {transform:translate3d(1.28%,-0.291%,0) scaleX(0.997)}
+  57.5% {transform:translate3d(1.265%,-0.297%,0) scaleX(0.997)}
+  60% {transform:translate3d(1.077%,-0.259%,0) scaleX(0.9972)}
+  62.5% {transform:translate3d(0.771%,-0.19%,0) scaleX(0.9975)}
+  65% {transform:translate3d(0.402%,-0.103%,0) scaleX(0.9979)}
+  67.5% {transform:translate3d(0.022%,-0.012%,0) scaleX(0.9983)}
+  70% {transform:translate3d(-0.316%,0.071%,0) scaleX(0.9987)}
+  72.5% {transform:translate3d(-0.558%,0.133%,0) scaleX(0.9989)}
+  75% {transform:translate3d(-0.65%,0.16%,0) scaleX(0.999)}
+  77.5% {transform:translate3d(-0.593%,0.152%,0) scaleX(0.9991)}
+  80% {transform:translate3d(-0.45%,0.124%,0) scaleX(0.9993)}
+  82.5% {transform:translate3d(-0.265%,0.084%,0) scaleX(0.9995)}
+  85% {transform:translate3d(-0.08%,0.044%,0) scaleX(0.9997)}
+  87.5% {transform:translate3d(0.063%,0.013%,0) scaleX(0.9999)}
+  90% {transform:translate3d(0.12%,0%,0) scaleX(1)}
+  92.5% {transform:translate3d(0.101%,0%,0) scaleX(1)}
+  95% {transform:translate3d(0.06%,0%,0) scaleX(1)}
+  97.5% {transform:translate3d(0.019%,0%,0) scaleX(1)}
+  100% {transform:translate3d(0%,0%,0) scaleX(1)}
 }
-@keyframes v5615-specular-shift {
-  0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.34}
-  10% {transform:translate3d(14px,-6px,0) scale(1.07);opacity:.50}
-  22% {transform:translate3d(-17px,4px,0) scale(.97);opacity:.24}
-  35% {transform:translate3d(17px,-7px,0) scale(1.1);opacity:.55}
-  49% {transform:translate3d(-14px,4px,0) scale(.96);opacity:.23}
-  65% {transform:translate3d(7px,-3px,0) scale(1.035);opacity:.40}
-  81% {transform:translate3d(-3px,1px,0) scale(.99);opacity:.31}
+@keyframes v5616-light-follow {
+  0% {transform:translate3d(0%,0%,0);opacity:0.34}
+  2.5% {transform:translate3d(-0.015%,0.012%,0);opacity:0.3394}
+  5% {transform:translate3d(-0.052%,0.042%,0);opacity:0.3379}
+  7.5% {transform:translate3d(-0.103%,0.082%,0);opacity:0.3359}
+  10% {transform:translate3d(-0.158%,0.126%,0);opacity:0.3337}
+  12.5% {transform:translate3d(-0.207%,0.165%,0);opacity:0.3317}
+  15% {transform:translate3d(-0.24%,0.192%,0);opacity:0.3304}
+  17.5% {transform:translate3d(-0.248%,0.199%,0);opacity:0.3301}
+  20% {transform:translate3d(-0.171%,0.156%,0);opacity:0.332}
+  22.5% {transform:translate3d(-0.008%,0.065%,0);opacity:0.3362}
+  25% {transform:translate3d(0.216%,-0.059%,0);opacity:0.342}
+  27.5% {transform:translate3d(0.472%,-0.201%,0);opacity:0.3486}
+  30% {transform:translate3d(0.734%,-0.346%,0);opacity:0.3554}
+  32.5% {transform:translate3d(0.974%,-0.478%,0);opacity:0.3616}
+  35% {transform:translate3d(1.165%,-0.581%,0);opacity:0.3665}
+  37.5% {transform:translate3d(1.279%,-0.641%,0);opacity:0.3695}
+  40% {transform:translate3d(1.284%,-0.641%,0);opacity:0.3696}
+  42.5% {transform:translate3d(1.121%,-0.568%,0);opacity:0.3651}
+  45% {transform:translate3d(0.825%,-0.438%,0);opacity:0.357}
+  47.5% {transform:translate3d(0.446%,-0.273%,0);opacity:0.3467}
+  50% {transform:translate3d(0.036%,-0.097%,0);opacity:0.3355}
+  52.5% {transform:translate3d(-0.354%,0.07%,0);opacity:0.3249}
+  55% {transform:translate3d(-0.671%,0.205%,0);opacity:0.3162}
+  57.5% {transform:translate3d(-0.865%,0.286%,0);opacity:0.311}
+  60% {transform:translate3d(-0.89%,0.295%,0);opacity:0.3102}
+  62.5% {transform:translate3d(-0.788%,0.253%,0);opacity:0.3127}
+  65% {transform:translate3d(-0.605%,0.178%,0);opacity:0.3171}
+  67.5% {transform:translate3d(-0.373%,0.086%,0);opacity:0.3226}
+  70% {transform:translate3d(-0.128%,-0.012%,0);opacity:0.3285}
+  72.5% {transform:translate3d(0.096%,-0.101%,0);opacity:0.3339}
+  75% {transform:translate3d(0.266%,-0.168%,0);opacity:0.338}
+  77.5% {transform:translate3d(0.347%,-0.199%,0);opacity:0.3399}
+  80% {transform:translate3d(0.328%,-0.19%,0);opacity:0.34}
+  82.5% {transform:translate3d(0.253%,-0.156%,0);opacity:0.34}
+  85% {transform:translate3d(0.147%,-0.109%,0);opacity:0.34}
+  87.5% {transform:translate3d(0.037%,-0.06%,0);opacity:0.34}
+  90% {transform:translate3d(-0.053%,-0.021%,0);opacity:0.34}
+  92.5% {transform:translate3d(-0.099%,-0.001%,0);opacity:0.34}
+  95% {transform:translate3d(-0.08%,0%,0);opacity:0.34}
+  97.5% {transform:translate3d(-0.029%,0%,0);opacity:0.34}
+  100% {transform:translate3d(0%,0%,0);opacity:0.34}
 }
-@keyframes v5615-cast-shadow {
-  0%,100%{transform:translateX(-50%) scaleX(1.06);opacity:.76}
-  10%{transform:translateX(-50%) scale(1.11,.90);opacity:.51}
-  22%{transform:translateX(-50%) scale(.96,1.08);opacity:.86}
-  35%{transform:translateX(-50%) scale(1.15,.88);opacity:.49}
-  49%{transform:translateX(-50%) scale(.98,1.08);opacity:.86}
-  65%{transform:translateX(-50%) scale(1.07,.94);opacity:.60}
-  81%{transform:translateX(-50%) scaleX(1.055);opacity:.73}
+@keyframes v5616-floor-shadow {
+  0% {transform:translateX(-50%) scale(1.06,1);opacity:0.76}
+  2.5% {transform:translateX(-50%) scale(1.0597,1.0007);opacity:0.76}
+  5% {transform:translateX(-50%) scale(1.0588,1.0023);opacity:0.76}
+  7.5% {transform:translateX(-50%) scale(1.0577,1.0045);opacity:0.76}
+  10% {transform:translateX(-50%) scale(1.0566,1.0068);opacity:0.76}
+  12.5% {transform:translateX(-50%) scale(1.0556,1.0088);opacity:0.76}
+  15% {transform:translateX(-50%) scale(1.0551,1.0099);opacity:0.76}
+  17.5% {transform:translateX(-50%) scale(1.0556,1.0093);opacity:0.7584}
+  20% {transform:translateX(-50%) scale(1.059,1.0054);opacity:0.7497}
+  22.5% {transform:translateX(-50%) scale(1.0645,0.9992);opacity:0.7356}
+  25% {transform:translateX(-50%) scale(1.0711,0.9916);opacity:0.7185}
+  27.5% {transform:translateX(-50%) scale(1.0779,0.9838);opacity:0.701}
+  30% {transform:translateX(-50%) scale(1.084,0.9769);opacity:0.6854}
+  32.5% {transform:translateX(-50%) scale(1.0883,0.9719);opacity:0.6743}
+  35% {transform:translateX(-50%) scale(1.09,0.97);opacity:0.67}
+  37.5% {transform:translateX(-50%) scale(1.0878,0.972);opacity:0.6751}
+  40% {transform:translateX(-50%) scale(1.0821,0.9772);opacity:0.6886}
+  42.5% {transform:translateX(-50%) scale(1.074,0.9846);opacity:0.7079}
+  45% {transform:translateX(-50%) scale(1.0645,0.9932);opacity:0.7304}
+  47.5% {transform:translateX(-50%) scale(1.0547,1.0021);opacity:0.7533}
+  50% {transform:translateX(-50%) scale(1.0459,1.0101);opacity:0.7742}
+  52.5% {transform:translateX(-50%) scale(1.0391,1.0163);opacity:0.7904}
+  55% {transform:translateX(-50%) scale(1.0354,1.0197);opacity:0.7991}
+  57.5% {transform:translateX(-50%) scale(1.0356,1.0195);opacity:0.7989}
+  60% {transform:translateX(-50%) scale(1.0392,1.0169);opacity:0.7927}
+  62.5% {transform:translateX(-50%) scale(1.0449,1.0126);opacity:0.7826}
+  65% {transform:translateX(-50%) scale(1.052,1.0072);opacity:0.7702}
+  67.5% {transform:translateX(-50%) scale(1.0595,1.0017);opacity:0.7572}
+  70% {transform:translateX(-50%) scale(1.0664,0.9965);opacity:0.7451}
+  72.5% {transform:translateX(-50%) scale(1.0718,0.9924);opacity:0.7357}
+  75% {transform:translateX(-50%) scale(1.0747,0.9902);opacity:0.7305}
+  77.5% {transform:translateX(-50%) scale(1.0746,0.9902);opacity:0.7307}
+  80% {transform:translateX(-50%) scale(1.0727,0.9916);opacity:0.7347}
+  82.5% {transform:translateX(-50%) scale(1.0696,0.9936);opacity:0.7408}
+  85% {transform:translateX(-50%) scale(1.0661,0.9959);opacity:0.7478}
+  87.5% {transform:translateX(-50%) scale(1.0629,0.9981);opacity:0.7542}
+  90% {transform:translateX(-50%) scale(1.0606,0.9996);opacity:0.7587}
+  92.5% {transform:translateX(-50%) scale(1.06,1);opacity:0.76}
+  95% {transform:translateX(-50%) scale(1.06,1);opacity:0.76}
+  97.5% {transform:translateX(-50%) scale(1.06,1);opacity:0.76}
+  100% {transform:translateX(-50%) scale(1.06,1);opacity:0.76}
 }
-/* Don't interfere with the 3D die animation or accessibility preference. */
-@media(prefers-reduced-motion:reduce){
-  #magic-ball-dialog .magic-ball.ball-mixing,
-  #magic-ball-dialog .magic-ball.ball-mixing .magic-ball-orbit,
-  #magic-ball-dialog .magic-ball.ball-mixing .magic-ball-surface::after,
-  #magic-ball-dialog .magic-ball-stage:has(.magic-ball.ball-mixing) .magic-ball-cast-shadow{
-    animation:none!important;
-  }
+@media(prefers-reduced-motion:reduce) {
+ #magic-ball-dialog .magic-ball.ball-mixing,
+ #magic-ball-dialog .magic-ball.ball-mixing .magic-ball-orbit,
+ #magic-ball-dialog .magic-ball.ball-mixing .magic-ball-surface::after,
+ #magic-ball-dialog .magic-ball-stage:has(.magic-ball.ball-mixing) .magic-ball-cast-shadow {
+   animation:none!important;will-change:auto;
+ }
 }
 
 </style>
