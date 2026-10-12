@@ -1,0 +1,67 @@
+/* Offline shell cache, v59 selective typography. All referenced files exist in ZIP. */
+const CACHE = 'battle-exorcists-prod-v59-1.4.0';
+const PRECACHE = [
+  './', './index.html', './styles.css', './app.js', './manifest.json',
+  './assets/exorcists-angular.woff2',
+  './icon.svg', './icon-192.png', './icon-512.png',
+  './icon-maskable-512.png', './apple-touch-icon.png',
+  './assets/parchment-fibers.webp', './assets/aged-cover.webp',
+  './assets/laid-rag.webp', './assets/flecked-vellum.webp',
+  './assets/soft-kraft.webp', './assets/bookcloth-weave.webp',
+  './assets/paper-tape.webp', './assets/liquid-caustics.webp',
+  './assets/leather-pressed.webp', './assets/felt-needled.webp',
+  './assets/metal-handbrushed.webp', './assets/paper-ink-flecks.webp',
+  './assets/torn-note-1.png', './assets/torn-note-2.png',
+  './assets/torn-note-3.png', './assets/torn-note-4.png',
+  './assets/torn-note-5.png', './assets/torn-note-6.png'
+];
+self.addEventListener('install', event => {
+  event.waitUntil(caches.open(CACHE)
+    .then(cache => cache.addAll(PRECACHE))
+    .then(() => self.skipWaiting()));
+});
+self.addEventListener('activate', event => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(key => key.startsWith('battle-exorcists-') && key !== CACHE)
+      .map(key => caches.delete(key)));
+    await self.clients.claim();
+  })());
+});
+self.addEventListener('fetch', event => {
+  const req = event.request;
+  if (req.method !== 'GET') return;
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin) return;
+  const canonical = new Request(url.origin + url.pathname);
+  const code = req.mode === 'navigate' || /\.(?:html|js|css)$/.test(url.pathname);
+  if (code) {
+    event.respondWith((async () => {
+      try {
+        // Always try the freshly deployed release, including Safari reloads.
+        const res = await fetch(req, {cache:'no-store'});
+        if (res.ok) {
+          const cache = await caches.open(CACHE);
+          try { await cache.put(canonical, res.clone()); } catch (_) { /* Non-fatal quota limit. */ }
+        }
+        return res;
+      } catch (error) {
+        const cache = await caches.open(CACHE);
+        return await cache.match(canonical) ||
+          (req.mode === 'navigate' ? await cache.match('./index.html') : undefined) ||
+          Response.error();
+      }
+    })());
+  } else {
+    event.respondWith((async () => {
+      const cache = await caches.open(CACHE);
+      const cached = await cache.match(canonical);
+      if (cached) return cached;
+      const res = await fetch(req);
+      if (res.ok) {
+        try { await cache.put(canonical, res.clone()); } catch (_) { /* Non-fatal quota limit. */ }
+      }
+      return res;
+    })());
+  }
+});
