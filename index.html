@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="app-revision" content="v56-material-1.6.0">
+  <meta name="app-revision" content="v56-material-1.8.0">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#09080d">
   <meta name="color-scheme" content="dark">
@@ -6360,216 +6360,871 @@ body::before {
   opacity:.76;
 }
 
+
+
 /* ============================================================================
-   v56.1.6 — CLASSIC MOTION PRINCIPLES / WEIGHTED, CURVED, RIGID-BODY SHAKE
+   v56.1.8 / SECONDARY ACTION AND INERTIAL SHAKE
 
-   Revised after analysing all 24 frames of v56.1.5 preview GIF. Problems:
-   1) Opposing 10-15%-long jolts gave every layer unrelated hard impulses.
-   2) Lens was squashed to 81% of its width during 3D orbit illusion.
-   3) Strong repeated specular flashes fought the ball's apparent weight.
+   0 - .28s: a gentle lifted pickup with a tiny opposite-side anticipation.
+   .26 - .82s: aggressive back/forth impulses: stronger left/right than 1.7.
+   .82 - 1.52s: gradually smaller AND more widely spaced side-to-side strokes.
+   1.29 - 1.72s: smooth returning to the ground with no springy final snap.
 
-   Direction: subtle anticipation -> ONE primary impulse along a true curved
-   arc -> counterstroke -> damped secondary action / settle. Each pose has
-   shared beats; insert, light and shadow respond with SMALL phase delays.
-   40 piecewise LINEAR compositor keyframes sample smooth cubic Hermite
-   trajectories; the mathematical curves are C1 continuous at anchor poses,
-   so they have none of the velocity jumps from the previous version.
-   Only transforms and opacity animate; no JS loops, paint-heavy filters or
-   time changes to the cube/ink. A physically rigid sphere may only translate,
-   rotate in-plane, and UNIFORMLY scale. Glass and bezel remain concentric.
-   Max aperture foreshortening: .4%, previously 19%.
+   Principles: anticipation, arcs, easing, follow-through, overlap, staging.
+   The shell has only rigid 2D translation, Z-rotation and UNIFORM scale.
+   The circular optical assembly projects as one piece, with <1.5% mild
+   foreshortening; the lens/bezel remain aligned at all times. Shadows never
+   follow the sphere; view-locked specular shifts are only secondary action.
+   Cube, ink and fluid start 480ms after the shell (shell shake starts ~210ms).
+   GPU-friendly transforms/opacity, generated from continuous paths at 77 fps.
    ============================================================================ */
 #magic-ball-dialog .magic-ball {transform-origin:50% 50%!important;}
-#magic-ball-dialog .magic-ball-orbit {transform-origin:50% 50%!important;transform:translate3d(0,0,0) scaleX(1);}
+#magic-ball-dialog .magic-ball-orbit {transform-origin:50% 50%!important;}
 #magic-ball-dialog .magic-ball.ball-mixing {
-  animation:v5616-body-arc 1.11s linear both!important;
+  animation:v5618-weighted-body 1.72s linear both!important;
   will-change:transform;
 }
 #magic-ball-dialog .magic-ball.ball-mixing .magic-ball-orbit {
-  animation:v5616-optics-lag 1.11s linear both!important;
+  animation:v5618-solid-optics 1.72s linear both!important;
   will-change:transform;
 }
 #magic-ball-dialog .magic-ball.ball-mixing .magic-ball-surface::after {
-  animation:v5616-light-follow 1.11s linear both!important;
+  animation:v5618-room-specular 1.72s linear both!important;
   will-change:transform,opacity;
 }
 #magic-ball-dialog .magic-ball-stage:has(.magic-ball.ball-mixing) .magic-ball-cast-shadow {
-  animation:v5616-floor-shadow 1.11s linear both!important;
+  animation:v5618-ground-shadow 1.72s linear both!important;
   will-change:transform,opacity;
 }
-@keyframes v5616-body-arc {
+/* Physics: the heavy shell receives the hand's force FIRST, the free die
+   responds only after the first strong side stroke has started. Delay all
+   nested liquid and cube layers so nothing trembles ahead of the shell. */
+#magic-ball-dialog .magic-ball.ball-mixing .magic-ball-fluid,
+#magic-ball-dialog .magic-ball.ball-mixing .magic-cube,
+#magic-ball-dialog .magic-ball.ball-mixing .magic-ball-veil,
+#magic-ball-dialog .magic-ball.ball-mixing .magic-ball-liquid {
+  animation-delay:480ms!important;
+  animation-fill-mode:both!important;
+}
+@keyframes v5618-weighted-body {
   0% {transform:translate3d(0%,0%,0) rotate(0deg) scale(1)}
-  2.5% {transform:translate3d(0.109%,0.078%,0) rotate(0.102deg) scale(1.0002)}
-  5% {transform:translate3d(0.35%,0.25%,0) rotate(0.325deg) scale(1.0005)}
-  7.5% {transform:translate3d(0.591%,0.422%,0) rotate(0.548deg) scale(1.0008)}
-  10% {transform:translate3d(0.7%,0.5%,0) rotate(0.65deg) scale(1.001)}
-  12.5% {transform:translate3d(0.556%,0.388%,0) rotate(0.502deg) scale(1.0015)}
-  15% {transform:translate3d(0.177%,0.095%,0) rotate(0.111deg) scale(1.0027)}
-  17.5% {transform:translate3d(-0.36%,-0.316%,0) rotate(-0.442deg) scale(1.0045)}
-  20% {transform:translate3d(-0.975%,-0.78%,0) rotate(-1.075deg) scale(1.0065)}
-  22.5% {transform:translate3d(-1.59%,-1.234%,0) rotate(-1.708deg) scale(1.0085)}
-  25% {transform:translate3d(-2.127%,-1.615%,0) rotate(-2.261deg) scale(1.0103)}
-  27.5% {transform:translate3d(-2.506%,-1.858%,0) rotate(-2.652deg) scale(1.0115)}
-  30% {transform:translate3d(-2.65%,-1.9%,0) rotate(-2.8deg) scale(1.012)}
-  32.5% {transform:translate3d(-2.468%,-1.723%,0) rotate(-2.612deg) scale(1.0115)}
-  35% {transform:translate3d(-1.985%,-1.387%,0) rotate(-2.113deg) scale(1.01)}
-  37.5% {transform:translate3d(-1.294%,-0.947%,0) rotate(-1.401deg) scale(1.0079)}
-  40% {transform:translate3d(-0.491%,-0.457%,0) rotate(-0.571deg) scale(1.0055)}
-  42.5% {transform:translate3d(0.331%,0.027%,0) rotate(0.277deg) scale(1.003)}
-  45% {transform:translate3d(1.078%,0.451%,0) rotate(1.048deg) scale(1.0008)}
-  47.5% {transform:translate3d(1.656%,0.762%,0) rotate(1.644deg) scale(0.999)}
-  50% {transform:translate3d(1.969%,0.903%,0) rotate(1.968deg) scale(0.9981)}
-  52.5% {transform:translate3d(1.947%,0.846%,0) rotate(1.949deg) scale(0.9981)}
-  55% {transform:translate3d(1.657%,0.677%,0) rotate(1.669deg) scale(0.9987)}
-  57.5% {transform:translate3d(1.187%,0.441%,0) rotate(1.214deg) scale(0.9996)}
-  60% {transform:translate3d(0.618%,0.173%,0) rotate(0.664deg) scale(1.0008)}
-  62.5% {transform:translate3d(0.033%,-0.09%,0) rotate(0.099deg) scale(1.0019)}
-  65% {transform:translate3d(-0.486%,-0.314%,0) rotate(-0.403deg) scale(1.003)}
-  67.5% {transform:translate3d(-0.858%,-0.463%,0) rotate(-0.763deg) scale(1.0037)}
-  70% {transform:translate3d(-1%,-0.5%,0) rotate(-0.9deg) scale(1.004)}
-  72.5% {transform:translate3d(-0.93%,-0.439%,0) rotate(-0.834deg) scale(1.0038)}
-  75% {transform:translate3d(-0.75%,-0.331%,0) rotate(-0.664deg) scale(1.0032)}
-  77.5% {transform:translate3d(-0.505%,-0.197%,0) rotate(-0.434deg) scale(1.0024)}
-  80% {transform:translate3d(-0.243%,-0.06%,0) rotate(-0.187deg) scale(1.0015)}
-  82.5% {transform:translate3d(-0.008%,0.057%,0) rotate(0.034deg) scale(1.0007)}
-  85% {transform:translate3d(0.154%,0.134%,0) rotate(0.187deg) scale(1.0002)}
-  87.5% {transform:translate3d(0.199%,0.148%,0) rotate(0.229deg) scale(1)}
-  90% {transform:translate3d(0.173%,0.123%,0) rotate(0.199deg) scale(1)}
-  92.5% {transform:translate3d(0.123%,0.085%,0) rotate(0.141deg) scale(1)}
-  95% {transform:translate3d(0.066%,0.045%,0) rotate(0.076deg) scale(1)}
-  97.5% {transform:translate3d(0.019%,0.013%,0) rotate(0.022deg) scale(1)}
+  0.7576% {transform:translate3d(0%,0%,0) rotate(0deg) scale(1)}
+  1.5152% {transform:translate3d(0%,-0.0031%,0) rotate(0deg) scale(1.00002)}
+  2.2727% {transform:translate3d(0%,-0.0297%,0) rotate(0deg) scale(1.00018)}
+  3.0303% {transform:translate3d(0%,-0.1003%,0) rotate(0deg) scale(1.00059)}
+  3.7879% {transform:translate3d(0%,-0.2275%,0) rotate(0deg) scale(1.00135)}
+  4.5455% {transform:translate3d(0%,-0.4172%,0) rotate(0deg) scale(1.00248)}
+  5.303% {transform:translate3d(0%,-0.6691%,0) rotate(0deg) scale(1.00397)}
+  6.0606% {transform:translate3d(0%,-0.9782%,0) rotate(0deg) scale(1.0058)}
+  6.8182% {transform:translate3d(0%,-1.3351%,0) rotate(0deg) scale(1.00792)}
+  7.5758% {transform:translate3d(0%,-1.7276%,0) rotate(0deg) scale(1.01025)}
+  8.3333% {transform:translate3d(0%,-2.1409%,0) rotate(0deg) scale(1.0127)}
+  9.0909% {transform:translate3d(0%,-2.5595%,0) rotate(0deg) scale(1.01519)}
+  9.8485% {transform:translate3d(0%,-2.9671%,0) rotate(0deg) scale(1.01761)}
+  10.6061% {transform:translate3d(0%,-3.3483%,0) rotate(0deg) scale(1.01987)}
+  11.3636% {transform:translate3d(0%,-3.6893%,0) rotate(0deg) scale(1.02189)}
+  12.1212% {transform:translate3d(-0.0547%,-3.9789%,0) rotate(-0.0047deg) scale(1.02361)}
+  12.8788% {transform:translate3d(-0.4483%,-4.2118%,0) rotate(-0.0381deg) scale(1.02496)}
+  13.6364% {transform:translate3d(-1.013%,-4.3844%,0) rotate(-0.0861deg) scale(1.02595)}
+  14.3939% {transform:translate3d(-1.4285%,-4.4921%,0) rotate(-0.1214deg) scale(1.02664)}
+  15.1515% {transform:translate3d(-1.4457%,-4.5331%,0) rotate(-0.2406deg) scale(1.02713)}
+  15.9091% {transform:translate3d(-0.9087%,-4.5138%,0) rotate(-0.5377deg) scale(1.02755)}
+  16.6667% {transform:translate3d(0.1587%,-4.4546%,0) rotate(-0.8221deg) scale(1.02803)}
+  17.4242% {transform:translate3d(1.6617%,-4.3766%,0) rotate(-0.8889deg) scale(1.02858)}
+  18.1818% {transform:translate3d(3.4672%,-4.2962%,0) rotate(-0.6037deg) scale(1.02909)}
+  18.9394% {transform:translate3d(5.4152%,-4.2348%,0) rotate(0.0821deg) scale(1.02944)}
+  19.697% {transform:translate3d(7.3331%,-4.2131%,0) rotate(1.1091deg) scale(1.02952)}
+  20.4545% {transform:translate3d(9.0508%,-4.245%,0) rotate(2.3864deg) scale(1.02925)}
+  21.2121% {transform:translate3d(10.4162%,-4.3327%,0) rotate(3.8008deg) scale(1.02864)}
+  21.9697% {transform:translate3d(11.3083%,-4.4656%,0) rotate(5.2269deg) scale(1.02774)}
+  22.7273% {transform:translate3d(11.6479%,-4.6226%,0) rotate(6.5384deg) scale(1.02668)}
+  23.4848% {transform:translate3d(11.1651%,-4.7783%,0) rotate(7.5986deg) scale(1.02559)}
+  24.2424% {transform:translate3d(9.5761%,-4.9099%,0) rotate(8.2858deg) scale(1.02461)}
+  25% {transform:translate3d(7.0283%,-5.0024%,0) rotate(8.5396deg) scale(1.02382)}
+  25.7576% {transform:translate3d(3.7612%,-5.0468%,0) rotate(8.3199deg) scale(1.02328)}
+  26.5152% {transform:translate3d(0.0819%,-5.0385%,0) rotate(7.367deg) scale(1.02302)}
+  27.2727% {transform:translate3d(-3.6639%,-4.9782%,0) rotate(5.6762deg) scale(1.02307)}
+  28.0303% {transform:translate3d(-7.124%,-4.8724%,0) rotate(3.4063deg) scale(1.02342)}
+  28.7879% {transform:translate3d(-9.9734%,-4.7323%,0) rotate(0.7708deg) scale(1.02404)}
+  29.5455% {transform:translate3d(-11.9441%,-4.5728%,0) rotate(-1.9827deg) scale(1.0249)}
+  30.303% {transform:translate3d(-12.8509%,-4.411%,0) rotate(-4.5953deg) scale(1.02591)}
+  31.0606% {transform:translate3d(-12.6512%,-4.2639%,0) rotate(-6.8252deg) scale(1.02701)}
+  31.8182% {transform:translate3d(-11.4783%,-4.1472%,0) rotate(-8.4725deg) scale(1.02811)}
+  32.5758% {transform:translate3d(-9.4322%,-4.0733%,0) rotate(-9.3815deg) scale(1.02912)}
+  33.3333% {transform:translate3d(-6.675%,-4.0501%,0) rotate(-9.4648deg) scale(1.02997)}
+  34.0909% {transform:translate3d(-3.4249%,-4.08%,0) rotate(-8.7795deg) scale(1.03059)}
+  34.8485% {transform:translate3d(0.0607%,-4.1599%,0) rotate(-7.4267deg) scale(1.03094)}
+  35.6061% {transform:translate3d(3.5059%,-4.2813%,0) rotate(-5.5135deg) scale(1.03098)}
+  36.3636% {transform:translate3d(6.6379%,-4.4312%,0) rotate(-3.1913deg) scale(1.03071)}
+  37.1212% {transform:translate3d(9.2087%,-4.5937%,0) rotate(-0.6442deg) scale(1.03016)}
+  37.8788% {transform:translate3d(11.0148%,-4.7516%,0) rotate(1.9264deg) scale(1.02937)}
+  38.6364% {transform:translate3d(11.9132%,-4.8881%,0) rotate(4.3169deg) scale(1.02839)}
+  39.3939% {transform:translate3d(11.8498%,-4.9886%,0) rotate(6.3393deg) scale(1.02731)}
+  40.1515% {transform:translate3d(10.9047%,-5.0425%,0) rotate(7.8401deg) scale(1.0262)}
+  40.9091% {transform:translate3d(9.1615%,-5.0441%,0) rotate(8.7012deg) scale(1.02515)}
+  41.6667% {transform:translate3d(6.7583%,-4.9931%,0) rotate(8.8542deg) scale(1.02425)}
+  42.4242% {transform:translate3d(3.8853%,-4.895%,0) rotate(8.3203deg) scale(1.02356)}
+  43.1818% {transform:translate3d(0.77%,-4.7603%,0) rotate(7.1783deg) scale(1.02313)}
+  43.9394% {transform:translate3d(-2.341%,-4.6032%,0) rotate(5.5185deg) scale(1.023)}
+  44.697% {transform:translate3d(-5.2012%,-4.4405%,0) rotate(3.4724deg) scale(1.02318)}
+  45.4545% {transform:translate3d(-7.5844%,-4.2894%,0) rotate(1.202deg) scale(1.02365)}
+  46.2121% {transform:translate3d(-9.3017%,-4.166%,0) rotate(-1.1129deg) scale(1.02438)}
+  46.9697% {transform:translate3d(-10.2173%,-4.0834%,0) rotate(-3.2891deg) scale(1.02531)}
+  47.7273% {transform:translate3d(-10.2956%,-4.0504%,0) rotate(-5.1574deg) scale(1.02638)}
+  48.4848% {transform:translate3d(-9.7961%,-4.0705%,0) rotate(-6.5925deg) scale(1.02749)}
+  49.2424% {transform:translate3d(-8.802%,-4.1416%,0) rotate(-7.4844deg) scale(1.02856)}
+  50% {transform:translate3d(-7.3721%,-4.2561%,0) rotate(-7.7609deg) scale(1.02951)}
+  50.7576% {transform:translate3d(-5.5909%,-4.4018%,0) rotate(-7.4862deg) scale(1.03027)}
+  51.5152% {transform:translate3d(-3.5635%,-4.5633%,0) rotate(-6.8315deg) scale(1.03078)}
+  52.2727% {transform:translate3d(-1.4098%,-4.7234%,0) rotate(-5.8385deg) scale(1.03099)}
+  53.0303% {transform:translate3d(0.743%,-4.865%,0) rotate(-4.5657deg) scale(1.0309)}
+  53.7879% {transform:translate3d(2.7677%,-4.9732%,0) rotate(-3.0885deg) scale(1.03051)}
+  54.5455% {transform:translate3d(4.5447%,-5.0364%,0) rotate(-1.4941deg) scale(1.02985)}
+  55.303% {transform:translate3d(5.9691%,-5.0478%,0) rotate(0.1234deg) scale(1.02897)}
+  56.0606% {transform:translate3d(6.9566%,-5.0064%,0) rotate(1.6683deg) scale(1.02794)}
+  56.8182% {transform:translate3d(7.4489%,-4.9164%,0) rotate(3.0495deg) scale(1.02683)}
+  57.5758% {transform:translate3d(7.4595%,-4.7875%,0) rotate(4.1888deg) scale(1.02574)}
+  58.3333% {transform:translate3d(7.1888%,-4.6334%,0) rotate(5.0361deg) scale(1.02474)}
+  59.0909% {transform:translate3d(6.6752%,-4.4704%,0) rotate(5.5433deg) scale(1.02392)}
+  59.8485% {transform:translate3d(5.9419%,-4.3158%,0) rotate(5.6797deg) scale(1.02334)}
+  60.6061% {transform:translate3d(5.0222%,-4.1862%,0) rotate(5.5212deg) scale(1.02304)}
+  61.3636% {transform:translate3d(3.9577%,-4.0952%,0) rotate(5.1766deg) scale(1.02304)}
+  62.1212% {transform:translate3d(2.7966%,-4.0525%,0) rotate(4.6617deg) scale(1.02335)}
+  62.8788% {transform:translate3d(1.5915%,-4.0628%,0) rotate(3.9996deg) scale(1.02394)}
+  63.6364% {transform:translate3d(0.397%,-4.1248%,0) rotate(3.2205deg) scale(1.02476)}
+  64.3939% {transform:translate3d(-0.7328%,-4.232%,0) rotate(2.3596deg) scale(1.02576)}
+  65.1515% {transform:translate3d(-1.7468%,-4.373%,0) rotate(1.4559deg) scale(1.02685)}
+  65.9091% {transform:translate3d(-2.5991%,-4.5329%,0) rotate(0.5503deg) scale(1.02795)}
+  66.6667% {transform:translate3d(-3.251%,-4.6945%,0) rotate(-0.3161deg) scale(1.02899)}
+  67.4242% {transform:translate3d(-3.673%,-4.8405%,0) rotate(-1.1042deg) scale(1.02986)}
+  68.1818% {transform:translate3d(-3.8461%,-4.9542%,0) rotate(-1.7783deg) scale(1.0305)}
+  68.9394% {transform:translate3d(-3.8078%,-5.0224%,0) rotate(-2.3116deg) scale(1.03086)}
+  69.697% {transform:translate3d(-3.6457%,-5.0372%,0) rotate(-2.6873deg) scale(1.03089)}
+  70.4545% {transform:translate3d(-3.3694%,-4.9977%,0) rotate(-2.8887deg) scale(1.03061)}
+  71.2121% {transform:translate3d(-2.9917%,-4.9103%,0) rotate(-2.9087deg) scale(1.03004)}
+  71.9697% {transform:translate3d(-2.5299%,-4.788%,0) rotate(-2.8083deg) scale(1.02925)}
+  72.7273% {transform:translate3d(-2.0054%,-4.648%,0) rotate(-2.6201deg) scale(1.02833)}
+  73.4848% {transform:translate3d(-1.4426%,-4.5093%,0) rotate(-2.3528deg) scale(1.02738)}
+  74.2424% {transform:translate3d(-0.8674%,-4.3894%,0) rotate(-2.0189deg) scale(1.0265)}
+  75% {transform:translate3d(-0.3064%,-4.3019%,0) rotate(-1.6337deg) scale(1.02577)}
+  75.7576% {transform:translate3d(0.2144%,-4.2514%,0) rotate(-1.2151deg) scale(1.02522)}
+  76.5152% {transform:translate3d(0.671%,-4.2328%,0) rotate(-0.7824deg) scale(1.02485)}
+  77.2727% {transform:translate3d(1.0422%,-4.2356%,0) rotate(-0.3556deg) scale(1.02464)}
+  78.0303% {transform:translate3d(1.3109%,-4.2459%,0) rotate(0.0455deg) scale(1.02452)}
+  78.7879% {transform:translate3d(1.4646%,-4.2484%,0) rotate(0.4024deg) scale(1.02442)}
+  79.5455% {transform:translate3d(1.4983%,-4.2284%,0) rotate(0.6987deg) scale(1.02427)}
+  80.303% {transform:translate3d(1.4572%,-4.1747%,0) rotate(0.9248deg) scale(1.02401)}
+  81.0606% {transform:translate3d(1.3637%,-4.0802%,0) rotate(1.0719deg) scale(1.02356)}
+  81.8182% {transform:translate3d(1.2248%,-3.9431%,0) rotate(1.1335deg) scale(1.02291)}
+  82.5758% {transform:translate3d(1.0507%,-3.7661%,0) rotate(1.1165deg) scale(1.02203)}
+  83.3333% {transform:translate3d(0.8544%,-3.5555%,0) rotate(1.0568deg) scale(1.02093)}
+  84.0909% {transform:translate3d(0.6503%,-3.3197%,0) rotate(0.9619deg) scale(1.01965)}
+  84.8485% {transform:translate3d(0.4537%,-3.0673%,0) rotate(0.8389deg) scale(1.01822)}
+  85.6061% {transform:translate3d(0.2789%,-2.8057%,0) rotate(0.6967deg) scale(1.0167)}
+  86.3636% {transform:translate3d(0.1391%,-2.5409%,0) rotate(0.5461deg) scale(1.01512)}
+  87.1212% {transform:translate3d(0.0444%,-2.2767%,0) rotate(0.398deg) scale(1.01354)}
+  87.8788% {transform:translate3d(0.002%,-2.0155%,0) rotate(0.2635deg) scale(1.01197)}
+  88.6364% {transform:translate3d(0%,-1.7597%,0) rotate(0.1512deg) scale(1.01044)}
+  89.3939% {transform:translate3d(0%,-1.5115%,0) rotate(0.0662deg) scale(1.00897)}
+  90.1515% {transform:translate3d(0%,-1.2745%,0) rotate(0.0147deg) scale(1.00756)}
+  90.9091% {transform:translate3d(0%,-1.0521%,0) rotate(0deg) scale(1.00624)}
+  91.6667% {transform:translate3d(0%,-0.8472%,0) rotate(0deg) scale(1.00503)}
+  92.4242% {transform:translate3d(0%,-0.6624%,0) rotate(0deg) scale(1.00393)}
+  93.1818% {transform:translate3d(0%,-0.4998%,0) rotate(0deg) scale(1.00297)}
+  93.9394% {transform:translate3d(0%,-0.3607%,0) rotate(0deg) scale(1.00214)}
+  94.697% {transform:translate3d(0%,-0.246%,0) rotate(0deg) scale(1.00146)}
+  95.4545% {transform:translate3d(0%,-0.1555%,0) rotate(0deg) scale(1.00092)}
+  96.2121% {transform:translate3d(0%,-0.0884%,0) rotate(0deg) scale(1.00052)}
+  96.9697% {transform:translate3d(0%,-0.0427%,0) rotate(0deg) scale(1.00025)}
+  97.7273% {transform:translate3d(0%,-0.0157%,0) rotate(0deg) scale(1.00009)}
+  98.4848% {transform:translate3d(0%,-0.0032%,0) rotate(0deg) scale(1.00002)}
+  99.2424% {transform:translate3d(0%,-0.0001%,0) rotate(0deg) scale(1)}
   100% {transform:translate3d(0%,0%,0) rotate(0deg) scale(1)}
 }
-@keyframes v5616-optics-lag {
-  0% {transform:translate3d(0%,0%,0) scaleX(1)}
-  2.5% {transform:translate3d(0.034%,0.013%,0) scaleX(0.9999)}
-  5% {transform:translate3d(0.117%,0.044%,0) scaleX(0.9997)}
-  7.5% {transform:translate3d(0.221%,0.083%,0) scaleX(0.9994)}
-  10% {transform:translate3d(0.321%,0.12%,0) scaleX(0.9992)}
-  12.5% {transform:translate3d(0.387%,0.145%,0) scaleX(0.999)}
-  15% {transform:translate3d(0.386%,0.152%,0) scaleX(0.999)}
-  17.5% {transform:translate3d(0.237%,0.169%,0) scaleX(0.9988)}
-  20% {transform:translate3d(-0.036%,0.202%,0) scaleX(0.9984)}
-  22.5% {transform:translate3d(-0.39%,0.244%,0) scaleX(0.9979)}
-  25% {transform:translate3d(-0.779%,0.293%,0) scaleX(0.9974)}
-  27.5% {transform:translate3d(-1.159%,0.342%,0) scaleX(0.9969)}
-  30% {transform:translate3d(-1.485%,0.388%,0) scaleX(0.9964)}
-  32.5% {transform:translate3d(-1.714%,0.426%,0) scaleX(0.9961)}
-  35% {transform:translate3d(-1.8%,0.45%,0) scaleX(0.996)}
-  37.5% {transform:translate3d(-1.679%,0.434%,0) scaleX(0.996)}
-  40% {transform:translate3d(-1.356%,0.365%,0) scaleX(0.9961)}
-  42.5% {transform:translate3d(-0.896%,0.258%,0) scaleX(0.9963)}
-  45% {transform:translate3d(-0.361%,0.13%,0) scaleX(0.9965)}
-  47.5% {transform:translate3d(0.188%,-0.005%,0) scaleX(0.9966)}
-  50% {transform:translate3d(0.685%,-0.131%,0) scaleX(0.9968)}
-  52.5% {transform:translate3d(1.07%,-0.232%,0) scaleX(0.9969)}
-  55% {transform:translate3d(1.28%,-0.291%,0) scaleX(0.997)}
-  57.5% {transform:translate3d(1.265%,-0.297%,0) scaleX(0.997)}
-  60% {transform:translate3d(1.077%,-0.259%,0) scaleX(0.9972)}
-  62.5% {transform:translate3d(0.771%,-0.19%,0) scaleX(0.9975)}
-  65% {transform:translate3d(0.402%,-0.103%,0) scaleX(0.9979)}
-  67.5% {transform:translate3d(0.022%,-0.012%,0) scaleX(0.9983)}
-  70% {transform:translate3d(-0.316%,0.071%,0) scaleX(0.9987)}
-  72.5% {transform:translate3d(-0.558%,0.133%,0) scaleX(0.9989)}
-  75% {transform:translate3d(-0.65%,0.16%,0) scaleX(0.999)}
-  77.5% {transform:translate3d(-0.593%,0.152%,0) scaleX(0.9991)}
-  80% {transform:translate3d(-0.45%,0.124%,0) scaleX(0.9993)}
-  82.5% {transform:translate3d(-0.265%,0.084%,0) scaleX(0.9995)}
-  85% {transform:translate3d(-0.08%,0.044%,0) scaleX(0.9997)}
-  87.5% {transform:translate3d(0.063%,0.013%,0) scaleX(0.9999)}
-  90% {transform:translate3d(0.12%,0%,0) scaleX(1)}
-  92.5% {transform:translate3d(0.101%,0%,0) scaleX(1)}
-  95% {transform:translate3d(0.06%,0%,0) scaleX(1)}
-  97.5% {transform:translate3d(0.019%,0%,0) scaleX(1)}
-  100% {transform:translate3d(0%,0%,0) scaleX(1)}
+@keyframes v5618-solid-optics {
+  0% {transform:translate3d(0%,0%,0) scale(1,1)}
+  0.7576% {transform:translate3d(0%,0%,0) scale(1,1)}
+  1.5152% {transform:translate3d(0%,0%,0) scale(1,1)}
+  2.2727% {transform:translate3d(0%,0%,0) scale(1,1)}
+  3.0303% {transform:translate3d(0%,0%,0) scale(1,1)}
+  3.7879% {transform:translate3d(0%,0%,0) scale(1,1)}
+  4.5455% {transform:translate3d(0%,0%,0) scale(1,1)}
+  5.303% {transform:translate3d(0%,0%,0) scale(1,1)}
+  6.0606% {transform:translate3d(0%,0%,0) scale(1,1)}
+  6.8182% {transform:translate3d(0%,0%,0) scale(1,1)}
+  7.5758% {transform:translate3d(0%,0%,0) scale(1,1)}
+  8.3333% {transform:translate3d(0%,0%,0) scale(1,1)}
+  9.0909% {transform:translate3d(0%,0%,0) scale(1,1)}
+  9.8485% {transform:translate3d(0%,0%,0) scale(1,1)}
+  10.6061% {transform:translate3d(0%,0%,0) scale(1,1)}
+  11.3636% {transform:translate3d(0%,0%,0) scale(1,1)}
+  12.1212% {transform:translate3d(0%,-0.0001%,0) scale(1,1)}
+  12.8788% {transform:translate3d(0%,-0.0009%,0) scale(1,1)}
+  13.6364% {transform:translate3d(0%,-0.0025%,0) scale(1,1)}
+  14.3939% {transform:translate3d(0%,-0.0031%,0) scale(1,1)}
+  15.1515% {transform:translate3d(0.0461%,-0.0091%,0) scale(0.99981,0.99995)}
+  15.9091% {transform:translate3d(0.1802%,-0.0267%,0) scale(0.99928,0.99979)}
+  16.6667% {transform:translate3d(0.327%,-0.0399%,0) scale(0.99869,0.99962)}
+  17.4242% {transform:translate3d(0.4031%,-0.0336%,0) scale(0.99838,0.99954)}
+  18.1818% {transform:translate3d(0.3516%,-0.0006%,0) scale(0.99859,0.9996)}
+  18.9394% {transform:translate3d(0.148%,0.0581%,0) scale(0.99941,0.99983)}
+  19.697% {transform:translate3d(-0.1901%,0.133%,0) scale(0.99924,0.99978)}
+  20.4545% {transform:translate3d(-0.6328%,0.2143%,0) scale(0.99746,0.99927)}
+  21.2121% {transform:translate3d(-1.1408%,0.2932%,0) scale(0.99541,0.99869)}
+  21.9697% {transform:translate3d(-1.6692%,0.3637%,0) scale(0.99329,0.99808)}
+  22.7273% {transform:translate3d(-2.1711%,0.4219%,0) scale(0.99127,0.99751)}
+  23.4848% {transform:translate3d(-2.602%,0.4661%,0) scale(0.98954,0.99701)}
+  24.2424% {transform:translate3d(-2.9237%,0.4948%,0) scale(0.98825,0.99664)}
+  25% {transform:translate3d(-3.1078%,0.5064%,0) scale(0.98751,0.99643)}
+  25.7576% {transform:translate3d(-3.1305%,0.4986%,0) scale(0.98742,0.9964)}
+  26.5152% {transform:translate3d(-2.88%,0.4499%,0) scale(0.98842,0.99669)}
+  27.2727% {transform:translate3d(-2.343%,0.3574%,0) scale(0.99058,0.99731)}
+  28.0303% {transform:translate3d(-1.5699%,0.2295%,0) scale(0.99369,0.9982)}
+  28.7879% {transform:translate3d(-0.6333%,0.078%,0) scale(0.99745,0.99927)}
+  29.5455% {transform:translate3d(0.3786%,-0.0835%,0) scale(0.99848,0.99957)}
+  30.303% {transform:translate3d(1.3707%,-0.2403%,0) scale(0.99449,0.99843)}
+  31.0606% {transform:translate3d(2.25%,-0.3782%,0) scale(0.99096,0.99742)}
+  31.8182% {transform:translate3d(2.9336%,-0.4848%,0) scale(0.98821,0.99663)}
+  32.5758% {transform:translate3d(3.3573%,-0.5504%,0) scale(0.98651,0.99614)}
+  33.3333% {transform:translate3d(3.4816%,-0.5692%,0) scale(0.98601,0.996)}
+  34.0909% {transform:translate3d(3.3215%,-0.545%,0) scale(0.98665,0.99619)}
+  34.8485% {transform:translate3d(2.9081%,-0.4832%,0) scale(0.98831,0.99666)}
+  35.6061% {transform:translate3d(2.274%,-0.388%,0) scale(0.99086,0.99739)}
+  36.3636% {transform:translate3d(1.4696%,-0.2661%,0) scale(0.99409,0.99831)}
+  37.1212% {transform:translate3d(0.5583%,-0.126%,0) scale(0.99776,0.99936)}
+  37.8788% {transform:translate3d(-0.3875%,0.0225%,0) scale(0.99844,0.99956)}
+  38.6364% {transform:translate3d(-1.293%,0.1687%,0) scale(0.9948,0.99852)}
+  39.3939% {transform:translate3d(-2.0865%,0.3022%,0) scale(0.99161,0.9976)}
+  40.1515% {transform:translate3d(-2.7052%,0.4132%,0) scale(0.98913,0.99689)}
+  40.9091% {transform:translate3d(-3.1001%,0.4932%,0) scale(0.98754,0.99644)}
+  41.6667% {transform:translate3d(-3.2399%,0.5359%,0) scale(0.98698,0.99628)}
+  42.4242% {transform:translate3d(-3.1265%,0.5403%,0) scale(0.98743,0.99641)}
+  43.1818% {transform:translate3d(-2.7833%,0.5081%,0) scale(0.98881,0.9968)}
+  43.9394% {transform:translate3d(-2.2373%,0.4408%,0) scale(0.99101,0.99743)}
+  44.697% {transform:translate3d(-1.5318%,0.3427%,0) scale(0.99384,0.99824)}
+  45.4545% {transform:translate3d(-0.7226%,0.2202%,0) scale(0.9971,0.99917)}
+  46.2121% {transform:translate3d(0.1261%,0.0818%,0) scale(0.99949,0.99986)}
+  46.9697% {transform:translate3d(0.9472%,-0.0623%,0) scale(0.99619,0.99891)}
+  47.7273% {transform:translate3d(1.6757%,-0.2015%,0) scale(0.99326,0.99808)}
+  48.4848% {transform:translate3d(2.2538%,-0.3249%,0) scale(0.99094,0.99741)}
+  49.2424% {transform:translate3d(2.6359%,-0.4226%,0) scale(0.9894,0.99697)}
+  50% {transform:translate3d(2.7917%,-0.4864%,0) scale(0.98878,0.99679)}
+  50.7576% {transform:translate3d(2.7434%,-0.5174%,0) scale(0.98897,0.99685)}
+  51.5152% {transform:translate3d(2.5547%,-0.5241%,0) scale(0.98973,0.99707)}
+  52.2727% {transform:translate3d(2.2377%,-0.5044%,0) scale(0.99101,0.99743)}
+  53.0303% {transform:translate3d(1.8113%,-0.4572%,0) scale(0.99272,0.99792)}
+  53.7879% {transform:translate3d(1.3006%,-0.3834%,0) scale(0.99477,0.99851)}
+  54.5455% {transform:translate3d(0.7358%,-0.2861%,0) scale(0.99704,0.99915)}
+  55.303% {transform:translate3d(0.1503%,-0.17%,0) scale(0.9994,0.99983)}
+  56.0606% {transform:translate3d(-0.4214%,-0.0419%,0) scale(0.99831,0.99952)}
+  56.8182% {transform:translate3d(-0.9455%,0.09%,0) scale(0.9962,0.99891)}
+  57.5758% {transform:translate3d(-1.391%,0.2168%,0) scale(0.99441,0.9984)}
+  58.3333% {transform:translate3d(-1.7315%,0.3294%,0) scale(0.99304,0.99801)}
+  59.0909% {transform:translate3d(-1.9471%,0.4189%,0) scale(0.99217,0.99776)}
+  59.8485% {transform:translate3d(-2.0248%,0.478%,0) scale(0.99186,0.99767)}
+  60.6061% {transform:translate3d(-1.9934%,0.5079%,0) scale(0.99199,0.99771)}
+  61.3636% {transform:translate3d(-1.894%,0.5132%,0) scale(0.99239,0.99782)}
+  62.1212% {transform:translate3d(-1.7311%,0.4919%,0) scale(0.99304,0.99801)}
+  62.8788% {transform:translate3d(-1.5121%,0.4445%,0) scale(0.99392,0.99826)}
+  63.6364% {transform:translate3d(-1.247%,0.3731%,0) scale(0.99499,0.99857)}
+  64.3939% {transform:translate3d(-0.9477%,0.2821%,0) scale(0.99619,0.99891)}
+  65.1515% {transform:translate3d(-0.6278%,0.1774%,0) scale(0.99748,0.99928)}
+  65.9091% {transform:translate3d(-0.3018%,0.0663%,0) scale(0.99879,0.99965)}
+  66.6667% {transform:translate3d(0.0156%,-0.0436%,0) scale(0.99994,0.99998)}
+  67.4242% {transform:translate3d(0.3099%,-0.1445%,0) scale(0.99875,0.99964)}
+  68.1818% {transform:translate3d(0.5679%,-0.2289%,0) scale(0.99772,0.99935)}
+  68.9394% {transform:translate3d(0.7779%,-0.2907%,0) scale(0.99687,0.99911)}
+  69.697% {transform:translate3d(0.9303%,-0.3259%,0) scale(0.99626,0.99893)}
+  70.4545% {transform:translate3d(1.0183%,-0.3328%,0) scale(0.99591,0.99883)}
+  71.2121% {transform:translate3d(1.0387%,-0.3125%,0) scale(0.99582,0.99881)}
+  71.9697% {transform:translate3d(1.0147%,-0.2734%,0) scale(0.99592,0.99883)}
+  72.7273% {transform:translate3d(0.9585%,-0.2227%,0) scale(0.99615,0.9989)}
+  73.4848% {transform:translate3d(0.8727%,-0.1664%,0) scale(0.99649,0.999)}
+  74.2424% {transform:translate3d(0.7612%,-0.1101%,0) scale(0.99694,0.99913)}
+  75% {transform:translate3d(0.6291%,-0.0587%,0) scale(0.99747,0.99928)}
+  75.7576% {transform:translate3d(0.4826%,-0.0156%,0) scale(0.99806,0.99945)}
+  76.5152% {transform:translate3d(0.3285%,0.0175%,0) scale(0.99868,0.99962)}
+  77.2727% {transform:translate3d(0.1738%,0.0407%,0) scale(0.9993,0.9998)}
+  78.0303% {transform:translate3d(0.0258%,0.0552%,0) scale(0.9999,0.99997)}
+  78.7879% {transform:translate3d(-0.1087%,0.0631%,0) scale(0.99956,0.99988)}
+  79.5455% {transform:translate3d(-0.2236%,0.0668%,0) scale(0.9991,0.99974)}
+  80.303% {transform:translate3d(-0.3134%,0.068%,0) scale(0.99874,0.99964)}
+  81.0606% {transform:translate3d(-0.3741%,0.0679%,0) scale(0.9985,0.99957)}
+  81.8182% {transform:translate3d(-0.4028%,0.0666%,0) scale(0.99838,0.99954)}
+  82.5758% {transform:translate3d(-0.4019%,0.0643%,0) scale(0.99838,0.99954)}
+  83.3333% {transform:translate3d(-0.3851%,0.0625%,0) scale(0.99845,0.99956)}
+  84.0909% {transform:translate3d(-0.3548%,0.06%,0) scale(0.99857,0.99959)}
+  84.8485% {transform:translate3d(-0.3132%,0.0559%,0) scale(0.99874,0.99964)}
+  85.6061% {transform:translate3d(-0.2634%,0.0495%,0) scale(0.99894,0.9997)}
+  86.3636% {transform:translate3d(-0.2091%,0.0409%,0) scale(0.99916,0.99976)}
+  87.1212% {transform:translate3d(-0.1543%,0.031%,0) scale(0.99938,0.99982)}
+  87.8788% {transform:translate3d(-0.103%,0.021%,0) scale(0.99959,0.99988)}
+  88.6364% {transform:translate3d(-0.0592%,0.0121%,0) scale(0.99976,0.99993)}
+  89.3939% {transform:translate3d(-0.0259%,0.0053%,0) scale(0.9999,0.99997)}
+  90.1515% {transform:translate3d(-0.0057%,0.0012%,0) scale(0.99998,0.99999)}
+  90.9091% {transform:translate3d(0%,0%,0) scale(1,1)}
+  91.6667% {transform:translate3d(0%,0%,0) scale(1,1)}
+  92.4242% {transform:translate3d(0%,0%,0) scale(1,1)}
+  93.1818% {transform:translate3d(0%,0%,0) scale(1,1)}
+  93.9394% {transform:translate3d(0%,0%,0) scale(1,1)}
+  94.697% {transform:translate3d(0%,0%,0) scale(1,1)}
+  95.4545% {transform:translate3d(0%,0%,0) scale(1,1)}
+  96.2121% {transform:translate3d(0%,0%,0) scale(1,1)}
+  96.9697% {transform:translate3d(0%,0%,0) scale(1,1)}
+  97.7273% {transform:translate3d(0%,0%,0) scale(1,1)}
+  98.4848% {transform:translate3d(0%,0%,0) scale(1,1)}
+  99.2424% {transform:translate3d(0%,0%,0) scale(1,1)}
+  100% {transform:translate3d(0%,0%,0) scale(1,1)}
 }
-@keyframes v5616-light-follow {
+@keyframes v5618-room-specular {
   0% {transform:translate3d(0%,0%,0);opacity:0.34}
-  2.5% {transform:translate3d(-0.015%,0.012%,0);opacity:0.3394}
-  5% {transform:translate3d(-0.052%,0.042%,0);opacity:0.3379}
-  7.5% {transform:translate3d(-0.103%,0.082%,0);opacity:0.3359}
-  10% {transform:translate3d(-0.158%,0.126%,0);opacity:0.3337}
-  12.5% {transform:translate3d(-0.207%,0.165%,0);opacity:0.3317}
-  15% {transform:translate3d(-0.24%,0.192%,0);opacity:0.3304}
-  17.5% {transform:translate3d(-0.248%,0.199%,0);opacity:0.3301}
-  20% {transform:translate3d(-0.171%,0.156%,0);opacity:0.332}
-  22.5% {transform:translate3d(-0.008%,0.065%,0);opacity:0.3362}
-  25% {transform:translate3d(0.216%,-0.059%,0);opacity:0.342}
-  27.5% {transform:translate3d(0.472%,-0.201%,0);opacity:0.3486}
-  30% {transform:translate3d(0.734%,-0.346%,0);opacity:0.3554}
-  32.5% {transform:translate3d(0.974%,-0.478%,0);opacity:0.3616}
-  35% {transform:translate3d(1.165%,-0.581%,0);opacity:0.3665}
-  37.5% {transform:translate3d(1.279%,-0.641%,0);opacity:0.3695}
-  40% {transform:translate3d(1.284%,-0.641%,0);opacity:0.3696}
-  42.5% {transform:translate3d(1.121%,-0.568%,0);opacity:0.3651}
-  45% {transform:translate3d(0.825%,-0.438%,0);opacity:0.357}
-  47.5% {transform:translate3d(0.446%,-0.273%,0);opacity:0.3467}
-  50% {transform:translate3d(0.036%,-0.097%,0);opacity:0.3355}
-  52.5% {transform:translate3d(-0.354%,0.07%,0);opacity:0.3249}
-  55% {transform:translate3d(-0.671%,0.205%,0);opacity:0.3162}
-  57.5% {transform:translate3d(-0.865%,0.286%,0);opacity:0.311}
-  60% {transform:translate3d(-0.89%,0.295%,0);opacity:0.3102}
-  62.5% {transform:translate3d(-0.788%,0.253%,0);opacity:0.3127}
-  65% {transform:translate3d(-0.605%,0.178%,0);opacity:0.3171}
-  67.5% {transform:translate3d(-0.373%,0.086%,0);opacity:0.3226}
-  70% {transform:translate3d(-0.128%,-0.012%,0);opacity:0.3285}
-  72.5% {transform:translate3d(0.096%,-0.101%,0);opacity:0.3339}
-  75% {transform:translate3d(0.266%,-0.168%,0);opacity:0.338}
-  77.5% {transform:translate3d(0.347%,-0.199%,0);opacity:0.3399}
-  80% {transform:translate3d(0.328%,-0.19%,0);opacity:0.34}
-  82.5% {transform:translate3d(0.253%,-0.156%,0);opacity:0.34}
-  85% {transform:translate3d(0.147%,-0.109%,0);opacity:0.34}
-  87.5% {transform:translate3d(0.037%,-0.06%,0);opacity:0.34}
-  90% {transform:translate3d(-0.053%,-0.021%,0);opacity:0.34}
-  92.5% {transform:translate3d(-0.099%,-0.001%,0);opacity:0.34}
-  95% {transform:translate3d(-0.08%,0%,0);opacity:0.34}
-  97.5% {transform:translate3d(-0.029%,0%,0);opacity:0.34}
+  0.7576% {transform:translate3d(0%,0%,0);opacity:0.34}
+  1.5152% {transform:translate3d(0%,0%,0);opacity:0.34}
+  2.2727% {transform:translate3d(0%,0%,0);opacity:0.34}
+  3.0303% {transform:translate3d(0%,0%,0);opacity:0.34}
+  3.7879% {transform:translate3d(0%,0%,0);opacity:0.34}
+  4.5455% {transform:translate3d(0%,0%,0);opacity:0.34}
+  5.303% {transform:translate3d(0%,0%,0);opacity:0.34}
+  6.0606% {transform:translate3d(0%,0%,0);opacity:0.34}
+  6.8182% {transform:translate3d(0%,0%,0);opacity:0.34}
+  7.5758% {transform:translate3d(0%,0%,0);opacity:0.34}
+  8.3333% {transform:translate3d(0%,0%,0);opacity:0.34}
+  9.0909% {transform:translate3d(0%,0%,0);opacity:0.34}
+  9.8485% {transform:translate3d(0%,0%,0);opacity:0.34}
+  10.6061% {transform:translate3d(0%,0%,0);opacity:0.34}
+  11.3636% {transform:translate3d(0%,0%,0);opacity:0.34}
+  12.1212% {transform:translate3d(0.0137%,0%,0);opacity:0.34003}
+  12.8788% {transform:translate3d(0.1121%,0%,0);opacity:0.34051}
+  13.6364% {transform:translate3d(0.2533%,0%,0);opacity:0.34196}
+  14.3939% {transform:translate3d(0.3571%,0%,0);opacity:0.34438}
+  15.1515% {transform:translate3d(0.3614%,-0.0205%,0);opacity:0.34717}
+  15.9091% {transform:translate3d(0.2272%,-0.0801%,0);opacity:0.34922}
+  16.6667% {transform:translate3d(-0.0397%,-0.1453%,0);opacity:0.34921}
+  17.4242% {transform:translate3d(-0.4154%,-0.1792%,0);opacity:0.34601}
+  18.1818% {transform:translate3d(-0.8668%,-0.1562%,0);opacity:0.33905}
+  18.9394% {transform:translate3d(-1.3538%,-0.0658%,0);opacity:0.32857}
+  19.697% {transform:translate3d(-1.8333%,0.0845%,0);opacity:0.31564}
+  20.4545% {transform:translate3d(-2.2627%,0.2812%,0);opacity:0.302}
+  21.2121% {transform:translate3d(-2.6041%,0.507%,0);opacity:0.28969}
+  21.9697% {transform:translate3d(-2.8271%,0.7419%,0);opacity:0.28065}
+  22.7273% {transform:translate3d(-2.912%,0.9649%,0);opacity:0.27623}
+  23.4848% {transform:translate3d(-2.7913%,1.1564%,0);opacity:0.27699}
+  24.2424% {transform:translate3d(-2.394%,1.2994%,0);opacity:0.28258}
+  25% {transform:translate3d(-1.7571%,1.3813%,0);opacity:0.29206}
+  25.7576% {transform:translate3d(-0.9403%,1.3913%,0);opacity:0.30462}
+  26.5152% {transform:translate3d(-0.0205%,1.28%,0);opacity:0.31944}
+  27.2727% {transform:translate3d(0.916%,1.0413%,0);opacity:0.33559}
+  28.0303% {transform:translate3d(1.781%,0.6977%,0);opacity:0.35201}
+  28.7879% {transform:translate3d(2.4933%,0.2815%,0);opacity:0.36766}
+  29.5455% {transform:translate3d(2.986%,-0.1682%,0);opacity:0.38155}
+  30.303% {transform:translate3d(3.2127%,-0.6092%,0);opacity:0.39277}
+  31.0606% {transform:translate3d(3.1628%,-1%,0);opacity:0.40061}
+  31.8182% {transform:translate3d(2.8696%,-1.3038%,0);opacity:0.40456}
+  32.5758% {transform:translate3d(2.3581%,-1.4921%,0);opacity:0.40438}
+  33.3333% {transform:translate3d(1.6688%,-1.5474%,0);opacity:0.40008}
+  34.0909% {transform:translate3d(0.8562%,-1.4762%,0);opacity:0.39192}
+  34.8485% {transform:translate3d(-0.0152%,-1.2925%,0);opacity:0.38044}
+  35.6061% {transform:translate3d(-0.8765%,-1.0107%,0);opacity:0.36637}
+  36.3636% {transform:translate3d(-1.6595%,-0.6531%,0);opacity:0.35061}
+  37.1212% {transform:translate3d(-2.3022%,-0.2482%,0);opacity:0.33417}
+  37.8788% {transform:translate3d(-2.7537%,0.1722%,0);opacity:0.3181}
+  38.6364% {transform:translate3d(-2.9783%,0.5746%,0);opacity:0.30343}
+  39.3939% {transform:translate3d(-2.9625%,0.9273%,0);opacity:0.29111}
+  40.1515% {transform:translate3d(-2.7262%,1.2023%,0);opacity:0.28192}
+  40.9091% {transform:translate3d(-2.2904%,1.3778%,0);opacity:0.27645}
+  41.6667% {transform:translate3d(-1.6896%,1.44%,0);opacity:0.27506}
+  42.4242% {transform:translate3d(-0.9713%,1.3896%,0);opacity:0.27782}
+  43.1818% {transform:translate3d(-0.1925%,1.237%,0);opacity:0.28457}
+  43.9394% {transform:translate3d(0.5852%,0.9943%,0);opacity:0.29487}
+  44.697% {transform:translate3d(1.3003%,0.6808%,0);opacity:0.30806}
+  45.4545% {transform:translate3d(1.8961%,0.3212%,0);opacity:0.3233}
+  46.2121% {transform:translate3d(2.3254%,-0.056%,0);opacity:0.3396}
+  46.9697% {transform:translate3d(2.5543%,-0.421%,0);opacity:0.35594}
+  47.7273% {transform:translate3d(2.5739%,-0.7447%,0);opacity:0.37125}
+  48.4848% {transform:translate3d(2.449%,-1.0017%,0);opacity:0.38456}
+  49.2424% {transform:translate3d(2.2005%,-1.1715%,0);opacity:0.39501}
+  50% {transform:translate3d(1.843%,-1.2407%,0);opacity:0.40194}
+  50.7576% {transform:translate3d(1.3977%,-1.2193%,0);opacity:0.4049}
+  51.5152% {transform:translate3d(0.8909%,-1.1354%,0);opacity:0.40371}
+  52.2727% {transform:translate3d(0.3525%,-0.9945%,0);opacity:0.39843}
+  53.0303% {transform:translate3d(-0.1857%,-0.805%,0);opacity:0.38941}
+  53.7879% {transform:translate3d(-0.6919%,-0.578%,0);opacity:0.37722}
+  54.5455% {transform:translate3d(-1.1362%,-0.327%,0);opacity:0.36265}
+  55.303% {transform:translate3d(-1.4923%,-0.0668%,0);opacity:0.34662}
+  56.0606% {transform:translate3d(-1.7391%,0.1873%,0);opacity:0.33017}
+  56.8182% {transform:translate3d(-1.8622%,0.4202%,0);opacity:0.31436}
+  57.5758% {transform:translate3d(-1.8649%,0.6182%,0);opacity:0.30018}
+  58.3333% {transform:translate3d(-1.7972%,0.7696%,0);opacity:0.28856}
+  59.0909% {transform:translate3d(-1.6688%,0.8654%,0);opacity:0.28023}
+  59.8485% {transform:translate3d(-1.4855%,0.8999%,0);opacity:0.27573}
+  60.6061% {transform:translate3d(-1.2555%,0.886%,0);opacity:0.27535}
+  61.3636% {transform:translate3d(-0.9894%,0.8418%,0);opacity:0.27911}
+  62.1212% {transform:translate3d(-0.6991%,0.7694%,0);opacity:0.28677}
+  62.8788% {transform:translate3d(-0.3979%,0.6721%,0);opacity:0.29785}
+  63.6364% {transform:translate3d(-0.0993%,0.5542%,0);opacity:0.31162}
+  64.3939% {transform:translate3d(0.1832%,0.4212%,0);opacity:0.32721}
+  65.1515% {transform:translate3d(0.4367%,0.279%,0);opacity:0.34362}
+  65.9091% {transform:translate3d(0.6498%,0.1341%,0);opacity:0.3598}
+  66.6667% {transform:translate3d(0.8127%,-0.0069%,0);opacity:0.37471}
+  67.4242% {transform:translate3d(0.9183%,-0.1377%,0);opacity:0.38735}
+  68.1818% {transform:translate3d(0.9615%,-0.2524%,0);opacity:0.39677}
+  68.9394% {transform:translate3d(0.9519%,-0.3457%,0);opacity:0.40225}
+  69.697% {transform:translate3d(0.9114%,-0.4135%,0);opacity:0.40336}
+  70.4545% {transform:translate3d(0.8424%,-0.4526%,0);opacity:0.40006}
+  71.2121% {transform:translate3d(0.7479%,-0.4616%,0);opacity:0.39273}
+  71.9697% {transform:translate3d(0.6325%,-0.451%,0);opacity:0.38212}
+  72.7273% {transform:translate3d(0.5014%,-0.426%,0);opacity:0.3693}
+  73.4848% {transform:translate3d(0.3607%,-0.3879%,0);opacity:0.35551}
+  74.2424% {transform:translate3d(0.2169%,-0.3383%,0);opacity:0.34203}
+  75% {transform:translate3d(0.0766%,-0.2796%,0);opacity:0.33001}
+  75.7576% {transform:translate3d(-0.0536%,-0.2145%,0);opacity:0.32039}
+  76.5152% {transform:translate3d(-0.1677%,-0.146%,0);opacity:0.31377}
+  77.2727% {transform:translate3d(-0.2605%,-0.0773%,0);opacity:0.31035}
+  78.0303% {transform:translate3d(-0.3277%,-0.0115%,0);opacity:0.30999}
+  78.7879% {transform:translate3d(-0.3662%,0.0483%,0);opacity:0.31221}
+  79.5455% {transform:translate3d(-0.3746%,0.0994%,0);opacity:0.3163}
+  80.303% {transform:translate3d(-0.3643%,0.1393%,0);opacity:0.32147}
+  81.0606% {transform:translate3d(-0.3409%,0.1663%,0);opacity:0.32689}
+  81.8182% {transform:translate3d(-0.3062%,0.179%,0);opacity:0.3319}
+  82.5758% {transform:translate3d(-0.2627%,0.1786%,0);opacity:0.336}
+  83.3333% {transform:translate3d(-0.2136%,0.1712%,0);opacity:0.33892}
+  84.0909% {transform:translate3d(-0.1626%,0.1577%,0);opacity:0.34067}
+  84.8485% {transform:translate3d(-0.1134%,0.1392%,0);opacity:0.34139}
+  85.6061% {transform:translate3d(-0.0697%,0.117%,0);opacity:0.3414}
+  86.3636% {transform:translate3d(-0.0348%,0.0929%,0);opacity:0.34102}
+  87.1212% {transform:translate3d(-0.0111%,0.0686%,0);opacity:0.34056}
+  87.8788% {transform:translate3d(-0.0005%,0.0458%,0);opacity:0.34021}
+  88.6364% {transform:translate3d(0%,0.0263%,0);opacity:0.34004}
+  89.3939% {transform:translate3d(0%,0.0115%,0);opacity:0.34}
+  90.1515% {transform:translate3d(0%,0.0026%,0);opacity:0.34}
+  90.9091% {transform:translate3d(0%,0%,0);opacity:0.34}
+  91.6667% {transform:translate3d(0%,0%,0);opacity:0.34}
+  92.4242% {transform:translate3d(0%,0%,0);opacity:0.34}
+  93.1818% {transform:translate3d(0%,0%,0);opacity:0.34}
+  93.9394% {transform:translate3d(0%,0%,0);opacity:0.34}
+  94.697% {transform:translate3d(0%,0%,0);opacity:0.34}
+  95.4545% {transform:translate3d(0%,0%,0);opacity:0.34}
+  96.2121% {transform:translate3d(0%,0%,0);opacity:0.34}
+  96.9697% {transform:translate3d(0%,0%,0);opacity:0.34}
+  97.7273% {transform:translate3d(0%,0%,0);opacity:0.34}
+  98.4848% {transform:translate3d(0%,0%,0);opacity:0.34}
+  99.2424% {transform:translate3d(0%,0%,0);opacity:0.34}
   100% {transform:translate3d(0%,0%,0);opacity:0.34}
 }
-@keyframes v5616-floor-shadow {
-  0% {transform:translateX(-50%) scale(1.06,1);opacity:0.76}
-  2.5% {transform:translateX(-50%) scale(1.0597,1.0007);opacity:0.76}
-  5% {transform:translateX(-50%) scale(1.0588,1.0023);opacity:0.76}
-  7.5% {transform:translateX(-50%) scale(1.0577,1.0045);opacity:0.76}
-  10% {transform:translateX(-50%) scale(1.0566,1.0068);opacity:0.76}
-  12.5% {transform:translateX(-50%) scale(1.0556,1.0088);opacity:0.76}
-  15% {transform:translateX(-50%) scale(1.0551,1.0099);opacity:0.76}
-  17.5% {transform:translateX(-50%) scale(1.0556,1.0093);opacity:0.7584}
-  20% {transform:translateX(-50%) scale(1.059,1.0054);opacity:0.7497}
-  22.5% {transform:translateX(-50%) scale(1.0645,0.9992);opacity:0.7356}
-  25% {transform:translateX(-50%) scale(1.0711,0.9916);opacity:0.7185}
-  27.5% {transform:translateX(-50%) scale(1.0779,0.9838);opacity:0.701}
-  30% {transform:translateX(-50%) scale(1.084,0.9769);opacity:0.6854}
-  32.5% {transform:translateX(-50%) scale(1.0883,0.9719);opacity:0.6743}
-  35% {transform:translateX(-50%) scale(1.09,0.97);opacity:0.67}
-  37.5% {transform:translateX(-50%) scale(1.0878,0.972);opacity:0.6751}
-  40% {transform:translateX(-50%) scale(1.0821,0.9772);opacity:0.6886}
-  42.5% {transform:translateX(-50%) scale(1.074,0.9846);opacity:0.7079}
-  45% {transform:translateX(-50%) scale(1.0645,0.9932);opacity:0.7304}
-  47.5% {transform:translateX(-50%) scale(1.0547,1.0021);opacity:0.7533}
-  50% {transform:translateX(-50%) scale(1.0459,1.0101);opacity:0.7742}
-  52.5% {transform:translateX(-50%) scale(1.0391,1.0163);opacity:0.7904}
-  55% {transform:translateX(-50%) scale(1.0354,1.0197);opacity:0.7991}
-  57.5% {transform:translateX(-50%) scale(1.0356,1.0195);opacity:0.7989}
-  60% {transform:translateX(-50%) scale(1.0392,1.0169);opacity:0.7927}
-  62.5% {transform:translateX(-50%) scale(1.0449,1.0126);opacity:0.7826}
-  65% {transform:translateX(-50%) scale(1.052,1.0072);opacity:0.7702}
-  67.5% {transform:translateX(-50%) scale(1.0595,1.0017);opacity:0.7572}
-  70% {transform:translateX(-50%) scale(1.0664,0.9965);opacity:0.7451}
-  72.5% {transform:translateX(-50%) scale(1.0718,0.9924);opacity:0.7357}
-  75% {transform:translateX(-50%) scale(1.0747,0.9902);opacity:0.7305}
-  77.5% {transform:translateX(-50%) scale(1.0746,0.9902);opacity:0.7307}
-  80% {transform:translateX(-50%) scale(1.0727,0.9916);opacity:0.7347}
-  82.5% {transform:translateX(-50%) scale(1.0696,0.9936);opacity:0.7408}
-  85% {transform:translateX(-50%) scale(1.0661,0.9959);opacity:0.7478}
-  87.5% {transform:translateX(-50%) scale(1.0629,0.9981);opacity:0.7542}
-  90% {transform:translateX(-50%) scale(1.0606,0.9996);opacity:0.7587}
-  92.5% {transform:translateX(-50%) scale(1.06,1);opacity:0.76}
-  95% {transform:translateX(-50%) scale(1.06,1);opacity:0.76}
-  97.5% {transform:translateX(-50%) scale(1.06,1);opacity:0.76}
-  100% {transform:translateX(-50%) scale(1.06,1);opacity:0.76}
+@keyframes v5618-ground-shadow {
+  0% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06,1);opacity:0.76}
+  0.7576% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06,1);opacity:0.76}
+  1.5152% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06006,1.0001);opacity:0.75982}
+  2.2727% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06062,1.00091);opacity:0.7583}
+  3.0303% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06209,1.00308);opacity:0.75427}
+  3.7879% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06475,1.007);opacity:0.747}
+  4.5455% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06871,1.01284);opacity:0.73616}
+  5.303% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.07397,1.02059);opacity:0.72176}
+  6.0606% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.08042,1.0301);opacity:0.7041}
+  6.8182% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.08788,1.04108);opacity:0.68371}
+  7.5758% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.09607,1.05316);opacity:0.66128}
+  8.3333% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.1047,1.06588);opacity:0.63766}
+  9.0909% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.11344,1.07875);opacity:0.61374}
+  9.8485% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.12195,1.0913);opacity:0.59045}
+  10.6061% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.12991,1.10303);opacity:0.56867}
+  11.3636% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.13703,1.11352);opacity:0.54918}
+  12.1212% {transform:translateX(-50%) translate3d(-0.0066%,0,0) scale(1.14307,1.12242);opacity:0.53265}
+  12.8788% {transform:translateX(-50%) translate3d(-0.0538%,0,0) scale(1.14787,1.12949);opacity:0.51951}
+  13.6364% {transform:translateX(-50%) translate3d(-0.1216%,0,0) scale(1.15135,1.13463);opacity:0.50998}
+  14.3939% {transform:translateX(-50%) translate3d(-0.1714%,0,0) scale(1.15356,1.13788);opacity:0.50393}
+  15.1515% {transform:translateX(-50%) translate3d(-0.1735%,0,0) scale(1.15467,1.13951);opacity:0.50091}
+  15.9091% {transform:translateX(-50%) translate3d(-0.109%,0,0) scale(1.15499,1.13998);opacity:0.50003}
+  16.6667% {transform:translateX(-50%) translate3d(0.019%,0,0) scale(1.155,1.14);opacity:0.5}
+  17.4242% {transform:translateX(-50%) translate3d(0.1994%,0,0) scale(1.155,1.14);opacity:0.5}
+  18.1818% {transform:translateX(-50%) translate3d(0.4161%,0,0) scale(1.155,1.14);opacity:0.5}
+  18.9394% {transform:translateX(-50%) translate3d(0.6498%,0,0) scale(1.155,1.14);opacity:0.5}
+  19.697% {transform:translateX(-50%) translate3d(0.88%,0,0) scale(1.155,1.14);opacity:0.5}
+  20.4545% {transform:translateX(-50%) translate3d(1.0861%,0,0) scale(1.155,1.14);opacity:0.5}
+  21.2121% {transform:translateX(-50%) translate3d(1.2499%,0,0) scale(1.155,1.14);opacity:0.5}
+  21.9697% {transform:translateX(-50%) translate3d(1.357%,0,0) scale(1.155,1.14);opacity:0.5}
+  22.7273% {transform:translateX(-50%) translate3d(1.3978%,0,0) scale(1.155,1.14);opacity:0.5}
+  23.4848% {transform:translateX(-50%) translate3d(1.3398%,0,0) scale(1.155,1.14);opacity:0.5}
+  24.2424% {transform:translateX(-50%) translate3d(1.1491%,0,0) scale(1.155,1.14);opacity:0.5}
+  25% {transform:translateX(-50%) translate3d(0.8434%,0,0) scale(1.155,1.14);opacity:0.5}
+  25.7576% {transform:translateX(-50%) translate3d(0.4513%,0,0) scale(1.155,1.14);opacity:0.5}
+  26.5152% {transform:translateX(-50%) translate3d(0.0098%,0,0) scale(1.155,1.14);opacity:0.5}
+  27.2727% {transform:translateX(-50%) translate3d(-0.4397%,0,0) scale(1.155,1.14);opacity:0.5}
+  28.0303% {transform:translateX(-50%) translate3d(-0.8549%,0,0) scale(1.155,1.14);opacity:0.5}
+  28.7879% {transform:translateX(-50%) translate3d(-1.1968%,0,0) scale(1.155,1.14);opacity:0.5}
+  29.5455% {transform:translateX(-50%) translate3d(-1.4333%,0,0) scale(1.155,1.14);opacity:0.5}
+  30.303% {transform:translateX(-50%) translate3d(-1.5421%,0,0) scale(1.155,1.14);opacity:0.5}
+  31.0606% {transform:translateX(-50%) translate3d(-1.5181%,0,0) scale(1.155,1.14);opacity:0.5}
+  31.8182% {transform:translateX(-50%) translate3d(-1.3774%,0,0) scale(1.155,1.14);opacity:0.5}
+  32.5758% {transform:translateX(-50%) translate3d(-1.1319%,0,0) scale(1.155,1.14);opacity:0.5}
+  33.3333% {transform:translateX(-50%) translate3d(-0.801%,0,0) scale(1.155,1.14);opacity:0.5}
+  34.0909% {transform:translateX(-50%) translate3d(-0.411%,0,0) scale(1.155,1.14);opacity:0.5}
+  34.8485% {transform:translateX(-50%) translate3d(0.0073%,0,0) scale(1.155,1.14);opacity:0.5}
+  35.6061% {transform:translateX(-50%) translate3d(0.4207%,0,0) scale(1.155,1.14);opacity:0.5}
+  36.3636% {transform:translateX(-50%) translate3d(0.7966%,0,0) scale(1.155,1.14);opacity:0.5}
+  37.1212% {transform:translateX(-50%) translate3d(1.105%,0,0) scale(1.155,1.14);opacity:0.5}
+  37.8788% {transform:translateX(-50%) translate3d(1.3218%,0,0) scale(1.155,1.14);opacity:0.5}
+  38.6364% {transform:translateX(-50%) translate3d(1.4296%,0,0) scale(1.155,1.14);opacity:0.5}
+  39.3939% {transform:translateX(-50%) translate3d(1.422%,0,0) scale(1.155,1.14);opacity:0.5}
+  40.1515% {transform:translateX(-50%) translate3d(1.3086%,0,0) scale(1.155,1.14);opacity:0.5}
+  40.9091% {transform:translateX(-50%) translate3d(1.0994%,0,0) scale(1.155,1.14);opacity:0.5}
+  41.6667% {transform:translateX(-50%) translate3d(0.811%,0,0) scale(1.155,1.14);opacity:0.5}
+  42.4242% {transform:translateX(-50%) translate3d(0.4662%,0,0) scale(1.155,1.14);opacity:0.5}
+  43.1818% {transform:translateX(-50%) translate3d(0.0924%,0,0) scale(1.155,1.14);opacity:0.5}
+  43.9394% {transform:translateX(-50%) translate3d(-0.2809%,0,0) scale(1.155,1.14);opacity:0.5}
+  44.697% {transform:translateX(-50%) translate3d(-0.6241%,0,0) scale(1.155,1.14);opacity:0.5}
+  45.4545% {transform:translateX(-50%) translate3d(-0.9101%,0,0) scale(1.155,1.14);opacity:0.5}
+  46.2121% {transform:translateX(-50%) translate3d(-1.1162%,0,0) scale(1.155,1.14);opacity:0.5}
+  46.9697% {transform:translateX(-50%) translate3d(-1.2261%,0,0) scale(1.155,1.14);opacity:0.5}
+  47.7273% {transform:translateX(-50%) translate3d(-1.2355%,0,0) scale(1.155,1.14);opacity:0.5}
+  48.4848% {transform:translateX(-50%) translate3d(-1.1755%,0,0) scale(1.155,1.14);opacity:0.5}
+  49.2424% {transform:translateX(-50%) translate3d(-1.0562%,0,0) scale(1.155,1.14);opacity:0.5}
+  50% {transform:translateX(-50%) translate3d(-0.8847%,0,0) scale(1.155,1.14);opacity:0.5}
+  50.7576% {transform:translateX(-50%) translate3d(-0.6709%,0,0) scale(1.155,1.14);opacity:0.5}
+  51.5152% {transform:translateX(-50%) translate3d(-0.4276%,0,0) scale(1.155,1.14);opacity:0.5}
+  52.2727% {transform:translateX(-50%) translate3d(-0.1692%,0,0) scale(1.155,1.14);opacity:0.5}
+  53.0303% {transform:translateX(-50%) translate3d(0.0892%,0,0) scale(1.155,1.14);opacity:0.5}
+  53.7879% {transform:translateX(-50%) translate3d(0.3321%,0,0) scale(1.155,1.14);opacity:0.5}
+  54.5455% {transform:translateX(-50%) translate3d(0.5454%,0,0) scale(1.155,1.14);opacity:0.5}
+  55.303% {transform:translateX(-50%) translate3d(0.7163%,0,0) scale(1.155,1.14);opacity:0.5}
+  56.0606% {transform:translateX(-50%) translate3d(0.8348%,0,0) scale(1.155,1.14);opacity:0.5}
+  56.8182% {transform:translateX(-50%) translate3d(0.8939%,0,0) scale(1.155,1.14);opacity:0.5}
+  57.5758% {transform:translateX(-50%) translate3d(0.8951%,0,0) scale(1.155,1.14);opacity:0.5}
+  58.3333% {transform:translateX(-50%) translate3d(0.8627%,0,0) scale(1.155,1.14);opacity:0.5}
+  59.0909% {transform:translateX(-50%) translate3d(0.801%,0,0) scale(1.155,1.14);opacity:0.5}
+  59.8485% {transform:translateX(-50%) translate3d(0.713%,0,0) scale(1.155,1.14);opacity:0.5}
+  60.6061% {transform:translateX(-50%) translate3d(0.6027%,0,0) scale(1.155,1.14);opacity:0.5}
+  61.3636% {transform:translateX(-50%) translate3d(0.4749%,0,0) scale(1.155,1.14);opacity:0.5}
+  62.1212% {transform:translateX(-50%) translate3d(0.3356%,0,0) scale(1.155,1.14);opacity:0.5}
+  62.8788% {transform:translateX(-50%) translate3d(0.191%,0,0) scale(1.155,1.14);opacity:0.5}
+  63.6364% {transform:translateX(-50%) translate3d(0.0476%,0,0) scale(1.155,1.14);opacity:0.5}
+  64.3939% {transform:translateX(-50%) translate3d(-0.0879%,0,0) scale(1.155,1.14);opacity:0.5}
+  65.1515% {transform:translateX(-50%) translate3d(-0.2096%,0,0) scale(1.155,1.14);opacity:0.5}
+  65.9091% {transform:translateX(-50%) translate3d(-0.3119%,0,0) scale(1.155,1.14);opacity:0.5}
+  66.6667% {transform:translateX(-50%) translate3d(-0.3901%,0,0) scale(1.155,1.14);opacity:0.5}
+  67.4242% {transform:translateX(-50%) translate3d(-0.4408%,0,0) scale(1.155,1.14);opacity:0.5}
+  68.1818% {transform:translateX(-50%) translate3d(-0.4615%,0,0) scale(1.155,1.14);opacity:0.5}
+  68.9394% {transform:translateX(-50%) translate3d(-0.4569%,0,0) scale(1.155,1.14);opacity:0.5}
+  69.697% {transform:translateX(-50%) translate3d(-0.4375%,0,0) scale(1.155,1.14);opacity:0.5}
+  70.4545% {transform:translateX(-50%) translate3d(-0.4043%,0,0) scale(1.155,1.14);opacity:0.5}
+  71.2121% {transform:translateX(-50%) translate3d(-0.359%,0,0) scale(1.155,1.14);opacity:0.5}
+  71.9697% {transform:translateX(-50%) translate3d(-0.3036%,0,0) scale(1.155,1.14);opacity:0.5}
+  72.7273% {transform:translateX(-50%) translate3d(-0.2407%,0,0) scale(1.155,1.14);opacity:0.5}
+  73.4848% {transform:translateX(-50%) translate3d(-0.1731%,0,0) scale(1.155,1.14);opacity:0.5}
+  74.2424% {transform:translateX(-50%) translate3d(-0.1041%,0,0) scale(1.155,1.14);opacity:0.5}
+  75% {transform:translateX(-50%) translate3d(-0.0368%,0,0) scale(1.155,1.14);opacity:0.5}
+  75.7576% {transform:translateX(-50%) translate3d(0.0257%,0,0) scale(1.15493,1.1399);opacity:0.50018}
+  76.5152% {transform:translateX(-50%) translate3d(0.0805%,0,0) scale(1.15467,1.13952);opacity:0.50089}
+  77.2727% {transform:translateX(-50%) translate3d(0.1251%,0,0) scale(1.15411,1.13869);opacity:0.50244}
+  78.0303% {transform:translateX(-50%) translate3d(0.1573%,0,0) scale(1.15316,1.13729);opacity:0.50504}
+  78.7879% {transform:translateX(-50%) translate3d(0.1758%,0,0) scale(1.15176,1.13522);opacity:0.50887}
+  79.5455% {transform:translateX(-50%) translate3d(0.1798%,0,0) scale(1.14987,1.13244);opacity:0.51404}
+  80.303% {transform:translateX(-50%) translate3d(0.1749%,0,0) scale(1.14747,1.12891);opacity:0.5206}
+  81.0606% {transform:translateX(-50%) translate3d(0.1636%,0,0) scale(1.14457,1.12463);opacity:0.52854}
+  81.8182% {transform:translateX(-50%) translate3d(0.147%,0,0) scale(1.14118,1.11963);opacity:0.53783}
+  82.5758% {transform:translateX(-50%) translate3d(0.1261%,0,0) scale(1.13732,1.11395);opacity:0.54839}
+  83.3333% {transform:translateX(-50%) translate3d(0.1025%,0,0) scale(1.13304,1.10764);opacity:0.56009}
+  84.0909% {transform:translateX(-50%) translate3d(0.078%,0,0) scale(1.1284,1.1008);opacity:0.5728}
+  84.8485% {transform:translateX(-50%) translate3d(0.0544%,0,0) scale(1.12345,1.09351);opacity:0.58634}
+  85.6061% {transform:translateX(-50%) translate3d(0.0335%,0,0) scale(1.11827,1.08587);opacity:0.60052}
+  86.3636% {transform:translateX(-50%) translate3d(0.0167%,0,0) scale(1.11293,1.078);opacity:0.61514}
+  87.1212% {transform:translateX(-50%) translate3d(0.0053%,0,0) scale(1.10751,1.07001);opacity:0.62998}
+  87.8788% {transform:translateX(-50%) translate3d(0.0002%,0,0) scale(1.10208,1.06202);opacity:0.64482}
+  88.6364% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.09674,1.05415);opacity:0.65944}
+  89.3939% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.09156,1.04651);opacity:0.67363}
+  90.1515% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.08661,1.03922);opacity:0.68717}
+  90.9091% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.08197,1.03237);opacity:0.69988}
+  91.6667% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.07769,1.02607);opacity:0.71159}
+  92.4242% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.07383,1.02038);opacity:0.72215}
+  93.1818% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.07044,1.01538);opacity:0.73144}
+  93.9394% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06753,1.0111);opacity:0.73939}
+  94.697% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06514,1.00757);opacity:0.74594}
+  95.4545% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06325,1.00478);opacity:0.75111}
+  96.2121% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06185,1.00272);opacity:0.75495}
+  96.9697% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06089,1.00132);opacity:0.75756}
+  97.7273% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06033,1.00048);opacity:0.7591}
+  98.4848% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06007,1.0001);opacity:0.75982}
+  99.2424% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06,1);opacity:0.76}
+  100% {transform:translateX(-50%) translate3d(0%,0,0) scale(1.06,1);opacity:0.76}
 }
-@media(prefers-reduced-motion:reduce) {
+@keyframes v5618-body-phone {
+  0% {transform:translate3d(0%,0%,0) rotate(0deg) scale(1)}
+  0.7576% {transform:translate3d(0%,0%,0) rotate(0deg) scale(1)}
+  1.5152% {transform:translate3d(0%,-0.0031%,0) rotate(0deg) scale(1.00002)}
+  2.2727% {transform:translate3d(0%,-0.0297%,0) rotate(0deg) scale(1.00018)}
+  3.0303% {transform:translate3d(0%,-0.1003%,0) rotate(0deg) scale(1.00059)}
+  3.7879% {transform:translate3d(0%,-0.2275%,0) rotate(0deg) scale(1.00135)}
+  4.5455% {transform:translate3d(0%,-0.4172%,0) rotate(0deg) scale(1.00248)}
+  5.303% {transform:translate3d(0%,-0.6691%,0) rotate(0deg) scale(1.00397)}
+  6.0606% {transform:translate3d(0%,-0.9782%,0) rotate(0deg) scale(1.0058)}
+  6.8182% {transform:translate3d(0%,-1.3351%,0) rotate(0deg) scale(1.00792)}
+  7.5758% {transform:translate3d(0%,-1.7276%,0) rotate(0deg) scale(1.01025)}
+  8.3333% {transform:translate3d(0%,-2.1409%,0) rotate(0deg) scale(1.0127)}
+  9.0909% {transform:translate3d(0%,-2.5595%,0) rotate(0deg) scale(1.01519)}
+  9.8485% {transform:translate3d(0%,-2.9671%,0) rotate(0deg) scale(1.01761)}
+  10.6061% {transform:translate3d(0%,-3.3483%,0) rotate(0deg) scale(1.01987)}
+  11.3636% {transform:translate3d(0%,-3.6893%,0) rotate(0deg) scale(1.02189)}
+  12.1212% {transform:translate3d(-0.0493%,-3.9789%,0) rotate(-0.0045deg) scale(1.02361)}
+  12.8788% {transform:translate3d(-0.4034%,-4.2118%,0) rotate(-0.0366deg) scale(1.02496)}
+  13.6364% {transform:translate3d(-0.9117%,-4.3844%,0) rotate(-0.0827deg) scale(1.02595)}
+  14.3939% {transform:translate3d(-1.2857%,-4.4921%,0) rotate(-0.1166deg) scale(1.02664)}
+  15.1515% {transform:translate3d(-1.3012%,-4.5331%,0) rotate(-0.231deg) scale(1.02713)}
+  15.9091% {transform:translate3d(-0.8178%,-4.5138%,0) rotate(-0.5162deg) scale(1.02755)}
+  16.6667% {transform:translate3d(0.1428%,-4.4546%,0) rotate(-0.7892deg) scale(1.02803)}
+  17.4242% {transform:translate3d(1.4955%,-4.3766%,0) rotate(-0.8534deg) scale(1.02858)}
+  18.1818% {transform:translate3d(3.1205%,-4.2962%,0) rotate(-0.5796deg) scale(1.02909)}
+  18.9394% {transform:translate3d(4.8737%,-4.2348%,0) rotate(0.0788deg) scale(1.02944)}
+  19.697% {transform:translate3d(6.5998%,-4.2131%,0) rotate(1.0648deg) scale(1.02952)}
+  20.4545% {transform:translate3d(8.1457%,-4.245%,0) rotate(2.291deg) scale(1.02925)}
+  21.2121% {transform:translate3d(9.3746%,-4.3327%,0) rotate(3.6488deg) scale(1.02864)}
+  21.9697% {transform:translate3d(10.1775%,-4.4656%,0) rotate(5.0179deg) scale(1.02774)}
+  22.7273% {transform:translate3d(10.4831%,-4.6226%,0) rotate(6.2769deg) scale(1.02668)}
+  23.4848% {transform:translate3d(10.0486%,-4.7783%,0) rotate(7.2946deg) scale(1.02559)}
+  24.2424% {transform:translate3d(8.6185%,-4.9099%,0) rotate(7.9543deg) scale(1.02461)}
+  25% {transform:translate3d(6.3255%,-5.0024%,0) rotate(8.198deg) scale(1.02382)}
+  25.7576% {transform:translate3d(3.3851%,-5.0468%,0) rotate(7.9871deg) scale(1.02328)}
+  26.5152% {transform:translate3d(0.0737%,-5.0385%,0) rotate(7.0723deg) scale(1.02302)}
+  27.2727% {transform:translate3d(-3.2975%,-4.9782%,0) rotate(5.4491deg) scale(1.02307)}
+  28.0303% {transform:translate3d(-6.4116%,-4.8724%,0) rotate(3.2701deg) scale(1.02342)}
+  28.7879% {transform:translate3d(-8.976%,-4.7323%,0) rotate(0.74deg) scale(1.02404)}
+  29.5455% {transform:translate3d(-10.7497%,-4.5728%,0) rotate(-1.9034deg) scale(1.0249)}
+  30.303% {transform:translate3d(-11.5658%,-4.411%,0) rotate(-4.4115deg) scale(1.02591)}
+  31.0606% {transform:translate3d(-11.3861%,-4.2639%,0) rotate(-6.5522deg) scale(1.02701)}
+  31.8182% {transform:translate3d(-10.3305%,-4.1472%,0) rotate(-8.1336deg) scale(1.02811)}
+  32.5758% {transform:translate3d(-8.489%,-4.0733%,0) rotate(-9.0062deg) scale(1.02912)}
+  33.3333% {transform:translate3d(-6.0075%,-4.0501%,0) rotate(-9.0862deg) scale(1.02997)}
+  34.0909% {transform:translate3d(-3.0824%,-4.08%,0) rotate(-8.4283deg) scale(1.03059)}
+  34.8485% {transform:translate3d(0.0547%,-4.1599%,0) rotate(-7.1296deg) scale(1.03094)}
+  35.6061% {transform:translate3d(3.1553%,-4.2813%,0) rotate(-5.2929deg) scale(1.03098)}
+  36.3636% {transform:translate3d(5.9741%,-4.4312%,0) rotate(-3.0637deg) scale(1.03071)}
+  37.1212% {transform:translate3d(8.2879%,-4.5937%,0) rotate(-0.6184deg) scale(1.03016)}
+  37.8788% {transform:translate3d(9.9133%,-4.7516%,0) rotate(1.8494deg) scale(1.02937)}
+  38.6364% {transform:translate3d(10.7218%,-4.8881%,0) rotate(4.1442deg) scale(1.02839)}
+  39.3939% {transform:translate3d(10.6648%,-4.9886%,0) rotate(6.0858deg) scale(1.02731)}
+  40.1515% {transform:translate3d(9.8142%,-5.0425%,0) rotate(7.5265deg) scale(1.0262)}
+  40.9091% {transform:translate3d(8.2453%,-5.0441%,0) rotate(8.3531deg) scale(1.02515)}
+  41.6667% {transform:translate3d(6.0824%,-4.9931%,0) rotate(8.5001deg) scale(1.02425)}
+  42.4242% {transform:translate3d(3.4967%,-4.895%,0) rotate(7.9875deg) scale(1.02356)}
+  43.1818% {transform:translate3d(0.693%,-4.7603%,0) rotate(6.8911deg) scale(1.02313)}
+  43.9394% {transform:translate3d(-2.1069%,-4.6032%,0) rotate(5.2977deg) scale(1.023)}
+  44.697% {transform:translate3d(-4.6811%,-4.4405%,0) rotate(3.3335deg) scale(1.02318)}
+  45.4545% {transform:translate3d(-6.8259%,-4.2894%,0) rotate(1.1539deg) scale(1.02365)}
+  46.2121% {transform:translate3d(-8.3715%,-4.166%,0) rotate(-1.0684deg) scale(1.02438)}
+  46.9697% {transform:translate3d(-9.1955%,-4.0834%,0) rotate(-3.1576deg) scale(1.02531)}
+  47.7273% {transform:translate3d(-9.266%,-4.0504%,0) rotate(-4.9511deg) scale(1.02638)}
+  48.4848% {transform:translate3d(-8.8165%,-4.0705%,0) rotate(-6.3288deg) scale(1.02749)}
+  49.2424% {transform:translate3d(-7.9218%,-4.1416%,0) rotate(-7.185deg) scale(1.02856)}
+  50% {transform:translate3d(-6.6349%,-4.2561%,0) rotate(-7.4505deg) scale(1.02951)}
+  50.7576% {transform:translate3d(-5.0318%,-4.4018%,0) rotate(-7.1867deg) scale(1.03027)}
+  51.5152% {transform:translate3d(-3.2072%,-4.5633%,0) rotate(-6.5582deg) scale(1.03078)}
+  52.2727% {transform:translate3d(-1.2688%,-4.7234%,0) rotate(-5.6049deg) scale(1.03099)}
+  53.0303% {transform:translate3d(0.6687%,-4.865%,0) rotate(-4.3831deg) scale(1.0309)}
+  53.7879% {transform:translate3d(2.4909%,-4.9732%,0) rotate(-2.965deg) scale(1.03051)}
+  54.5455% {transform:translate3d(4.0903%,-5.0364%,0) rotate(-1.4343deg) scale(1.02985)}
+  55.303% {transform:translate3d(5.3722%,-5.0478%,0) rotate(0.1185deg) scale(1.02897)}
+  56.0606% {transform:translate3d(6.2609%,-5.0064%,0) rotate(1.6016deg) scale(1.02794)}
+  56.8182% {transform:translate3d(6.704%,-4.9164%,0) rotate(2.9275deg) scale(1.02683)}
+  57.5758% {transform:translate3d(6.7136%,-4.7875%,0) rotate(4.0212deg) scale(1.02574)}
+  58.3333% {transform:translate3d(6.4699%,-4.6334%,0) rotate(4.8347deg) scale(1.02474)}
+  59.0909% {transform:translate3d(6.0076%,-4.4704%,0) rotate(5.3215deg) scale(1.02392)}
+  59.8485% {transform:translate3d(5.3477%,-4.3158%,0) rotate(5.4525deg) scale(1.02334)}
+  60.6061% {transform:translate3d(4.52%,-4.1862%,0) rotate(5.3004deg) scale(1.02304)}
+  61.3636% {transform:translate3d(3.5619%,-4.0952%,0) rotate(4.9696deg) scale(1.02304)}
+  62.1212% {transform:translate3d(2.5169%,-4.0525%,0) rotate(4.4752deg) scale(1.02335)}
+  62.8788% {transform:translate3d(1.4324%,-4.0628%,0) rotate(3.8397deg) scale(1.02394)}
+  63.6364% {transform:translate3d(0.3573%,-4.1248%,0) rotate(3.0917deg) scale(1.02476)}
+  64.3939% {transform:translate3d(-0.6595%,-4.232%,0) rotate(2.2652deg) scale(1.02576)}
+  65.1515% {transform:translate3d(-1.5721%,-4.373%,0) rotate(1.3977deg) scale(1.02685)}
+  65.9091% {transform:translate3d(-2.3392%,-4.5329%,0) rotate(0.5283deg) scale(1.02795)}
+  66.6667% {transform:translate3d(-2.9259%,-4.6945%,0) rotate(-0.3035deg) scale(1.02899)}
+  67.4242% {transform:translate3d(-3.3057%,-4.8405%,0) rotate(-1.0601deg) scale(1.02986)}
+  68.1818% {transform:translate3d(-3.4615%,-4.9542%,0) rotate(-1.7071deg) scale(1.0305)}
+  68.9394% {transform:translate3d(-3.427%,-5.0224%,0) rotate(-2.2191deg) scale(1.03086)}
+  69.697% {transform:translate3d(-3.2812%,-5.0372%,0) rotate(-2.5798deg) scale(1.03089)}
+  70.4545% {transform:translate3d(-3.0325%,-4.9977%,0) rotate(-2.7731deg) scale(1.03061)}
+  71.2121% {transform:translate3d(-2.6925%,-4.9103%,0) rotate(-2.7924deg) scale(1.03004)}
+  71.9697% {transform:translate3d(-2.2769%,-4.788%,0) rotate(-2.696deg) scale(1.02925)}
+  72.7273% {transform:translate3d(-1.8049%,-4.648%,0) rotate(-2.5153deg) scale(1.02833)}
+  73.4848% {transform:translate3d(-1.2984%,-4.5093%,0) rotate(-2.2587deg) scale(1.02738)}
+  74.2424% {transform:translate3d(-0.7807%,-4.3894%,0) rotate(-1.9381deg) scale(1.0265)}
+  75% {transform:translate3d(-0.2758%,-4.3019%,0) rotate(-1.5684deg) scale(1.02577)}
+  75.7576% {transform:translate3d(0.193%,-4.2514%,0) rotate(-1.1665deg) scale(1.02522)}
+  76.5152% {transform:translate3d(0.6039%,-4.2328%,0) rotate(-0.7511deg) scale(1.02485)}
+  77.2727% {transform:translate3d(0.938%,-4.2356%,0) rotate(-0.3414deg) scale(1.02464)}
+  78.0303% {transform:translate3d(1.1798%,-4.2459%,0) rotate(0.0437deg) scale(1.02452)}
+  78.7879% {transform:translate3d(1.3182%,-4.2484%,0) rotate(0.3863deg) scale(1.02442)}
+  79.5455% {transform:translate3d(1.3485%,-4.2284%,0) rotate(0.6708deg) scale(1.02427)}
+  80.303% {transform:translate3d(1.3115%,-4.1747%,0) rotate(0.8878deg) scale(1.02401)}
+  81.0606% {transform:translate3d(1.2273%,-4.0802%,0) rotate(1.029deg) scale(1.02356)}
+  81.8182% {transform:translate3d(1.1023%,-3.9431%,0) rotate(1.0881deg) scale(1.02291)}
+  82.5758% {transform:translate3d(0.9456%,-3.7661%,0) rotate(1.0718deg) scale(1.02203)}
+  83.3333% {transform:translate3d(0.7689%,-3.5555%,0) rotate(1.0145deg) scale(1.02093)}
+  84.0909% {transform:translate3d(0.5853%,-3.3197%,0) rotate(0.9235deg) scale(1.01965)}
+  84.8485% {transform:translate3d(0.4083%,-3.0673%,0) rotate(0.8053deg) scale(1.01822)}
+  85.6061% {transform:translate3d(0.251%,-2.8057%,0) rotate(0.6689deg) scale(1.0167)}
+  86.3636% {transform:translate3d(0.1252%,-2.5409%,0) rotate(0.5242deg) scale(1.01512)}
+  87.1212% {transform:translate3d(0.04%,-2.2767%,0) rotate(0.3821deg) scale(1.01354)}
+  87.8788% {transform:translate3d(0.0018%,-2.0155%,0) rotate(0.2529deg) scale(1.01197)}
+  88.6364% {transform:translate3d(0%,-1.7597%,0) rotate(0.1452deg) scale(1.01044)}
+  89.3939% {transform:translate3d(0%,-1.5115%,0) rotate(0.0636deg) scale(1.00897)}
+  90.1515% {transform:translate3d(0%,-1.2745%,0) rotate(0.0141deg) scale(1.00756)}
+  90.9091% {transform:translate3d(0%,-1.0521%,0) rotate(0deg) scale(1.00624)}
+  91.6667% {transform:translate3d(0%,-0.8472%,0) rotate(0deg) scale(1.00503)}
+  92.4242% {transform:translate3d(0%,-0.6624%,0) rotate(0deg) scale(1.00393)}
+  93.1818% {transform:translate3d(0%,-0.4998%,0) rotate(0deg) scale(1.00297)}
+  93.9394% {transform:translate3d(0%,-0.3607%,0) rotate(0deg) scale(1.00214)}
+  94.697% {transform:translate3d(0%,-0.246%,0) rotate(0deg) scale(1.00146)}
+  95.4545% {transform:translate3d(0%,-0.1555%,0) rotate(0deg) scale(1.00092)}
+  96.2121% {transform:translate3d(0%,-0.0884%,0) rotate(0deg) scale(1.00052)}
+  96.9697% {transform:translate3d(0%,-0.0427%,0) rotate(0deg) scale(1.00025)}
+  97.7273% {transform:translate3d(0%,-0.0157%,0) rotate(0deg) scale(1.00009)}
+  98.4848% {transform:translate3d(0%,-0.0032%,0) rotate(0deg) scale(1.00002)}
+  99.2424% {transform:translate3d(0%,-0.0001%,0) rotate(0deg) scale(1)}
+  100% {transform:translate3d(0%,0%,0) rotate(0deg) scale(1)}
+}
+@keyframes v5618-body-small {
+  0% {transform:translate3d(0%,0%,0) rotate(0deg) scale(1)}
+  0.7576% {transform:translate3d(0%,0%,0) rotate(0deg) scale(1)}
+  1.5152% {transform:translate3d(0%,-0.0031%,0) rotate(0deg) scale(1.00002)}
+  2.2727% {transform:translate3d(0%,-0.0297%,0) rotate(0deg) scale(1.00018)}
+  3.0303% {transform:translate3d(0%,-0.1003%,0) rotate(0deg) scale(1.00059)}
+  3.7879% {transform:translate3d(0%,-0.2275%,0) rotate(0deg) scale(1.00135)}
+  4.5455% {transform:translate3d(0%,-0.4172%,0) rotate(0deg) scale(1.00248)}
+  5.303% {transform:translate3d(0%,-0.6691%,0) rotate(0deg) scale(1.00397)}
+  6.0606% {transform:translate3d(0%,-0.9782%,0) rotate(0deg) scale(1.0058)}
+  6.8182% {transform:translate3d(0%,-1.3351%,0) rotate(0deg) scale(1.00792)}
+  7.5758% {transform:translate3d(0%,-1.7276%,0) rotate(0deg) scale(1.01025)}
+  8.3333% {transform:translate3d(0%,-2.1409%,0) rotate(0deg) scale(1.0127)}
+  9.0909% {transform:translate3d(0%,-2.5595%,0) rotate(0deg) scale(1.01519)}
+  9.8485% {transform:translate3d(0%,-2.9671%,0) rotate(0deg) scale(1.01761)}
+  10.6061% {transform:translate3d(0%,-3.3483%,0) rotate(0deg) scale(1.01987)}
+  11.3636% {transform:translate3d(0%,-3.6893%,0) rotate(0deg) scale(1.02189)}
+  12.1212% {transform:translate3d(-0.0378%,-3.9789%,0) rotate(-0.004deg) scale(1.02361)}
+  12.8788% {transform:translate3d(-0.3093%,-4.2118%,0) rotate(-0.0324deg) scale(1.02496)}
+  13.6364% {transform:translate3d(-0.699%,-4.3844%,0) rotate(-0.0732deg) scale(1.02595)}
+  14.3939% {transform:translate3d(-0.9857%,-4.4921%,0) rotate(-0.1032deg) scale(1.02664)}
+  15.1515% {transform:translate3d(-0.9976%,-4.5331%,0) rotate(-0.2045deg) scale(1.02713)}
+  15.9091% {transform:translate3d(-0.627%,-4.5138%,0) rotate(-0.457deg) scale(1.02755)}
+  16.6667% {transform:translate3d(0.1095%,-4.4546%,0) rotate(-0.6988deg) scale(1.02803)}
+  17.4242% {transform:translate3d(1.1466%,-4.3766%,0) rotate(-0.7556deg) scale(1.02858)}
+  18.1818% {transform:translate3d(2.3924%,-4.2962%,0) rotate(-0.5132deg) scale(1.02909)}
+  18.9394% {transform:translate3d(3.7365%,-4.2348%,0) rotate(0.0698deg) scale(1.02944)}
+  19.697% {transform:translate3d(5.0598%,-4.2131%,0) rotate(0.9427deg) scale(1.02952)}
+  20.4545% {transform:translate3d(6.2451%,-4.245%,0) rotate(2.0285deg) scale(1.02925)}
+  21.2121% {transform:translate3d(7.1872%,-4.3327%,0) rotate(3.2307deg) scale(1.02864)}
+  21.9697% {transform:translate3d(7.8027%,-4.4656%,0) rotate(4.4429deg) scale(1.02774)}
+  22.7273% {transform:translate3d(8.0371%,-4.6226%,0) rotate(5.5576deg) scale(1.02668)}
+  23.4848% {transform:translate3d(7.7039%,-4.7783%,0) rotate(6.4588deg) scale(1.02559)}
+  24.2424% {transform:translate3d(6.6075%,-4.9099%,0) rotate(7.0429deg) scale(1.02461)}
+  25% {transform:translate3d(4.8496%,-5.0024%,0) rotate(7.2587deg) scale(1.02382)}
+  25.7576% {transform:translate3d(2.5953%,-5.0468%,0) rotate(7.0719deg) scale(1.02328)}
+  26.5152% {transform:translate3d(0.0565%,-5.0385%,0) rotate(6.2619deg) scale(1.02302)}
+  27.2727% {transform:translate3d(-2.5281%,-4.9782%,0) rotate(4.8247deg) scale(1.02307)}
+  28.0303% {transform:translate3d(-4.9156%,-4.8724%,0) rotate(2.8954deg) scale(1.02342)}
+  28.7879% {transform:translate3d(-6.8816%,-4.7323%,0) rotate(0.6552deg) scale(1.02404)}
+  29.5455% {transform:translate3d(-8.2414%,-4.5728%,0) rotate(-1.6853deg) scale(1.0249)}
+  30.303% {transform:translate3d(-8.8671%,-4.411%,0) rotate(-3.906deg) scale(1.02591)}
+  31.0606% {transform:translate3d(-8.7293%,-4.2639%,0) rotate(-5.8015deg) scale(1.02701)}
+  31.8182% {transform:translate3d(-7.92%,-4.1472%,0) rotate(-7.2016deg) scale(1.02811)}
+  32.5758% {transform:translate3d(-6.5082%,-4.0733%,0) rotate(-7.9743deg) scale(1.02912)}
+  33.3333% {transform:translate3d(-4.6058%,-4.0501%,0) rotate(-8.0451deg) scale(1.02997)}
+  34.0909% {transform:translate3d(-2.3632%,-4.08%,0) rotate(-7.4626deg) scale(1.03059)}
+  34.8485% {transform:translate3d(0.0419%,-4.1599%,0) rotate(-6.3127deg) scale(1.03094)}
+  35.6061% {transform:translate3d(2.4191%,-4.2813%,0) rotate(-4.6864deg) scale(1.03098)}
+  36.3636% {transform:translate3d(4.5802%,-4.4312%,0) rotate(-2.7126deg) scale(1.03071)}
+  37.1212% {transform:translate3d(6.354%,-4.5937%,0) rotate(-0.5475deg) scale(1.03016)}
+  37.8788% {transform:translate3d(7.6002%,-4.7516%,0) rotate(1.6375deg) scale(1.02937)}
+  38.6364% {transform:translate3d(8.2201%,-4.8881%,0) rotate(3.6693deg) scale(1.02839)}
+  39.3939% {transform:translate3d(8.1764%,-4.9886%,0) rotate(5.3884deg) scale(1.02731)}
+  40.1515% {transform:translate3d(7.5242%,-5.0425%,0) rotate(6.6641deg) scale(1.0262)}
+  40.9091% {transform:translate3d(6.3214%,-5.0441%,0) rotate(7.396deg) scale(1.02515)}
+  41.6667% {transform:translate3d(4.6632%,-4.9931%,0) rotate(7.5261deg) scale(1.02425)}
+  42.4242% {transform:translate3d(2.6808%,-4.895%,0) rotate(7.0723deg) scale(1.02356)}
+  43.1818% {transform:translate3d(0.5313%,-4.7603%,0) rotate(6.1015deg) scale(1.02313)}
+  43.9394% {transform:translate3d(-1.6153%,-4.6032%,0) rotate(4.6907deg) scale(1.023)}
+  44.697% {transform:translate3d(-3.5888%,-4.4405%,0) rotate(2.9515deg) scale(1.02318)}
+  45.4545% {transform:translate3d(-5.2332%,-4.2894%,0) rotate(1.0217deg) scale(1.02365)}
+  46.2121% {transform:translate3d(-6.4182%,-4.166%,0) rotate(-0.946deg) scale(1.02438)}
+  46.9697% {transform:translate3d(-7.0499%,-4.0834%,0) rotate(-2.7958deg) scale(1.02531)}
+  47.7273% {transform:translate3d(-7.1039%,-4.0504%,0) rotate(-4.3838deg) scale(1.02638)}
+  48.4848% {transform:translate3d(-6.7593%,-4.0705%,0) rotate(-5.6036deg) scale(1.02749)}
+  49.2424% {transform:translate3d(-6.0734%,-4.1416%,0) rotate(-6.3618deg) scale(1.02856)}
+  50% {transform:translate3d(-5.0868%,-4.2561%,0) rotate(-6.5968deg) scale(1.02951)}
+  50.7576% {transform:translate3d(-3.8577%,-4.4018%,0) rotate(-6.3633deg) scale(1.03027)}
+  51.5152% {transform:translate3d(-2.4588%,-4.5633%,0) rotate(-5.8068deg) scale(1.03078)}
+  52.2727% {transform:translate3d(-0.9728%,-4.7234%,0) rotate(-4.9627deg) scale(1.03099)}
+  53.0303% {transform:translate3d(0.5127%,-4.865%,0) rotate(-3.8809deg) scale(1.0309)}
+  53.7879% {transform:translate3d(1.9097%,-4.9732%,0) rotate(-2.6252deg) scale(1.03051)}
+  54.5455% {transform:translate3d(3.1359%,-5.0364%,0) rotate(-1.27deg) scale(1.02985)}
+  55.303% {transform:translate3d(4.1187%,-5.0478%,0) rotate(0.1049deg) scale(1.02897)}
+  56.0606% {transform:translate3d(4.8%,-5.0064%,0) rotate(1.4181deg) scale(1.02794)}
+  56.8182% {transform:translate3d(5.1397%,-4.9164%,0) rotate(2.592deg) scale(1.02683)}
+  57.5758% {transform:translate3d(5.1471%,-4.7875%,0) rotate(3.5605deg) scale(1.02574)}
+  58.3333% {transform:translate3d(4.9603%,-4.6334%,0) rotate(4.2807deg) scale(1.02474)}
+  59.0909% {transform:translate3d(4.6059%,-4.4704%,0) rotate(4.7118deg) scale(1.02392)}
+  59.8485% {transform:translate3d(4.0999%,-4.3158%,0) rotate(4.8277deg) scale(1.02334)}
+  60.6061% {transform:translate3d(3.4653%,-4.1862%,0) rotate(4.6931deg) scale(1.02304)}
+  61.3636% {transform:translate3d(2.7308%,-4.0952%,0) rotate(4.4002deg) scale(1.02304)}
+  62.1212% {transform:translate3d(1.9297%,-4.0525%,0) rotate(3.9624deg) scale(1.02335)}
+  62.8788% {transform:translate3d(1.0981%,-4.0628%,0) rotate(3.3997deg) scale(1.02394)}
+  63.6364% {transform:translate3d(0.2739%,-4.1248%,0) rotate(2.7374deg) scale(1.02476)}
+  64.3939% {transform:translate3d(-0.5056%,-4.232%,0) rotate(2.0057deg) scale(1.02576)}
+  65.1515% {transform:translate3d(-1.2053%,-4.373%,0) rotate(1.2375deg) scale(1.02685)}
+  65.9091% {transform:translate3d(-1.7934%,-4.5329%,0) rotate(0.4678deg) scale(1.02795)}
+  66.6667% {transform:translate3d(-2.2432%,-4.6945%,0) rotate(-0.2687deg) scale(1.02899)}
+  67.4242% {transform:translate3d(-2.5344%,-4.8405%,0) rotate(-0.9386deg) scale(1.02986)}
+  68.1818% {transform:translate3d(-2.6538%,-4.9542%,0) rotate(-1.5115deg) scale(1.0305)}
+  68.9394% {transform:translate3d(-2.6274%,-5.0224%,0) rotate(-1.9648deg) scale(1.03086)}
+  69.697% {transform:translate3d(-2.5156%,-5.0372%,0) rotate(-2.2842deg) scale(1.03089)}
+  70.4545% {transform:translate3d(-2.3249%,-4.9977%,0) rotate(-2.4554deg) scale(1.03061)}
+  71.2121% {transform:translate3d(-2.0642%,-4.9103%,0) rotate(-2.4724deg) scale(1.03004)}
+  71.9697% {transform:translate3d(-1.7456%,-4.788%,0) rotate(-2.387deg) scale(1.02925)}
+  72.7273% {transform:translate3d(-1.3838%,-4.648%,0) rotate(-2.2271deg) scale(1.02833)}
+  73.4848% {transform:translate3d(-0.9954%,-4.5093%,0) rotate(-1.9999deg) scale(1.02738)}
+  74.2424% {transform:translate3d(-0.5985%,-4.3894%,0) rotate(-1.7161deg) scale(1.0265)}
+  75% {transform:translate3d(-0.2114%,-4.3019%,0) rotate(-1.3887deg) scale(1.02577)}
+  75.7576% {transform:translate3d(0.1479%,-4.2514%,0) rotate(-1.0328deg) scale(1.02522)}
+  76.5152% {transform:translate3d(0.463%,-4.2328%,0) rotate(-0.665deg) scale(1.02485)}
+  77.2727% {transform:translate3d(0.7191%,-4.2356%,0) rotate(-0.3023deg) scale(1.02464)}
+  78.0303% {transform:translate3d(0.9045%,-4.2459%,0) rotate(0.0387deg) scale(1.02452)}
+  78.7879% {transform:translate3d(1.0106%,-4.2484%,0) rotate(0.342deg) scale(1.02442)}
+  79.5455% {transform:translate3d(1.0339%,-4.2284%,0) rotate(0.5939deg) scale(1.02427)}
+  80.303% {transform:translate3d(1.0055%,-4.1747%,0) rotate(0.7861deg) scale(1.02401)}
+  81.0606% {transform:translate3d(0.9409%,-4.0802%,0) rotate(0.9111deg) scale(1.02356)}
+  81.8182% {transform:translate3d(0.8451%,-3.9431%,0) rotate(0.9634deg) scale(1.02291)}
+  82.5758% {transform:translate3d(0.725%,-3.7661%,0) rotate(0.949deg) scale(1.02203)}
+  83.3333% {transform:translate3d(0.5895%,-3.5555%,0) rotate(0.8983deg) scale(1.02093)}
+  84.0909% {transform:translate3d(0.4487%,-3.3197%,0) rotate(0.8176deg) scale(1.01965)}
+  84.8485% {transform:translate3d(0.313%,-3.0673%,0) rotate(0.713deg) scale(1.01822)}
+  85.6061% {transform:translate3d(0.1925%,-2.8057%,0) rotate(0.5922deg) scale(1.0167)}
+  86.3636% {transform:translate3d(0.096%,-2.5409%,0) rotate(0.4642deg) scale(1.01512)}
+  87.1212% {transform:translate3d(0.0306%,-2.2767%,0) rotate(0.3383deg) scale(1.01354)}
+  87.8788% {transform:translate3d(0.0014%,-2.0155%,0) rotate(0.224deg) scale(1.01197)}
+  88.6364% {transform:translate3d(0%,-1.7597%,0) rotate(0.1285deg) scale(1.01044)}
+  89.3939% {transform:translate3d(0%,-1.5115%,0) rotate(0.0563deg) scale(1.00897)}
+  90.1515% {transform:translate3d(0%,-1.2745%,0) rotate(0.0125deg) scale(1.00756)}
+  90.9091% {transform:translate3d(0%,-1.0521%,0) rotate(0deg) scale(1.00624)}
+  91.6667% {transform:translate3d(0%,-0.8472%,0) rotate(0deg) scale(1.00503)}
+  92.4242% {transform:translate3d(0%,-0.6624%,0) rotate(0deg) scale(1.00393)}
+  93.1818% {transform:translate3d(0%,-0.4998%,0) rotate(0deg) scale(1.00297)}
+  93.9394% {transform:translate3d(0%,-0.3607%,0) rotate(0deg) scale(1.00214)}
+  94.697% {transform:translate3d(0%,-0.246%,0) rotate(0deg) scale(1.00146)}
+  95.4545% {transform:translate3d(0%,-0.1555%,0) rotate(0deg) scale(1.00092)}
+  96.2121% {transform:translate3d(0%,-0.0884%,0) rotate(0deg) scale(1.00052)}
+  96.9697% {transform:translate3d(0%,-0.0427%,0) rotate(0deg) scale(1.00025)}
+  97.7273% {transform:translate3d(0%,-0.0157%,0) rotate(0deg) scale(1.00009)}
+  98.4848% {transform:translate3d(0%,-0.0032%,0) rotate(0deg) scale(1.00002)}
+  99.2424% {transform:translate3d(0%,-0.0001%,0) rotate(0deg) scale(1)}
+  100% {transform:translate3d(0%,0%,0) rotate(0deg) scale(1)}
+}
+/* Constrain only small-screen horizontal travel; no side clipping when the
+   physical sphere turns near iPhone-width screen edges. */
+@media(max-width:420px) {
+ #magic-ball-dialog .magic-ball.ball-mixing {animation-name:v5618-body-phone!important;}
+}
+@media(max-width:360px) {
+ #magic-ball-dialog .magic-ball.ball-mixing {animation-name:v5618-body-small!important;}
+}
+@media (prefers-reduced-motion:reduce) {
  #magic-ball-dialog .magic-ball.ball-mixing,
  #magic-ball-dialog .magic-ball.ball-mixing .magic-ball-orbit,
  #magic-ball-dialog .magic-ball.ball-mixing .magic-ball-surface::after,
@@ -7978,7 +8633,7 @@ const cubeFaceAngles = {
   6: [0, 180]
 };
 let cubeCurrentFace = 1;
-const BALL_MIX_MS = 1110;
+const BALL_MIX_MS = 1720;
 const BALL_DARK_MS = 165;
 const BALL_RETURN_MS = 1080;
 
