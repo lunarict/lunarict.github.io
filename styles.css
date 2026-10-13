@@ -7712,3 +7712,32 @@ body::before {
   57%{opacity:.72}
   82%,100%{opacity:1}
 }
+
+/* v56.3.0 - a single persistent mobile renderer; no phase-specific visibility. */
+#magic-ball-dialog .magic-ball.ball-gpu-active {
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border-color:transparent!important;
+  animation:none!important;
+  overflow:visible!important;
+  will-change:transform;
+}
+#magic-ball-dialog .magic-ball.ball-gpu-active::before,
+#magic-ball-dialog .magic-ball.ball-gpu-active::after {
+  display:none!important;content:none!important;
+}
+#magic-ball-dialog .magic-ball.ball-gpu-active > .magic-ball-halo,
+#magic-ball-dialog .magic-ball.ball-gpu-active > .magic-ball-highlight,
+#magic-ball-dialog .magic-ball.ball-gpu-active > .magic-ball-surface,
+#magic-ball-dialog .magic-ball.ball-gpu-active > .magic-ball-orbit {
+  display:none!important;visibility:hidden!important;animation:none!important;
+}
+#magic-ball-dialog canvas.magic-ball-gpu {
+  display:block!important;position:absolute!important;inset:0!important;
+  width:100%!important;height:100%!important;
+  margin:0!important;padding:0!important;border:0!important;
+  border-radius:0!important;background:transparent!important;
+  filter:none!important;pointer-events:none!important;
+  z-index:42!important;
+}

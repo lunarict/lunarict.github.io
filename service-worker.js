@@ -1,7 +1,7 @@
-/* Offline shell cache, v56.2.4 native MP4 Safari range fix and cube optics. All referenced files exist in ZIP. */
-const CACHE = 'battle-exorcists-prod-v56-2.4.0';
+/* Offline shell cache, v56.3.0 persistent mobile renderer. All referenced files exist in ZIP. */
+const CACHE = 'battle-exorcists-prod-v56-3.0.0';
 const PRECACHE = [
-  './', './index.html', './styles.css', './app.js', './manifest.json',
+  './', './index.html', './styles.css', './app.js', './mobile-ball.js', './manifest.json',
   './icon.svg', './icon-192.png', './icon-512.png',
   './icon-maskable-512.png', './apple-touch-icon.png',
   './assets/parchment-fibers.webp', './assets/aged-cover.webp',
@@ -12,7 +12,9 @@ const PRECACHE = [
   './assets/metal-handbrushed.webp', './assets/paper-ink-flecks.webp', './assets/plastic-microtexture.webp', './assets/black-gloss-shell.webp',
   './assets/torn-note-1.png', './assets/torn-note-2.png',
   './assets/torn-note-3.png', './assets/torn-note-4.png',
-  './assets/torn-note-5.png', './assets/torn-note-6.png'
+  './assets/torn-note-5.png', './assets/torn-note-6.png',
+  './assets/ball-mobile-back.webp', './assets/ball-mobile-front.webp',
+  './assets/ball-mobile-faces.webp', './assets/ball-mobile-resin.webp'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE)

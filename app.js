@@ -1178,205 +1178,34 @@ const BALL_MIX_MS = 1720;
 const BALL_DARK_MS = 165;
 const BALL_RETURN_MS = 1080;
 
-/* v56.2.2: iPhone performance. The 1290px transparent WebP clips used to
-   decode 52 x 6.7 MB surfaces for one shake (~350MB per clip) on WebKit.
-   Replace them with high-bitrate, hardware-decoded H.264 MP4 at the FULL
-   920px diameter of the actual Retina globe (the remaining 370 source pixels
-   were TRANSPARENT padding). Sphere-shaped video is statically clipped and
-   its original frame-by-frame spatial motion is recreated solely by a
-   compositor transform. All optical detail remains prerecorded and crisp.
-   No giant animated WebP decoder state, repeated live cube shaders or blur. */
-const BALL_VIDEO_ASSETS = window.BALL_VIDEO_INLINE || {
-  shake: Array.from({length:6},(_,i)=>`assets/ball-shake-${i+1}.mp4`),
-  rise: Array.from({length:6},(_,i)=>`assets/ball-rise-${i+1}.mp4`)
-};
-const BALL_SHAKE_TRACK = [[0.0,0.0,1.0],[0.0,0.0,1.0],[0.0,-0.2717,1.002174],[0.0,-0.8696,1.004348],[0.0,-1.8478,1.01087],[0.0,-2.8804,1.017391],[0.0,-3.8043,1.021739],[-0.8696,-4.3478,1.026087],[-1.0326,-4.5109,1.027174],[1.5217,-4.3478,1.028261],[5.8696,-4.1848,1.029348],[9.4565,-4.3478,1.028261],[10.163,-4.7283,1.025],[5.5435,-5.0,1.023913],[-2.663,-4.9457,1.022826],[-9.5652,-4.6739,1.023913],[-11.3587,-4.2391,1.027174],[-7.2283,-4.0761,1.029348],[0.2174,-4.1304,1.030435],[7.337,-4.5109,1.029348],[10.7065,-4.8913,1.028261],[8.6413,-5.0543,1.025],[2.7174,-4.837,1.023913],[-4.2935,-4.4565,1.022826],[-8.6957,-4.1304,1.023913],[-8.8587,-4.0761,1.027174],[-5.8152,-4.2935,1.029348],[-1.087,-4.7283,1.031522],[3.4783,-5.0,1.030435],[6.3587,-4.9457,1.027174],[6.5217,-4.6739,1.023913],[5.0543,-4.2935,1.022826],[2.663,-4.0761,1.022826],[-0.0543,-4.1848,1.025],[-2.337,-4.5109,1.027174],[-3.3696,-4.8913,1.030435],[-3.2609,-5.0,1.030435],[-2.4457,-4.837,1.029348],[-1.1957,-4.4565,1.026087],[0.0543,-4.2935,1.025],[0.9783,-4.2391,1.023913],[1.3043,-4.2391,1.023913],[1.1413,-3.9674,1.022826],[0.8152,-3.5326,1.020652],[0.3261,-2.9348,1.017391],[0.0,-2.2826,1.013043],[0.0,-1.5761,1.009783],[0.0,-1.0326,1.006522],[0.0,-0.5435,1.002174],[0.0,-0.2174,1.0],[0.0,0.0,1.0],[0.0,0.0,1.0]];
-const ballRasterCache = new Map();
-let ballRasterPlayback = null;
-let ballRasterGeneration = 0;
+/* v56.3.0: keep a single mobile canvas alive across every roll phase.
+   Desktop continues to use the existing CSS choreography. */
 let ballRollGeneration = 0;
-function ballRasterEligible() {
-  return motionIsMobile() &&
-    !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches &&
-    !document.hidden && typeof window.HTMLVideoElement !== 'undefined' &&
-    !!document.createElement('video').canPlayType('video/mp4; codecs="avc1.64001f"');
-}
-function warmBallRaster(kind,face) {
-  if (!ballRasterEligible() || !BALL_VIDEO_ASSETS[kind]?.[face-1]) return null;
-  const key=`${kind}-${face}`;
-  let entry=ballRasterCache.get(key);
-  if (entry) return entry;
-  const asset=BALL_VIDEO_ASSETS[kind][face-1];
-  // Keep MP4 files as genuine HTTP media URLs on deployed sites. Safari's
-  // hardware decoder can seek/fetch byte ranges; blob URLs are only needed
-  // for the GitHub single-file edition with embedded data URIs.
-  if(!asset.startsWith('data:')){
-    entry={ready:true,blob:null,pending:null,directUrl:asset};
-    ballRasterCache.set(key,entry);
-    return entry;
+let ballMobileRenderer = null;
+let ballMobilePreparing = null;
+const magicBallWaiters = new Set();
+function prepareMobileBall() {
+  if (!motionIsMobile() || !window.MobileMagicBall) return Promise.resolve(null);
+  if (ballMobileRenderer) return Promise.resolve(ballMobileRenderer.lost ? null : ballMobileRenderer);
+  if (!ballMobilePreparing) {
+    const ball = document.getElementById('magic-ball');
+    ballMobilePreparing = window.MobileMagicBall.create(ball, cubeCurrentFace)
+      .then(renderer => {ballMobileRenderer = renderer;renderer.setFace(cubeCurrentFace);return renderer;})
+      .catch(() => null) // The original live sphere stays visible on failure.
+      .finally(() => {ballMobilePreparing = null;});
   }
-  entry={ready:false,blob:null,pending:null,directUrl:null};
-  ballRasterCache.set(key,entry);
-  entry.pending=fetch(asset, {cache:'force-cache'})
-    .then(r=>{if(!r.ok)throw new Error('MP4 missing: '+key);return r.blob();})
-    .then(blob=>{if(blob.size<1000)throw new Error('Bad MP4: '+key);entry.blob=blob;entry.ready=true;return blob;})
-    .catch(()=>{ballRasterCache.delete(key);return null;});
-  return entry;
+  return ballMobilePreparing;
 }
 function warmBallVisuals() {
-  if (!ballRasterEligible()) return;
-  warmBallRaster('shake',cubeCurrentFace);
-  // Warm the six short result clips as compressed bytes only. They are NEVER
-  // decoded simultaneously. Safari retains a few MB of compressed blobs.
-  const warm=()=>{for(let i=1;i<=6;i++)warmBallRaster('rise',i);};
-  if ('requestIdleCallback' in window) requestIdleCallback(warm,{timeout:600});
-  else setTimeout(warm,120);
+  if (motionIsMobile()) void prepareMobileBall();
 }
-/* v56.2.4: an actual single-layer video stage for iOS. The previous
-   "fallback" shell remained visible UNDER a moving, opaque MP4, leaving a
-   second stationary sphere visible around the moving silhouette. During
-   playback the live optics are completely removed from composition; they
-   return only AFTER a completed media frame or a genuine fallback. */
-function stopBallRaster() {
-  ballRasterGeneration++;
-  const ball=document.getElementById('magic-ball');
-  if(ball)ball.classList.remove('ball-video-active');
-  const p=ballRasterPlayback;
-  ballRasterPlayback=null;
-  if(!p)return;
-  if(p.onPhaseFinished){
-    const callback=p.onPhaseFinished;p.onPhaseFinished=null;
-    callback(false);
-  }
-  if(p.animation){try{p.animation.cancel();}catch(_){}}
-  if(p.timeUpdate) p.video.removeEventListener('timeupdate',p.timeUpdate);
-  try{p.video.pause();p.video.removeAttribute('src');p.video.load();}catch(_){ }
-  p.viewport.remove();
-  if(p.ownUrl)URL.revokeObjectURL(p.url);
-}
-function makeVideoMotion(viewport,kind,mediaTimeMs=0) {
-  if(kind!=='shake')return null;
-  const animation=viewport.animate(BALL_SHAKE_TRACK.map(([x,y,scale],i)=>({
-    offset:i/(BALL_SHAKE_TRACK.length-1),
-    transform:`translate(-50%,-50%) translate3d(${x}%,${y}%,0) scale(${scale})`
-  })),{duration:BALL_MIX_MS,fill:'both',easing:'linear',iterations:1});
-  // A decoded video frame can arrive >100ms after play() on mobile Safari.
-  // Never begin the shell movement at t=0 while the cube is at t>0.
-  animation.currentTime=Math.min(BALL_MIX_MS,Math.max(0,mediaTimeMs));
-  return animation;
-}
-async function playBallRaster(kind,face) {
-  if(!ballRasterEligible())return false;
-  stopBallRaster();
-  const generation=ballRasterGeneration;
-  const entry=warmBallRaster(kind,face);
-  if(!entry)return false;
-  const blob=entry.directUrl||(entry.ready?entry.blob:await entry.pending);
-  if(!blob||generation!==ballRasterGeneration)return false;
-  const ball=document.getElementById('magic-ball');
-  if(!ball||!document.getElementById('magic-ball-dialog')?.open)return false;
-  const viewport=document.createElement('span');
-  viewport.className='magic-ball-video-viewport';
-  viewport.setAttribute('aria-hidden','true');
-  const video=document.createElement('video');
-  video.className='magic-ball-video';
-  video.preload='auto';video.muted=true;video.defaultMuted=true;
-  video.playsInline=true;video.controls=false;
-  video.setAttribute('playsinline','');video.setAttribute('webkit-playsinline','');
-  video.setAttribute('muted','');video.setAttribute('disablepictureinpicture','');
-  video.disablePictureInPicture=true;video.disableRemotePlayback=true;
-  const ownUrl=!entry.directUrl;
-  const url=ownUrl?URL.createObjectURL(blob):entry.directUrl;
-  video.src=url;
-  viewport.append(video);
-  ball.append(viewport);
-  const p={viewport,video,url,ownUrl,animation:null,onPhaseFinished:null,timeUpdate:null};
-  ballRasterPlayback=p;
-  return await new Promise(resolve=>{
-    let complete=false;
-    const finish=success=>{
-      if(complete)return;
-      complete=true;
-      clearTimeout(watchdog);
-      if(!success){
-        if(ballRasterPlayback===p)stopBallRaster();
-        resolve(false);return;
-      }
-      if(generation!==ballRasterGeneration){resolve(false);return;}
-      // These two changes are in ONE paint: the video becomes visible as the
-      // non-moving live sphere is hidden. No 80ms alpha blend/ghost trail.
-      ball.classList.add('ball-video-active');
-      viewport.classList.add('video-ready');
-      p.animation=makeVideoMotion(viewport,kind,video.currentTime*1000);
-      if(p.animation){
-        // timeupdate fires at ~4Hz; small corrections smooth out any startup
-        // drift without a heavy per-frame JS transform on iOS.
-        p.timeUpdate=()=>{
-          if(ballRasterPlayback!==p||!p.animation)return;
-          const expected=Math.min(BALL_MIX_MS,video.currentTime*1000);
-          const current=Number(p.animation.currentTime)||0;
-          const drift=expected-current;
-          if(Math.abs(drift)>65){
-            p.animation.currentTime=Math.min(BALL_MIX_MS,Math.max(0,current+Math.max(-28,Math.min(28,drift))));
-          }
-        };
-        video.addEventListener('timeupdate',p.timeUpdate,{passive:true});
-        video.addEventListener('waiting',()=>{try{p.animation?.pause();}catch(_){}});
-        video.addEventListener('playing',()=>{
-          if(p.animation && p.animation.playState==='paused'){
-            p.animation.currentTime=Math.min(BALL_MIX_MS,video.currentTime*1000);
-            p.animation.play();
-          }
-        });
-      }
-      resolve(true);
-    };
-    const watchdog=setTimeout(()=>finish(false),1100);
-    video.addEventListener('error',()=>{
-      if(!complete)finish(false);
-      else if(ballRasterPlayback===p)stopBallRaster();
-    },{once:true});
-    // "playing" may precede the first composited frame on iOS. Keep the
-    // visible live sphere untouched until a real frame is decoded.
-    if(typeof video.requestVideoFrameCallback==='function'){
-      video.requestVideoFrameCallback(()=>finish(true));
-    }else{
-      const ready=()=>{if(video.readyState>=2 && video.currentTime>.015)finish(true);};
-      video.addEventListener('timeupdate',ready,{once:true});
-      video.addEventListener('playing',()=>setTimeout(ready,45),{once:true});
-    }
-    try{const started=video.play();if(started?.catch)started.catch(()=>finish(false));}
-    catch(_){finish(false);}
-  });
-}
-/* Use the VIDEO timeline for phase changes rather than starting a second
-   setTimeout clock after an asynchronous first-frame wait. In the previous
-   version the clip could already have played ~0.2s before JS began timing:
-   the last video frames then froze in place before the reveal. */
-function waitBallPhase(videoStarted, duration) {
-  const p=videoStarted?ballRasterPlayback:null;
-  if(!p?.video){
-    return new Promise(resolve=>magicBallTimers.push(setTimeout(resolve,duration)));
-  }
-  return new Promise(resolve=>{
-    let settled=false;
-    let timeoutId=null;
-    const onEnded=()=>done(true);
-    const done=()=>{
-      if(settled)return;
-      settled=true;
-      if(timeoutId!==null)clearTimeout(timeoutId);
-      p.video.removeEventListener('ended',onEnded);
-      if(p.onPhaseFinished===done)p.onPhaseFinished=null;
-      resolve();
-    };
-    p.onPhaseFinished=done;
-    p.video.addEventListener('ended',onEnded,{once:true});
-    if(p.video.ended){done();return;}
-    // Allow temporary decoding pauses, but do not trap the modal forever.
-    const remain=Math.max(0,duration-p.video.currentTime*1000);
-    timeoutId=setTimeout(done,remain+950);
-    magicBallTimers.push(timeoutId);
+function waitBallPhase(duration) {
+  return new Promise(resolve => {
+    let timer;
+    const done = () => {clearTimeout(timer);magicBallWaiters.delete(done);resolve();};
+    magicBallWaiters.add(done);
+    timer = setTimeout(done, duration);
+    magicBallTimers.push(timer);
   });
 }
 /* v56.2.1. Android: a sequence of separate, progressively softer cube-wall
@@ -1413,6 +1242,7 @@ let cubeHapticFired = false;
 function clearMagicBallTimers() {
   magicBallTimers.forEach(timer => clearTimeout(timer));
   magicBallTimers = [];
+  for (const done of [...magicBallWaiters]) done();
 }
 
 function orientCube(ball, prefix, value) {
@@ -1424,7 +1254,7 @@ function orientCube(ball, prefix, value) {
 function resetBallAnimation() {
   ballRollGeneration++;
   cubeHapticFired = false;
-  stopBallRaster();
+  ballMobileRenderer?.cancel(cubeCurrentFace);
   const ball = $('#magic-ball');
   if (!ball) return;
   ball.classList.remove('ball-mixing', 'ball-submerged', 'ball-rising', 'ball-diving', 'shaking', 'settled', 'omen-six', 'omen-one');
@@ -1642,7 +1472,7 @@ async function rollMagicBall(source = 'tap') {
   orientCube(ball,'from',cubeCurrentFace);
   orientCube(ball,'to',value);
   if(reducedMotion){
-    cubeCurrentFace=value;orientCube(ball,'face',value);
+    cubeCurrentFace=value;orientCube(ball,'face',value);ballMobileRenderer?.setFace(value);
     result.textContent=String(value);status.textContent=`Выпало ${value}`;
     return;
   }
@@ -1651,40 +1481,41 @@ async function rollMagicBall(source = 'tap') {
   const tapInput=document.getElementById('magic-ball-ios-switch');
   if(tapInput)tapInput.disabled=true;
   status.textContent='Идёт бросок…';
-  const shakeVideo=ballRasterEligible()?await playBallRaster('shake',cubeCurrentFace):false;
-  if(rollGeneration!==ballRollGeneration)return;
-  ball.classList.add('ball-mixing');
-  // The cube can only hit the wall AFTER the shell has been moving. Its
-  // collision cue uses the same video clock when available.
-  const alreadyPlayed=shakeVideo?Math.round((ballRasterPlayback?.video?.currentTime||0)*1000):0;
-  magicBallTimers.push(setTimeout(()=>{
-    if(!cubeHapticFired && magicBallBusy){cubeHapticFired=true;pulseCubeHaptic();}
-  },Math.max(0,480-alreadyPlayed)));
-  await waitBallPhase(shakeVideo,BALL_MIX_MS);
-  if(rollGeneration!==ballRollGeneration)return;
-  ball.classList.remove('ball-mixing');
-  ball.classList.add('ball-submerged');
-  stopBallRaster();
-  await new Promise(resolve=>magicBallTimers.push(setTimeout(resolve,BALL_DARK_MS)));
-  if(rollGeneration!==ballRollGeneration)return;
-  result.textContent=String(value);
-  const riseVideo=ballRasterEligible()?await playBallRaster('rise',value):false;
-  if(rollGeneration!==ballRollGeneration)return;
-  ball.classList.remove('ball-submerged');
-  ball.classList.add('ball-rising');
-  await waitBallPhase(riseVideo,BALL_RETURN_MS);
-  if(rollGeneration!==ballRollGeneration)return;
-  // Restore the fully built 3D cube BEFORE retiring the video, in the same
-  // JavaScript frame. A mobile first-frame failure never leaves a blank ball.
+  const renderer = motionIsMobile() ? await prepareMobileBall() : null;
+  if (rollGeneration !== ballRollGeneration) return;
+  if (renderer && renderer.ready && !renderer.lost) {
+    await renderer.play(cubeCurrentFace, value, () => {
+      if (!cubeHapticFired && magicBallBusy) {cubeHapticFired=true;pulseCubeHaptic();}
+    });
+    if (rollGeneration !== ballRollGeneration) return;
+  } else {
+    // No WebGL/texture support: retain the original live sphere, never an MP4.
+    ball.classList.add('ball-mixing');
+    magicBallTimers.push(setTimeout(() => {
+      if (!cubeHapticFired && magicBallBusy) {cubeHapticFired=true;pulseCubeHaptic();}
+    }, 480));
+    await waitBallPhase(BALL_MIX_MS);
+    if (rollGeneration !== ballRollGeneration) return;
+    ball.classList.remove('ball-mixing');
+    ball.classList.add('ball-submerged');
+    await waitBallPhase(BALL_DARK_MS);
+    if (rollGeneration !== ballRollGeneration) return;
+    result.textContent=String(value);
+    ball.classList.remove('ball-submerged');
+    ball.classList.add('ball-rising');
+    await waitBallPhase(BALL_RETURN_MS);
+    if (rollGeneration !== ballRollGeneration) return;
+  }
   cubeCurrentFace=value;
   orientCube(ball,'face',value);
-  ball.classList.remove('ball-rising');
-  stopBallRaster();
-  status.textContent=`Выпало ${value}`;
+  result.textContent=String(value);
+  ball.classList.remove('ball-mixing','ball-submerged','ball-rising');
+  ballMobileRenderer?.setFace(value);
+  status.textContent=`\u0412\u044b\u043f\u0430\u043b\u043e ${value}`;
   ball.disabled=false;
   if(tapInput)tapInput.disabled=false;
   magicBallBusy=false;
-  warmBallRaster('shake',cubeCurrentFace);
+  clearMagicBallTimers();
 }
 
 /* ================================================================
