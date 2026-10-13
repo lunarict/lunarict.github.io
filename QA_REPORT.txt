@@ -1,9 +1,7 @@
-v59 / selective typography QA
-
-320x568: heading font mapping correct; book/player states/rules/ball load; 0 JS errors; no page overflow
-390x844: heading font mapping correct; book/player states/rules/ball load; 0 JS errors; no page overflow
-740x900: heading font mapping correct; book/player states/rules/ball load; 0 JS errors; no page overflow
-1440x900: heading font mapping correct; book/player states/rules/ball load; 0 JS errors; no page overflow
-Offline standalone HTML loads custom v58 face, game starts, and real 3D ball roll finishes normally
-
-Confirmed in Chromium mobile emulation + desktop. Physical iPhone/WebKit and font CDN online loading were not verified.
+v56.2.4
+Source v56.2.3.
+Automated Chromium mobile contexts: 320/390/740 CSS pixels, three consecutive rolls each: PASS (9/9).
+Single-file build: no JavaScript page errors, video overlay has exactly one visible sphere during playback, live orbit and shell hidden; full sphere restored after each roll.
+Video assets unchanged: 918x918 H264, 30fps, 12 variants.
+Desktop: unchanged cube/body choreography; numeral opacity curve reaches final at 82% instead of 90% of rise phase.
+Not verified on physical iPhone/Safari; user-side confirmation required.

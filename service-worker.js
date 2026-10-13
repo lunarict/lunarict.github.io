@@ -1,8 +1,7 @@
-/* Offline shell cache, v59 selective typography. All referenced files exist in ZIP. */
-const CACHE = 'battle-exorcists-prod-v59-1.4.0';
+/* Offline shell cache, v56.2.4 native MP4 Safari range fix and cube optics. All referenced files exist in ZIP. */
+const CACHE = 'battle-exorcists-prod-v56-2.4.0';
 const PRECACHE = [
   './', './index.html', './styles.css', './app.js', './manifest.json',
-  './assets/exorcists-angular.woff2',
   './icon.svg', './icon-192.png', './icon-512.png',
   './icon-maskable-512.png', './apple-touch-icon.png',
   './assets/parchment-fibers.webp', './assets/aged-cover.webp',
@@ -10,7 +9,7 @@ const PRECACHE = [
   './assets/soft-kraft.webp', './assets/bookcloth-weave.webp',
   './assets/paper-tape.webp', './assets/liquid-caustics.webp',
   './assets/leather-pressed.webp', './assets/felt-needled.webp',
-  './assets/metal-handbrushed.webp', './assets/paper-ink-flecks.webp',
+  './assets/metal-handbrushed.webp', './assets/paper-ink-flecks.webp', './assets/plastic-microtexture.webp', './assets/black-gloss-shell.webp',
   './assets/torn-note-1.png', './assets/torn-note-2.png',
   './assets/torn-note-3.png', './assets/torn-note-4.png',
   './assets/torn-note-5.png', './assets/torn-note-6.png'
@@ -33,6 +32,9 @@ self.addEventListener('fetch', event => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+  // Video on iOS requires HTTP byte ranges. Let the server handle all MP4
+  // and Range requests directly; never return a cached 200 for a 206 range.
+  if (/\.mp4$/i.test(url.pathname) || req.headers.has('range')) return;
   const canonical = new Request(url.origin + url.pathname);
   const code = req.mode === 'navigate' || /\.(?:html|js|css)$/.test(url.pathname);
   if (code) {
