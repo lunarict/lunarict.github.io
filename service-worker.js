@@ -1,5 +1,5 @@
-/* Offline shell cache, v56.3.0 persistent mobile renderer. All referenced files exist in ZIP. */
-const CACHE = 'battle-exorcists-prod-v56-3.0.0';
+/* Offline shell cache, v56.5.0 original UI palette, new generator data. All referenced files exist in ZIP. */
+const CACHE = 'battle-exorcists-prod-v56-5.0.0';
 const PRECACHE = [
   './', './index.html', './styles.css', './app.js', './mobile-ball.js', './manifest.json',
   './icon.svg', './icon-192.png', './icon-512.png',
