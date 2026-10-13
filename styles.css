@@ -7741,3 +7741,144 @@ body::before {
   filter:none!important;pointer-events:none!important;
   z-index:42!important;
 }
+/* v56.4.0 | Холодная мистическая гамма.
+   Only static UI surfaces are recolored. The moving magic ball, its cube,
+   lens and shadows keep their original materials and animation. */
+:root {
+  --bg:#090b0e;
+  --bg-2:#101217;
+  --surface:#171a20;
+  --surface-2:#1b1e25;
+  --surface-3:#242630;
+  --ink:#edf0ef;
+  --muted:#aeb5bc;
+  --faint:#7d8590;
+  --line:#4b525d;
+  --line-soft:#343b45;
+  --green:#688d86;
+  --cyan:#6f9199;
+  --violet:#777390;
+  --rose:#8d7187;
+  --demon:#a75a60;
+  --ghost:#64859c;
+  --succubus:#966e8a;
+}
+html { background-color:var(--bg); }
+body {
+  background:
+    radial-gradient(ellipse at 16% 11%,rgba(75,91,107,.105),transparent 32%),
+    radial-gradient(ellipse at 84% 22%,rgba(67,105,109,.067),transparent 34%),
+    radial-gradient(ellipse at 54% 94%,rgba(84,77,106,.063),transparent 42%),
+    linear-gradient(180deg,#0a0b0f 0%,#0b0d11 52%,#090a0e 100%);
+  background-attachment:fixed;
+}
+/* Three colored fog planes keep the atmosphere subtle rather than blue. */
+.ambient-fog span:nth-child(1) {
+  background:radial-gradient(ellipse,rgba(92,128,126,.116),rgba(92,128,126,.024) 51%,transparent 75%) !important;
+}
+.ambient-fog span:nth-child(2) {
+  background:radial-gradient(ellipse,rgba(108,109,153,.095),rgba(108,109,153,.018) 53%,transparent 76%) !important;
+}
+.ambient-fog span:nth-child(3) {
+  background:radial-gradient(ellipse,rgba(94,104,136,.063),rgba(94,104,136,.011) 50%,transparent 76%) !important;
+}
+/* Header and surface ink: slightly silvered neutrals, not electric cyan. */
+.brand h1 { color:#f0f0ed !important; }
+.sigil { background:rgba(20,23,29,.8);border-color:rgba(126,141,147,.45); }
+.sigil svg { stroke:#81a5a0; }
+.eyebrow { color:#91a6a7; }
+#home-screen .mode-card {
+  background-color:#1b1e24 !important;
+  background-image:
+    linear-gradient(151deg,rgba(69,83,96,.16) 0%,rgba(20,24,32,.10) 46%,rgba(3,6,10,.33) 100%),
+    var(--material-leather) !important;
+  border-color:rgba(140,151,158,.43) !important;
+  box-shadow:inset 0 1px 0 rgba(216,225,227,.08),inset 0 -18px 35px rgba(0,0,0,.10),4px 6px 0 rgba(0,0,0,.30) !important;
+}
+#home-screen .mode-card::before {
+  border-color:rgba(164,181,182,.16) !important;
+  background:linear-gradient(145deg,rgba(220,234,233,.026),transparent 35%) !important;
+}
+#home-screen .mode-card::after {
+  background:
+    radial-gradient(ellipse at 0 0,rgba(171,189,191,.074),transparent 26%),
+    radial-gradient(ellipse at 100% 100%,rgba(118,139,163,.057),transparent 24%),
+    linear-gradient(90deg,rgba(7,9,14,.17),transparent 6%,transparent 94%,rgba(5,7,11,.20)) !important;
+}
+#home-screen .mode-card strong { color:#ecedef !important; }
+#home-screen .mode-card small { color:#bac2c7 !important; }
+/* The kraft-colored pictograms and paper cards stay warm for contrast. */
+#home-screen .mode-icon { border-color:rgba(87,80,79,.39) !important; }
+/* Buttons, navigation and forms take a muted graphite/slate cast. */
+.rules-launch,
+.ghost-button,.entity-book-launch,.magic-ball-launch,
+.mini-button,.icon-button,.nav-arrow,.game-menu-button {
+  background-color:#1a1d23 !important;
+  border-color:rgba(126,140,149,.40) !important;
+  color:#e1e4e6 !important;
+}
+#home-screen .home-tools > button {
+  background-color:#1a1d23 !important;
+  border-color:rgba(126,140,149,.4) !important;
+}
+.field input,.field select,.share-url {
+  background-color:#181b22 !important;
+  border-color:rgba(128,141,151,.41) !important;
+  color:#e7e9e9 !important;
+}
+.field input:focus,.field select:focus { border-color:rgba(158,185,186,.83) !important; }
+.setup-card,.gothic-panel,.status-card,.dialog-card {
+  background-color:#1b1e25 !important;
+  background-image:
+    linear-gradient(164deg,rgba(52,65,76,.19),rgba(5,8,13,.47)),
+    var(--material-felt) !important;
+  border-color:rgba(132,147,156,.38) !important;
+}
+#game-screen .player-tab {
+  background-color:#181b22 !important;
+  border-color:rgba(123,139,150,.42) !important;
+}
+#game-screen .player-tab.active {
+  background-color:#29313a !important;
+  border-color:rgba(164,182,187,.58) !important;
+}
+/* Characteristic slips and grimoire pages keep their ink-and-parchment tones. */
+#game-screen .trait .mystery-plaque { border-bottom-color:rgba(94,96,106,.15) !important; }
+#entity-book-dialog .entity-book-shell {
+  background-color:#1d2028 !important;
+  background-image:
+    linear-gradient(90deg,rgba(5,8,12,.36) 0 5px,rgba(192,206,212,.022) 6px 7px,transparent 11px),
+    radial-gradient(ellipse at 87% 9%,color-mix(in srgb,var(--book-accent) 7%,transparent),transparent 42%),
+    linear-gradient(156deg,rgba(22,33,39,.20),rgba(5,7,12,.49)),
+    var(--material-felt) !important;
+  border-color:rgba(139,151,160,.38) !important;
+}
+/* Recolor only the frame of the ball window; its optics remain untouched. */
+#magic-ball-dialog .magic-ball-shell {
+  background-color:#41454d !important;
+  background-image:
+    linear-gradient(148deg,rgba(111,123,132,.45) 0%,rgba(71,80,93,.31) 47%,rgba(25,29,37,.42) 100%),
+    var(--material-felt) !important;
+  border-color:rgba(202,215,217,.43) !important;
+}
+#magic-ball-dialog .magic-ball-header { border-bottom-color:rgba(210,224,226,.16); }
+#magic-ball-dialog .magic-ball-header .eyebrow { color:#c3cdd0 !important; }
+#magic-ball-dialog .magic-ball-header h2 { color:#f0f1f0 !important; }
+#magic-ball-dialog #magic-ball-close {
+  background:rgba(14,18,25,.81) !important;
+  border-color:rgba(204,218,219,.3) !important;
+  color:#edefef !important;
+}
+#magic-ball-dialog #magic-ball-close:hover {
+  background:rgba(33,39,49,.92) !important;
+  border-color:rgba(216,230,231,.58) !important;
+}
+/* Rules: cool the leather binding only, keep the yellowed paper legible. */
+.rules-shell {
+  background:
+    linear-gradient(140deg,rgba(45,59,71,.22),transparent 45%),
+    var(--material-felt) center/550px repeat,
+    #141820 !important;
+}
+.rules-header { background:linear-gradient(90deg,rgba(14,19,27,.7),rgba(21,27,34,.64)) !important; }
+:where(button,input,select,summary,[tabindex]):focus-visible { outline-color:#b0c7c6 !important; }
