@@ -1,22 +1,22 @@
 {
-  "version": "56.6.3",
-  "base_version": "56.6.2",
-  "name": "Refined reading and compact session",
+  "version": "56.6.4",
+  "base_version": "56.6.3",
+  "name": "Ritual paper, reading seals and grimoire",
   "date": "2026-10-14",
   "complete_build": true,
   "new_runtime_files": [
-    "refinement.css"
+    "ritual.css",
+    "ritual.js"
   ],
   "changed_runtime_files": [
     "index.html",
     "app.js",
     "fieldnotes.js",
-    "tabletop.css",
-    "fieldnotes.css",
-    "folio.css",
     "service-worker.js"
   ],
   "verification": "verification.json",
-  "checks_passed": 284,
+  "browser_checks_passed": 171,
+  "browser_checks_failed": 0,
+  "integrity_checks_passed": 21,
   "new_dependencies": []
 }

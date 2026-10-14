@@ -1,6 +1,7 @@
-/* Offline shell cache, v56.6.3 unified folio UI, original generator data. All referenced files exist in ZIP. */
-const CACHE = 'battle-exorcists-prod-v56-6.3.0';
+/* Offline shell cache, v56.6.4 ritual paper UI, original generator data. All referenced files exist in ZIP. */
+const CACHE = 'battle-exorcists-prod-v56-6.4.0';
 const PRECACHE = [
+  './ritual.css', './ritual.js',
   './refinement.css',
   './folio.css',
   './fieldnotes.css', './fieldnotes.js', './assets/rag-stock.webp', './assets/grimoire-hide.webp', './assets/field-binder.webp', './assets/mending-tape.webp', './assets/fieldnote-edge-1.svg', './assets/fieldnote-edge-2.svg', './assets/fieldnote-edge-3.svg', './assets/fieldnote-edge-4.svg', './assets/fieldnote-edge-5.svg', './assets/fieldnote-edge-6.svg',

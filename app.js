@@ -264,6 +264,7 @@ function renderLocalNameInputs() {
 }
 
 function startLocalGame() {
+  window.ExorcistPaper?.cancelAll();
   const inputs = $$('#local-player-names input');
   const players = inputs.map((input,i) => blankPlayer(sanitizePlayerName(input.value, `Игрок ${i+1}`)));
   generateCharactersForPlayers(players);
@@ -587,87 +588,36 @@ function applyTraitAction(playerId, action, key) {
   return null;
 }
 
-// One physical sheet remains in the DOM for the whole fingertip -> spring -> ink
-// sequence. Only the writing is replaced; card texture, geometry and WAAPI
-// spring never restart on a state update.
-function beginTraitReveal(playerId, key, revealButton) {
-  const card = revealButton?.closest('.trait');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!card || reduceMotion || !card.animate) {
-    traitAction(playerId, 'reveal', key);
+// 56.6.4: one existing paper node turns over at its edge-on midpoint.
+// The UI owns motion; only traitAction changes authoritative game state.
+function beginTraitPaperAction(playerId, key, button, action) {
+  const card = button?.closest('.trait');
+  if (!card || card.dataset.paperTurning === 'true' || !canControlPlayer(playerId)) return;
+  const original = game?.players?.find(p => p.id === playerId)?.character?.traits?.[key];
+  const target = action === 'reveal';
+  if (!original || original.open === target) return;
+  if (game.mode === 'online' && !online.isHost && !online.hostConnection?.open) {
+    traitAction(playerId, action, key);
     return;
   }
-  if (card.classList.contains('paper-pressing')) return;
-  const activeGame = game;
-  const activeTrait = game?.players?.find(p => p.id === playerId)?.character?.traits?.[key];
-  if (!activeTrait || activeTrait.open) return;
-  // Disable immediately to make fast double taps completely harmless.
-  revealButton.disabled = true;
-  card.classList.remove('paper-fingerdown');
-  card.classList.add('paper-pressing', 'reveal-prelude');
-
-  // Individual CSS transforms preserve the card's hand-cut rotation and
-  // clipping. The 2–3 small rebounds are tuned to settle without jitter.
-  card.animate([
-    {offset:0,    scale:'1 1',          translate:'0 0'},
-    {offset:.13,  scale:'.998 .991',     translate:'0 1px'},
-    {offset:.28,  scale:'.991 .966',     translate:'0 3.2px'},
-    {offset:.39,  scale:'.994 .976',     translate:'0 2px'},
-    {offset:.52,  scale:'1.003 1.015',   translate:'0 -1.3px'},
-    {offset:.64,  scale:'.998 .994',     translate:'0 .7px'},
-    {offset:.78,  scale:'1.001 1.004',   translate:'0 -.35px'},
-    {offset:1,    scale:'1 1',          translate:'0 0'}
-  ], {duration:960, easing:'linear'});
-
-  // Change the ink while the paper is fully depressed. The _same_ card
-  // springs back over the freshly appeared writing.
-  window.setTimeout(() => {
-    if (game !== activeGame || game?.status !== 'playing' || activeTrait.open) return;
-    traitAction(playerId, 'reveal', key);
-  }, 286);
-  window.setTimeout(() => {
-    card.classList.remove('paper-pressing', 'paper-fingerdown', 'reveal-prelude');
-  }, 1000);
+  const sessionCreated = game.createdAt;
+  const sessionStarted = game.startedAt;
+  const originalValue = original.value;
+  const current = () => game?.players?.find(p => p.id === playerId)?.character?.traits?.[key];
+  const isCurrent = () => Boolean(game?.status === 'playing' &&
+    game.createdAt === sessionCreated && game.startedAt === sessionStarted &&
+    current()?.value === originalValue && viewPlayerId === playerId &&
+    card.isConnected && document.body.dataset.screen === 'game-screen');
+  const commit = () => { if (isCurrent() && current()?.open !== target) traitAction(playerId, action, key); };
+  if (!window.ExorcistPaper) { commit(); return; }
+  window.ExorcistPaper.turn({ card, button, action, isCurrent,
+    isApplied: () => current()?.open === target, commit });
 }
-
-function beginTraitClose(playerId, key, closeButton) {
-  const card = closeButton?.closest('.trait');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!card || reduceMotion || !card.animate) {
-    traitAction(playerId, 'close', key);
-    return;
-  }
-  if (card.classList.contains('paper-sealing')) return;
-  const activeGame = game;
-  const activeTrait = game?.players?.find(p => p.id === playerId)?.character?.traits?.[key];
-  if (!activeTrait?.open) return;
-  closeButton.disabled = true;
-  card.classList.add('paper-sealing');
-
-  // The sheet is not replaced: paper lifts, briefly contracts, then settles.
-  // No full-card flash, ink stain, burst, or scaling of the surrounding grid.
-  card.animate([
-    {offset:0,    scale:'1 1',         translate:'0 0'},
-    {offset:.19,  scale:'1.003 1.007', translate:'0 -1.4px'},
-    {offset:.41,  scale:'.999 .991',   translate:'0 1px'},
-    {offset:.63,  scale:'.997 .983',   translate:'0 2px'},
-    {offset:.81,  scale:'1.001 1.004', translate:'0 -.5px'},
-    {offset:1,    scale:'1 1',         translate:'0 0'}
-  ], {duration:790, easing:'linear'});
-  const lettering = card.querySelector('.trait-value');
-  lettering?.animate([
-    {offset:0, opacity:1, filter:'blur(0)', transform:'translateY(0)'},
-    {offset:.32, opacity:.86, filter:'blur(0)', transform:'translateY(0)'},
-    {offset:1, opacity:0, filter:'blur(1.2px)', transform:'translateY(1.7px)'}
-  ], {duration:315, easing:'cubic-bezier(.45,0,.75,1)', fill:'forwards'});
-
-  window.setTimeout(() => {
-    if (game !== activeGame || game?.status !== 'playing' || !activeTrait.open) return;
-    traitAction(playerId, 'close', key);
-  }, 302);
-  window.setTimeout(() => {
-    card.classList.remove('paper-sealing');
-  }, 830);
+function beginTraitReveal(playerId, key, button) {
+  beginTraitPaperAction(playerId, key, button, 'reveal');
+}
+function beginTraitClose(playerId, key, button) {
+  beginTraitPaperAction(playerId, key, button, 'close');
 }
 
 function traitAction(playerId, action, key) {
@@ -809,7 +759,7 @@ function renderGame() {
       reveal.setAttribute('aria-label', `Раскрыть: ${item.title}`);
       // A slight mechanical depression; no touch-position ink blot.
       reveal.addEventListener('pointerdown', event => {
-        if (event.pointerType !== 'mouse' || event.buttons) card.classList.add('paper-fingerdown');
+        if (event.pointerType !== 'mouse' || event.buttons) reveal.closest('.trait')?.classList.add('paper-fingerdown');
       });
       reveal.addEventListener('pointercancel', () => card.classList.remove('paper-fingerdown'));
       reveal.addEventListener('pointerleave', () => {
@@ -834,7 +784,7 @@ function renderGame() {
       const fingerdown = oldCard.classList.contains('paper-fingerdown');
       const sealing = oldCard.classList.contains('paper-sealing');
       const tapeLayer = oldCard.querySelector(':scope > .paper-tape');
-      oldCard.querySelectorAll(':scope > :not(.paper-tape)').forEach(el => el.remove());
+      oldCard.querySelectorAll(':scope > :not(.paper-tape):not([data-motion-layer])').forEach(el => el.remove());
       [...card.children].filter(el => !el.classList.contains('paper-tape'))
         .forEach(el => oldCard.insertBefore(el, tapeLayer || null));
       if (!tapeLayer) oldCard.appendChild(tape);
@@ -868,6 +818,7 @@ function renderGame() {
 }
 
 function restartGame() {
+  window.ExorcistPaper?.cancelAll();
   if (!game || game.status !== 'playing') return;
   if (game.mode === 'online' && !online.isHost) return;
   generateCharactersForPlayers(game.players);

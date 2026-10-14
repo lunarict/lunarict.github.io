@@ -155,7 +155,7 @@
       if(pending?.button===button || reduced.matches || button.dataset.prop!=='book')return;
       bookMotion(button,'close');
     },{passive:true});
-    button.addEventListener('focus',()=>{if(button.matches(':focus-visible'))preview();});
+    button.addEventListener('focus',()=>{if(document.body.dataset.input !== 'pointer' && button.matches(':focus-visible'))preview();});
     button.addEventListener('blur',()=>{
       if(pending?.button===button || reduced.matches || button.dataset.prop!=='book')return;
       bookMotion(button,'close');
