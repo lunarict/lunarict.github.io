@@ -1,0 +1,62 @@
+ODERZHIMYE v56.6.0 - release verification
+Date: 2026-10-14
+Base: user-supplied v56.5.0 ORIGINAL COLORS UPDATED TRAITS FULL ZIP.
+
+RESULT
+166 / 166 automated assertions passed.
+No uncaught application page errors were captured.
+Additional static HTML/CSS local asset reference check: PASS.
+JavaScript syntax: app.js and tabletop.js passed node --check.
+Browser: Chromium 144.0.7559.96 built on Debian GNU/Linux 13 (trixie)
+
+EXECUTION BOUNDARY
+The managed environment blocked normal local/file browser navigation. The
+actual HTML, CSS, JS and images were therefore inlined into an isolated
+Chromium page. localStorage was an in-memory test implementation. This tests
+layout and actual application event handlers, not hosting or browser storage
+persistence across real page reloads. No app source was replaced by test
+mocks in the delivered build. The testing harness is not included in the app.
+
+VIEWPORTS
+320 x 740, 360 x 800, 390 x 844, 430 x 932,
+768 x 1024, 1440 x 1000, 844 x 390 (landscape).
+Phone presets used touch/mobile emulation. Previews use real Chromium renders.
+
+CHECKED
+- Home, local setup and online setup fit their horizontal bounds.
+- Four-player setup, six generated characteristics and retained input names.
+- Player label height, long names, trait and toolbar bounds.
+- Entity/rules/globe dialog bounds, close controls and background scroll lock.
+- Single action on double reveal; 1/6 through 6/6 progress and completion state.
+- Conceal/reveal and reveal counter; state retained across player changes.
+- Keyboard player navigation retains focus after the button list is rebuilt.
+- Continue within the same test session; restart cancel and confirm.
+- All entity categories, next/previous, picker and expandable effect descriptions.
+- Rule search, highlighted results, clear and final chapter navigation.
+- Dialog Escape handling; closing/reopening the ball during an active roll.
+- Valid 1-6 ball outcome, busy guard, clear transient state in the CSS fallback.
+- Reduced-motion home has no active animation; reveal and roll remain functional.
+- Longest actual trait strings remain inside the mobile viewport.
+- Original styles.css, mobile-ball.js, manifest.json and original assets match.
+- app.js outside the focused player-strip accessibility patch is unchanged.
+- Every service-worker precache file exists; no runtime font binaries added.
+
+NOT VERIFIED HERE
+- Physical iPhone/Safari, Android devices, real safe-area/keyboard behavior.
+- Mobile WebGL rendering: WebGL was unavailable in this test Chromium.
+  Only the existing CSS fallback was exercised; the original mobile renderer
+  and all its textures are byte-identical to the supplied build.
+- Real frame rate, GPU load, memory and battery usage on physical devices.
+- Device-motion permissions, accelerometer shake and haptics.
+- Actual PeerJS networking, QR external service or multiple remote devices.
+- Deployed HTTPS hosting, service-worker installation/update/offline lifecycle,
+  existing PWA cache migration and persistent localStorage across reloads.
+
+PERFORMANCE SCOPE
+New visual materials total 48,132 bytes, rasterized ahead of time.
+No new external libraries or remote font requests. New entry animations are
+finite; no new ambient loop or touch gyroscope tracking was added. This is
+an implementation characteristic, not a measured device-FPS guarantee.
+
+Detailed assertions: docs/verification.json.
+Physical-device and deployed-host checks remain release acceptance gates.

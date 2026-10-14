@@ -1,2697 +1,4028 @@
 {
-  "harness": "Chromium isolated inline app; in-memory storage; no live server/service worker/network/device hardware validation",
-  "seconds": 89.3,
-  "checks": [
-    {
-      "name": "320x740 home bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".topbar",
-          "x": 18,
-          "right": 302,
-          "w": 284,
-          "h": 70,
-          "inside": true
-        },
-        {
-          "sel": "mode-local",
-          "x": 17.18051528930664,
-          "right": 302.8194923400879,
-          "w": 285.63897705078125,
-          "h": 160.96533203125,
-          "inside": true
-        },
-        {
-          "sel": "mode-online",
-          "x": 17.18051528930664,
-          "right": 302.8194923400879,
-          "w": 285.63897705078125,
-          "h": 160.96533203125,
-          "inside": true
-        },
-        {
-          "sel": "open-rules-home",
-          "x": 18,
-          "right": 108,
-          "w": 90,
-          "h": 185,
-          "inside": true
-        },
-        {
-          "sel": "open-entity-book-home",
-          "x": 115,
-          "right": 205,
-          "w": 90,
-          "h": 185,
-          "inside": true
-        },
-        {
-          "sel": "open-magic-ball-home",
-          "x": 212,
-          "right": 302,
-          "w": 90,
-          "h": 185,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "320x740 online setup bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".setup-card",
-          "x": 17.71082878112793,
-          "right": 302.28919792175293,
-          "w": 284.578369140625,
-          "h": 208.29226684570312,
-          "inside": true
-        },
-        {
-          "sel": ".setup-card",
-          "x": 17.677043914794922,
-          "right": 302.3229789733887,
-          "w": 284.64593505859375,
-          "h": 285.6436767578125,
-          "inside": true
-        },
-        {
-          "sel": "join-code",
-          "x": 43.013916015625,
-          "right": 277.13128662109375,
-          "w": 234.11737060546875,
-          "h": 52.53082275390625,
-          "inside": true
-        },
-        {
-          "sel": "host-name",
-          "x": 42.94670104980469,
-          "right": 277.09100341796875,
-          "w": 234.14430236816406,
-          "h": 52.65325927734375,
-          "inside": true
-        },
-        {
-          "sel": "host-create",
-          "x": 43.09191131591797,
-          "right": 277.21944427490234,
-          "w": 234.12753295898438,
-          "h": 46.65325927734375,
-          "inside": true
-        },
-        {
-          "sel": "join-button",
-          "x": 42.73370361328125,
-          "right": 276.83746337890625,
-          "w": 234.103759765625,
-          "h": 46.53076171875,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "320x740 numeric code sanitization",
-      "passed": true
-    },
-    {
-      "name": "320x740 four name fields",
-      "passed": true
-    },
-    {
-      "name": "320x740 local setup bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": "local-count",
-          "x": 18,
-          "right": 258,
-          "w": 240,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 18,
-          "right": 302,
-          "w": 284,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 18,
-          "right": 302,
-          "w": 284,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 18,
-          "right": 302,
-          "w": 284,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 18,
-          "right": 302,
-          "w": 284,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "start-local",
-          "x": 18,
-          "right": 302,
-          "w": 284,
-          "h": 46,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "320x740 creates 4 players and 6 traits",
-      "passed": true
-    },
-    {
-      "name": "320x740 game bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".game-control-panel",
-          "x": 18,
-          "right": 302,
-          "w": 284,
-          "h": 200,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 26,
-          "right": 87,
-          "w": 61,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 95,
-          "right": 156,
-          "w": 61,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 164,
-          "right": 225,
-          "w": 61,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 233,
-          "right": 294,
-          "w": 61,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".reading-head",
-          "x": 18,
-          "right": 302,
-          "w": 284,
-          "h": 100.6875,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.290267944335938,
-          "right": 302.57969665527344,
-          "w": 285.2894287109375,
-          "h": 151.47268676757812,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.593067169189453,
-          "right": 302.4979438781738,
-          "w": 284.9048767089844,
-          "h": 150.73211669921875,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.593067169189453,
-          "right": 302.4979438781738,
-          "w": 284.9048767089844,
-          "h": 150.73211669921875,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.36075210571289,
-          "right": 302.52222061157227,
-          "w": 285.1614685058594,
-          "h": 151.22589111328125,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.572858810424805,
-          "right": 302.34913444519043,
-          "w": 284.7762756347656,
-          "h": 150.485107421875,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.420291900634766,
-          "right": 302.7097511291504,
-          "w": 285.2894592285156,
-          "h": 151.47265625,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "320x740 player labels not clipped",
-      "passed": true,
-      "details": [
-        13,
-        13,
-        13,
-        13
-      ]
-    },
-    {
-      "name": "320x740 entity-book dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 10,
-        "y": 12,
-        "w": 300,
-        "h": 716
-      }
-    },
-    {
-      "name": "320x740 entity-book background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "320x740 entity-book closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "320x740 rules dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 10,
-        "y": 12,
-        "w": 300,
-        "h": 716
-      }
-    },
-    {
-      "name": "320x740 rules background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "320x740 rules closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "320x740 magic-ball dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 9.59375,
-        "y": 171.296875,
-        "w": 300.796875,
-        "h": 397.390625
-      }
-    },
-    {
-      "name": "320x740 magic-ball background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "320x740 magic-ball closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "360x800 home bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".topbar",
-          "x": 18,
-          "right": 342,
-          "w": 324,
-          "h": 70,
-          "inside": true
-        },
-        {
-          "sel": "mode-local",
-          "x": 17.181612014770508,
-          "right": 342.81839179992676,
-          "w": 325.63677978515625,
-          "h": 161.38417053222656,
-          "inside": true
-        },
-        {
-          "sel": "mode-online",
-          "x": 17.181612014770508,
-          "right": 342.81839179992676,
-          "w": 325.63677978515625,
-          "h": 161.38421630859375,
-          "inside": true
-        },
-        {
-          "sel": "open-rules-home",
-          "x": 18,
-          "right": 121.328125,
-          "w": 103.328125,
-          "h": 185,
-          "inside": true
-        },
-        {
-          "sel": "open-entity-book-home",
-          "x": 128.328125,
-          "right": 231.65625,
-          "w": 103.328125,
-          "h": 185,
-          "inside": true
-        },
-        {
-          "sel": "open-magic-ball-home",
-          "x": 238.65625,
-          "right": 342,
-          "w": 103.34375,
-          "h": 185,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "360x800 online setup bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".setup-card",
-          "x": 17.710906982421875,
-          "right": 342.2890930175781,
-          "w": 324.57818603515625,
-          "h": 208.40396118164062,
-          "inside": true
-        },
-        {
-          "sel": ".setup-card",
-          "x": 17.677095413208008,
-          "right": 342.32290840148926,
-          "w": 324.64581298828125,
-          "h": 285.734375,
-          "inside": true
-        },
-        {
-          "sel": "join-code",
-          "x": 43.01396560668945,
-          "right": 317.1312446594238,
-          "w": 274.1172790527344,
-          "h": 52.62152099609375,
-          "inside": true
-        },
-        {
-          "sel": "host-name",
-          "x": 42.94677734375,
-          "right": 317.0909118652344,
-          "w": 274.1441345214844,
-          "h": 52.76495361328125,
-          "inside": true
-        },
-        {
-          "sel": "host-create",
-          "x": 43.09198760986328,
-          "right": 317.21939849853516,
-          "w": 274.1274108886719,
-          "h": 46.76495361328125,
-          "inside": true
-        },
-        {
-          "sel": "join-button",
-          "x": 42.7337532043457,
-          "right": 316.8374214172363,
-          "w": 274.1036682128906,
-          "h": 46.62158203125,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "360x800 numeric code sanitization",
-      "passed": true
-    },
-    {
-      "name": "360x800 four name fields",
-      "passed": true
-    },
-    {
-      "name": "360x800 local setup bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": "local-count",
-          "x": 18,
-          "right": 258,
-          "w": 240,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 18,
-          "right": 342,
-          "w": 324,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 18,
-          "right": 342,
-          "w": 324,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 18,
-          "right": 342,
-          "w": 324,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 18,
-          "right": 342,
-          "w": 324,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "start-local",
-          "x": 18,
-          "right": 342,
-          "w": 324,
-          "h": 46,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "360x800 creates 4 players and 6 traits",
-      "passed": true
-    },
-    {
-      "name": "360x800 game bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".game-control-panel",
-          "x": 18,
-          "right": 342,
-          "w": 324,
-          "h": 200,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 26,
-          "right": 97,
-          "w": 71,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 105,
-          "right": 176,
-          "w": 71,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 184,
-          "right": 255,
-          "w": 71,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 263,
-          "right": 334,
-          "w": 71,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".reading-head",
-          "x": 18,
-          "right": 342,
-          "w": 324,
-          "h": 73.1875,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.29102897644043,
-          "right": 342.5789623260498,
-          "w": 325.2879333496094,
-          "h": 151.82171630859375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.59343910217285,
-          "right": 342.4975833892822,
-          "w": 324.9041442871094,
-          "h": 150.97637939453125,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.59343910217285,
-          "right": 342.4975833892822,
-          "w": 324.9041442871094,
-          "h": 150.97637939453125,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.361370086669922,
-          "right": 342.5216178894043,
-          "w": 325.1602478027344,
-          "h": 151.5400390625,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.57313346862793,
-          "right": 342.3488597869873,
-          "w": 324.7757263183594,
-          "h": 150.6944580078125,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.42105484008789,
-          "right": 342.70898818969727,
-          "w": 325.2879333496094,
-          "h": 151.82177734375,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "360x800 player labels not clipped",
-      "passed": true,
-      "details": [
-        13,
-        13,
-        13,
-        13
-      ]
-    },
-    {
-      "name": "360x800 entity-book dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 10,
-        "y": 12,
-        "w": 340,
-        "h": 776
-      }
-    },
-    {
-      "name": "360x800 entity-book background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "360x800 entity-book closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "360x800 rules dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 10,
-        "y": 12,
-        "w": 340,
-        "h": 776
-      }
-    },
-    {
-      "name": "360x800 rules background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "360x800 rules closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "360x800 magic-ball dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 10.796875,
-        "y": 184.90625,
-        "w": 338.390625,
-        "h": 430.1875
-      }
-    },
-    {
-      "name": "360x800 magic-ball background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "360x800 magic-ball closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "390x844 home bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".topbar",
-          "x": 18,
-          "right": 372,
-          "w": 354,
-          "h": 70,
-          "inside": true
-        },
-        {
-          "sel": "mode-local",
-          "x": 17.135311126708984,
-          "right": 372.8646812438965,
-          "w": 355.7293701171875,
-          "h": 170.69786071777344,
-          "inside": true
-        },
-        {
-          "sel": "mode-online",
-          "x": 17.135311126708984,
-          "right": 372.8646812438965,
-          "w": 355.7293701171875,
-          "h": 170.6978759765625,
-          "inside": true
-        },
-        {
-          "sel": "open-rules-home",
-          "x": 18,
-          "right": 128,
-          "w": 110,
-          "h": 185,
-          "inside": true
-        },
-        {
-          "sel": "open-entity-book-home",
-          "x": 140,
-          "right": 250,
-          "w": 110,
-          "h": 185,
-          "inside": true
-        },
-        {
-          "sel": "open-magic-ball-home",
-          "x": 262,
-          "right": 372,
-          "w": 110,
-          "h": 185,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "390x844 online setup bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".setup-card",
-          "x": 17.710966110229492,
-          "right": 372.28903007507324,
-          "w": 354.57806396484375,
-          "h": 208.48773193359375,
-          "inside": true
-        },
-        {
-          "sel": ".setup-card",
-          "x": 17.677133560180664,
-          "right": 372.32288551330566,
-          "w": 354.645751953125,
-          "h": 285.802490234375,
-          "inside": true
-        },
-        {
-          "sel": "join-code",
-          "x": 43.014007568359375,
-          "right": 347.1311950683594,
-          "w": 304.1171875,
-          "h": 52.6895751953125,
-          "inside": true
-        },
-        {
-          "sel": "host-name",
-          "x": 42.94683837890625,
-          "right": 347.0908508300781,
-          "w": 304.1440124511719,
-          "h": 52.84869384765625,
-          "inside": true
-        },
-        {
-          "sel": "host-create",
-          "x": 43.09204864501953,
-          "right": 347.2193374633789,
-          "w": 304.1272888183594,
-          "h": 46.8487548828125,
-          "inside": true
-        },
-        {
-          "sel": "join-button",
-          "x": 42.733795166015625,
-          "right": 346.8373718261719,
-          "w": 304.10357666015625,
-          "h": 46.689697265625,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "390x844 numeric code sanitization",
-      "passed": true
-    },
-    {
-      "name": "390x844 four name fields",
-      "passed": true
-    },
-    {
-      "name": "390x844 local setup bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": "local-count",
-          "x": 18,
-          "right": 258,
-          "w": 240,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 18,
-          "right": 186,
-          "w": 168,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 204,
-          "right": 372,
-          "w": 168,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 18,
-          "right": 186,
-          "w": 168,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 204,
-          "right": 372,
-          "w": 168,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "start-local",
-          "x": 18,
-          "right": 372,
-          "w": 354,
-          "h": 46,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "390x844 creates 4 players and 6 traits",
-      "passed": true
-    },
-    {
-      "name": "390x844 game bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".game-control-panel",
-          "x": 18,
-          "right": 372,
-          "w": 354,
-          "h": 200,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 26,
-          "right": 104.5,
-          "w": 78.5,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 112.5,
-          "right": 191,
-          "w": 78.5,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 199,
-          "right": 277.5,
-          "w": 78.5,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 285.5,
-          "right": 364,
-          "w": 78.5,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".reading-head",
-          "x": 18,
-          "right": 372,
-          "w": 354,
-          "h": 79.78125,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.29159927368164,
-          "right": 372.57837295532227,
-          "w": 355.2867736816406,
-          "h": 152.08352661132812,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.593719482421875,
-          "right": 372.4972839355469,
-          "w": 354.903564453125,
-          "h": 151.15966796875,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.593719482421875,
-          "right": 372.4972839355469,
-          "w": 354.903564453125,
-          "h": 151.15966796875,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.361831665039062,
-          "right": 372.52113342285156,
-          "w": 355.1593017578125,
-          "h": 151.775634765625,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.573339462280273,
-          "right": 372.3486385345459,
-          "w": 354.7752990722656,
-          "h": 150.8514404296875,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.4216251373291,
-          "right": 372.7083988189697,
-          "w": 355.2867736816406,
-          "h": 152.08349609375,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "390x844 player labels not clipped",
-      "passed": true,
-      "details": [
-        13,
-        13,
-        13,
-        13
-      ]
-    },
-    {
-      "name": "390x844 entity-book dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 10,
-        "y": 12,
-        "w": 370,
-        "h": 820
-      }
-    },
-    {
-      "name": "390x844 entity-book background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "390x844 entity-book closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "390x844 rules dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 10,
-        "y": 12,
-        "w": 370,
-        "h": 820
-      }
-    },
-    {
-      "name": "390x844 rules background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "390x844 rules closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "390x844 magic-ball dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 11.703125,
-        "y": 201.5,
-        "w": 366.59375,
-        "h": 441
-      }
-    },
-    {
-      "name": "390x844 magic-ball background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "390x844 magic-ball closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "430x932 home bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".topbar",
-          "x": 18,
-          "right": 412,
-          "w": 394,
-          "h": 70,
-          "inside": true
-        },
-        {
-          "sel": "mode-local",
-          "x": 17.13640785217285,
-          "right": 412.86358070373535,
-          "w": 395.7271728515625,
-          "h": 171.11671447753906,
-          "inside": true
-        },
-        {
-          "sel": "mode-online",
-          "x": 17.13640785217285,
-          "right": 412.86358070373535,
-          "w": 395.7271728515625,
-          "h": 171.11669921875,
-          "inside": true
-        },
-        {
-          "sel": "open-rules-home",
-          "x": 18,
-          "right": 141.328125,
-          "w": 123.328125,
-          "h": 185,
-          "inside": true
-        },
-        {
-          "sel": "open-entity-book-home",
-          "x": 153.328125,
-          "right": 276.65625,
-          "w": 123.328125,
-          "h": 185,
-          "inside": true
-        },
-        {
-          "sel": "open-magic-ball-home",
-          "x": 288.65625,
-          "right": 412,
-          "w": 123.34375,
-          "h": 185,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "430x932 online setup bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".setup-card",
-          "x": 17.711044311523438,
-          "right": 412.2889862060547,
-          "w": 394.57794189453125,
-          "h": 208.59945678710938,
-          "inside": true
-        },
-        {
-          "sel": ".setup-card",
-          "x": 17.67718505859375,
-          "right": 412.32281494140625,
-          "w": 394.6456298828125,
-          "h": 285.8931884765625,
-          "inside": true
-        },
-        {
-          "sel": "join-code",
-          "x": 43.01405715942383,
-          "right": 387.13115310668945,
-          "w": 344.1170959472656,
-          "h": 52.7803955078125,
-          "inside": true
-        },
-        {
-          "sel": "host-name",
-          "x": 42.94691467285156,
-          "right": 387.0907745361328,
-          "w": 344.14385986328125,
-          "h": 52.96038818359375,
-          "inside": true
-        },
-        {
-          "sel": "host-create",
-          "x": 43.092124938964844,
-          "right": 387.21923065185547,
-          "w": 344.1271057128906,
-          "h": 46.96044921875,
-          "inside": true
-        },
-        {
-          "sel": "join-button",
-          "x": 42.73384475708008,
-          "right": 386.83732986450195,
-          "w": 344.1034851074219,
-          "h": 46.7803955078125,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "430x932 numeric code sanitization",
-      "passed": true
-    },
-    {
-      "name": "430x932 four name fields",
-      "passed": true
-    },
-    {
-      "name": "430x932 local setup bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": "local-count",
-          "x": 18,
-          "right": 258,
-          "w": 240,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 18,
-          "right": 206,
-          "w": 188,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 224,
-          "right": 412,
-          "w": 188,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 18,
-          "right": 206,
-          "w": 188,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 224,
-          "right": 412,
-          "w": 188,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "start-local",
-          "x": 18,
-          "right": 412,
-          "w": 394,
-          "h": 46,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "430x932 creates 4 players and 6 traits",
-      "passed": true
-    },
-    {
-      "name": "430x932 game bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".game-control-panel",
-          "x": 18,
-          "right": 412,
-          "w": 394,
-          "h": 200,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 26,
-          "right": 114.5,
-          "w": 88.5,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 122.5,
-          "right": 211,
-          "w": 88.5,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 219,
-          "right": 307.5,
-          "w": 88.5,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 315.5,
-          "right": 404,
-          "w": 88.5,
-          "h": 60,
-          "inside": true
-        },
-        {
-          "sel": ".reading-head",
-          "x": 18,
-          "right": 412,
-          "w": 394,
-          "h": 79.78125,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.292362213134766,
-          "right": 412.57761001586914,
-          "w": 395.2852478027344,
-          "h": 152.43255615234375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.594093322753906,
-          "right": 412.4969253540039,
-          "w": 394.90283203125,
-          "h": 151.404052734375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.594093322753906,
-          "right": 412.4969253540039,
-          "w": 394.90283203125,
-          "h": 151.404052734375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.362449645996094,
-          "right": 412.5205307006836,
-          "w": 395.1580810546875,
-          "h": 152.08984375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.5736141204834,
-          "right": 412.3483638763428,
-          "w": 394.7747497558594,
-          "h": 151.060791015625,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.422386169433594,
-          "right": 412.70763397216797,
-          "w": 395.2852478027344,
-          "h": 152.4326171875,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "430x932 player labels not clipped",
-      "passed": true,
-      "details": [
-        13,
-        13,
-        13,
-        13
-      ]
-    },
-    {
-      "name": "430x932 entity-book dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 10,
-        "y": 12,
-        "w": 410,
-        "h": 908
-      }
-    },
-    {
-      "name": "430x932 entity-book background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "430x932 entity-book closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "430x932 rules dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 10,
-        "y": 12,
-        "w": 410,
-        "h": 908
-      }
-    },
-    {
-      "name": "430x932 rules background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "430x932 rules closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "430x932 magic-ball dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 12.90625,
-        "y": 245.5,
-        "w": 404.1875,
-        "h": 441
-      }
-    },
-    {
-      "name": "430x932 magic-ball background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "430x932 magic-ball closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "768x1024 home bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".topbar",
-          "x": 32,
-          "right": 736,
-          "w": 704,
-          "h": 85,
-          "inside": true
-        },
-        {
-          "sel": "mode-local",
-          "x": 30.417583465576172,
-          "right": 372.5824394226074,
-          "w": 342.16485595703125,
-          "h": 307.5332336425781,
-          "inside": true
-        },
-        {
-          "sel": "mode-online",
-          "x": 395.4175720214844,
-          "right": 737.5823974609375,
-          "w": 342.1648254394531,
-          "h": 307.5332336425781,
-          "inside": true
-        },
-        {
-          "sel": "open-rules-home",
-          "x": 32,
-          "right": 250.65625,
-          "w": 218.65625,
-          "h": 213,
-          "inside": true
-        },
-        {
-          "sel": "open-entity-book-home",
-          "x": 274.65625,
-          "right": 493.328125,
-          "w": 218.671875,
-          "h": 213,
-          "inside": true
-        },
-        {
-          "sel": "open-magic-ball-home",
-          "x": 517.328125,
-          "right": 736,
-          "w": 218.671875,
-          "h": 213,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "768x1024 online setup bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".setup-card",
-          "x": 31.5915584564209,
-          "right": 372.4084529876709,
-          "w": 340.81689453125,
-          "h": 293.9482727050781,
-          "inside": true
-        },
-        {
-          "sel": ".setup-card",
-          "x": 395.66802978515625,
-          "right": 736.3319702148438,
-          "w": 340.6639404296875,
-          "h": 293.7707214355469,
-          "inside": true
-        },
-        {
-          "sel": "join-code",
-          "x": 425.01397705078125,
-          "right": 707.1312255859375,
-          "w": 282.11724853515625,
-          "h": 52.63970947265625,
-          "inside": true
-        },
-        {
-          "sel": "host-name",
-          "x": 60.838584899902344,
-          "right": 342.9826889038086,
-          "w": 282.14410400390625,
-          "h": 52.78729248046875,
-          "inside": true
-        },
-        {
-          "sel": "host-create",
-          "x": 60.983795166015625,
-          "right": 343.11114501953125,
-          "w": 282.1273498535156,
-          "h": 46.787322998046875,
-          "inside": true
-        },
-        {
-          "sel": "join-button",
-          "x": 424.7337646484375,
-          "right": 706.83740234375,
-          "w": 282.1036376953125,
-          "h": 46.6396484375,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "768x1024 numeric code sanitization",
-      "passed": true
-    },
-    {
-      "name": "768x1024 four name fields",
-      "passed": true
-    },
-    {
-      "name": "768x1024 local setup bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": "local-count",
-          "x": 49,
-          "right": 289,
-          "w": 240,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 49,
-          "right": 374,
-          "w": 325,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 394,
-          "right": 719,
-          "w": 325,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 49,
-          "right": 374,
-          "w": 325,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 394,
-          "right": 719,
-          "w": 325,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "start-local",
-          "x": 49,
-          "right": 719,
-          "w": 670,
-          "h": 46,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "768x1024 creates 4 players and 6 traits",
-      "passed": true
-    },
-    {
-      "name": "768x1024 game bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".game-control-panel",
-          "x": 32,
-          "right": 736,
-          "w": 704,
-          "h": 201,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 40,
-          "right": 206,
-          "w": 166,
-          "h": 62,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 214,
-          "right": 380,
-          "w": 166,
-          "h": 62,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 388,
-          "right": 554,
-          "w": 166,
-          "h": 62,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 562,
-          "right": 728,
-          "w": 166,
-          "h": 62,
-          "inside": true
-        },
-        {
-          "sel": ".reading-head",
-          "x": 32,
-          "right": 736,
-          "w": 704,
-          "h": 101.1875,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 31.17130470275879,
-          "right": 370.67685890197754,
-          "w": 339.50555419921875,
-          "h": 176.94293212890625,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 397.52484130859375,
-          "right": 736.5814208984375,
-          "w": 339.05657958984375,
-          "h": 176.06146240234375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 31.52484893798828,
-          "right": 370.58145904541016,
-          "w": 339.0566101074219,
-          "h": 176.06146240234375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 397.25360107421875,
-          "right": 736.6097412109375,
-          "w": 339.35614013671875,
-          "h": 176.64923095703125,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 31.50123405456543,
-          "right": 370.4076671600342,
-          "w": 338.90643310546875,
-          "h": 175.767333984375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 397.3231506347656,
-          "right": 736.8286743164062,
-          "w": 339.5055236816406,
-          "h": 176.94293212890625,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "768x1024 player labels not clipped",
-      "passed": true,
-      "details": [
-        15.59375,
-        15.59375,
-        15.59375,
-        15.59375
-      ]
-    },
-    {
-      "name": "768x1024 entity-book dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 24,
-        "y": 24,
-        "w": 720,
-        "h": 976
-      }
-    },
-    {
-      "name": "768x1024 entity-book background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "768x1024 entity-book closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "768x1024 rules dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 24,
-        "y": 52,
-        "w": 720,
-        "h": 920
-      }
-    },
-    {
-      "name": "768x1024 rules background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "768x1024 rules closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "768x1024 magic-ball dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 114,
-        "y": 270.40625,
-        "w": 540,
-        "h": 483.1875
-      }
-    },
-    {
-      "name": "768x1024 magic-ball background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "768x1024 magic-ball closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "1440x1000 home bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".topbar",
-          "x": 162.5,
-          "right": 1262.5,
-          "w": 1100,
-          "h": 85,
-          "inside": true
-        },
-        {
-          "sel": "mode-local",
-          "x": 160.8392333984375,
-          "right": 701.1607666015625,
-          "w": 540.321533203125,
-          "h": 325.60577392578125,
-          "inside": true
-        },
-        {
-          "sel": "mode-online",
-          "x": 723.8392333984375,
-          "right": 1264.1607666015625,
-          "w": 540.321533203125,
-          "h": 325.60577392578125,
-          "inside": true
-        },
-        {
-          "sel": "open-rules-home",
-          "x": 162.5,
-          "right": 513.15625,
-          "w": 350.65625,
-          "h": 213,
-          "inside": true
-        },
-        {
-          "sel": "open-entity-book-home",
-          "x": 537.15625,
-          "right": 887.828125,
-          "w": 350.671875,
-          "h": 213,
-          "inside": true
-        },
-        {
-          "sel": "open-magic-ball-home",
-          "x": 911.828125,
-          "right": 1262.484375,
-          "w": 350.65625,
-          "h": 213,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "1440x1000 online setup bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".setup-card",
-          "x": 292.0917053222656,
-          "right": 700.9083251953125,
-          "w": 408.8166198730469,
-          "h": 294.13818359375,
-          "inside": true
-        },
-        {
-          "sel": ".setup-card",
-          "x": 724.1680908203125,
-          "right": 1132.831787109375,
-          "w": 408.6636962890625,
-          "h": 293.9250183105469,
-          "inside": true
-        },
-        {
-          "sel": "join-code",
-          "x": 753.5140380859375,
-          "right": 1103.631103515625,
-          "w": 350.1170654296875,
-          "h": 52.79400634765625,
-          "inside": true
-        },
-        {
-          "sel": "host-name",
-          "x": 321.3387145996094,
-          "right": 671.4825439453125,
-          "w": 350.1438293457031,
-          "h": 52.9771728515625,
-          "inside": true
-        },
-        {
-          "sel": "host-create",
-          "x": 321.4839172363281,
-          "right": 671.6110229492188,
-          "w": 350.1271057128906,
-          "h": 46.9771728515625,
-          "inside": true
-        },
-        {
-          "sel": "join-button",
-          "x": 753.23388671875,
-          "right": 1103.33740234375,
-          "w": 350.103515625,
-          "h": 46.7939453125,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "1440x1000 numeric code sanitization",
-      "passed": true
-    },
-    {
-      "name": "1440x1000 four name fields",
-      "passed": true
-    },
-    {
-      "name": "1440x1000 local setup bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": "local-count",
-          "x": 377.5,
-          "right": 617.5,
-          "w": 240,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 377.5,
-          "right": 702.5,
-          "w": 325,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 722.5,
-          "right": 1047.5,
-          "w": 325,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 377.5,
-          "right": 702.5,
-          "w": 325,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 722.5,
-          "right": 1047.5,
-          "w": 325,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "start-local",
-          "x": 377.5,
-          "right": 1047.5,
-          "w": 670,
-          "h": 46,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "1440x1000 creates 4 players and 6 traits",
-      "passed": true
-    },
-    {
-      "name": "1440x1000 game bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".game-control-panel",
-          "x": 162.5,
-          "right": 1262.5,
-          "w": 1100,
-          "h": 201,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 170.5,
-          "right": 435.5,
-          "w": 265,
-          "h": 62,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 443.5,
-          "right": 708.5,
-          "w": 265,
-          "h": 62,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 716.5,
-          "right": 981.5,
-          "w": 265,
-          "h": 62,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 989.5,
-          "right": 1254.5,
-          "w": 265,
-          "h": 62,
-          "inside": true
-        },
-        {
-          "sel": ".reading-head",
-          "x": 162.5,
-          "right": 1262.5,
-          "w": 1100,
-          "h": 87.9375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 161.67507934570312,
-          "right": 699.1731262207031,
-          "w": 537.498046875,
-          "h": 178.67074584960938,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 726.0266723632812,
-          "right": 1263.07958984375,
-          "w": 537.0529174804688,
-          "h": 177.27093505859375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 162.02670288085938,
-          "right": 699.0795593261719,
-          "w": 537.0528564453125,
-          "h": 177.27093505859375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 725.7566528320312,
-          "right": 1263.106689453125,
-          "w": 537.3500366210938,
-          "h": 178.204345703125,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 162.00259399414062,
-          "right": 698.9062805175781,
-          "w": 536.9036865234375,
-          "h": 176.80401611328125,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 725.826904296875,
-          "right": 1263.324951171875,
-          "w": 537.498046875,
-          "h": 178.6707763671875,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "1440x1000 player labels not clipped",
-      "passed": true,
-      "details": [
-        15.59375,
-        15.59375,
-        15.59375,
-        15.59375
-      ]
-    },
-    {
-      "name": "1440x1000 entity-book dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 282.5,
-        "y": 24,
-        "w": 860,
-        "h": 952
-      }
-    },
-    {
-      "name": "1440x1000 entity-book background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "1440x1000 entity-book closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "1440x1000 rules dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 192.5,
-        "y": 40,
-        "w": 1040,
-        "h": 920
-      }
-    },
-    {
-      "name": "1440x1000 rules background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "1440x1000 rules closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "1440x1000 magic-ball dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 442.5,
-        "y": 258.40625,
-        "w": 540,
-        "h": 483.1875
-      }
-    },
-    {
-      "name": "1440x1000 magic-ball background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "1440x1000 magic-ball closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "844x390 home bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".topbar",
-          "x": 32,
-          "right": 812,
-          "w": 780,
-          "h": 85,
-          "inside": true
-        },
-        {
-          "sel": "mode-local",
-          "x": 30.418624877929688,
-          "right": 410.58140563964844,
-          "w": 380.16278076171875,
-          "h": 307.93115234375,
-          "inside": true
-        },
-        {
-          "sel": "mode-online",
-          "x": 433.4186096191406,
-          "right": 813.5813598632812,
-          "w": 380.1627502441406,
-          "h": 307.93115234375,
-          "inside": true
-        },
-        {
-          "sel": "open-rules-home",
-          "x": 32,
-          "right": 276,
-          "w": 244,
-          "h": 213,
-          "inside": true
-        },
-        {
-          "sel": "open-entity-book-home",
-          "x": 300,
-          "right": 544,
-          "w": 244,
-          "h": 213,
-          "inside": true
-        },
-        {
-          "sel": "open-magic-ball-home",
-          "x": 568,
-          "right": 812,
-          "w": 244,
-          "h": 213,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "844x390 online setup bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".setup-card",
-          "x": 31.591632843017578,
-          "right": 410.4083442687988,
-          "w": 378.81671142578125,
-          "h": 294.054443359375,
-          "inside": true
-        },
-        {
-          "sel": ".setup-card",
-          "x": 433.6680908203125,
-          "right": 812.3319091796875,
-          "w": 378.663818359375,
-          "h": 293.8569030761719,
-          "inside": true
-        },
-        {
-          "sel": "join-code",
-          "x": 463.0140380859375,
-          "right": 783.1311645507812,
-          "w": 320.11712646484375,
-          "h": 52.725921630859375,
-          "inside": true
-        },
-        {
-          "sel": "host-name",
-          "x": 60.83865737915039,
-          "right": 380.98263931274414,
-          "w": 320.14398193359375,
-          "h": 52.8934326171875,
-          "inside": true
-        },
-        {
-          "sel": "host-create",
-          "x": 60.98387145996094,
-          "right": 381.11106872558594,
-          "w": 320.127197265625,
-          "h": 46.8934326171875,
-          "inside": true
-        },
-        {
-          "sel": "join-button",
-          "x": 462.73382568359375,
-          "right": 782.8373413085938,
-          "w": 320.103515625,
-          "h": 46.7259521484375,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "844x390 numeric code sanitization",
-      "passed": true
-    },
-    {
-      "name": "844x390 four name fields",
-      "passed": true
-    },
-    {
-      "name": "844x390 local setup bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": "local-count",
-          "x": 87,
-          "right": 327,
-          "w": 240,
-          "h": 51.99998474121094,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 87,
-          "right": 412,
-          "w": 325,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 432,
-          "right": 757,
-          "w": 325,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 87,
-          "right": 412,
-          "w": 325,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "#local-player-names input",
-          "x": 432,
-          "right": 757,
-          "w": 325,
-          "h": 52,
-          "inside": true
-        },
-        {
-          "sel": "start-local",
-          "x": 87,
-          "right": 757,
-          "w": 670,
-          "h": 46,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "844x390 creates 4 players and 6 traits",
-      "passed": true
-    },
-    {
-      "name": "844x390 game bounds",
-      "passed": true,
-      "details": [
-        {
-          "sel": ".game-control-panel",
-          "x": 32,
-          "right": 812,
-          "w": 780,
-          "h": 201,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 40,
-          "right": 225,
-          "w": 185,
-          "h": 62,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 233,
-          "right": 418,
-          "w": 185,
-          "h": 62,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 426,
-          "right": 611,
-          "w": 185,
-          "h": 62,
-          "inside": true
-        },
-        {
-          "sel": ".player-tab",
-          "x": 619,
-          "right": 804,
-          "w": 185,
-          "h": 62,
-          "inside": true
-        },
-        {
-          "sel": ".reading-head",
-          "x": 32,
-          "right": 812,
-          "w": 780,
-          "h": 87.9375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 31.172029495239258,
-          "right": 408.676118850708,
-          "w": 377.50408935546875,
-          "h": 177.27450561523438,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 435.52520751953125,
-          "right": 812.5811157226562,
-          "w": 377.055908203125,
-          "h": 176.29360961914062,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 31.525203704833984,
-          "right": 408.58108139038086,
-          "w": 377.0558776855469,
-          "h": 176.2935791015625,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 435.2541809082031,
-          "right": 812.6091918945312,
-          "w": 377.3550109863281,
-          "h": 176.94769287109375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 31.501495361328125,
-          "right": 408.40740966796875,
-          "w": 376.9059143066406,
-          "h": 175.96630859375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 435.3238830566406,
-          "right": 812.8279418945312,
-          "w": 377.5040588378906,
-          "h": 177.274658203125,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "844x390 player labels not clipped",
-      "passed": true,
-      "details": [
-        15.59375,
-        15.59375,
-        15.59375,
-        15.59375
-      ]
-    },
-    {
-      "name": "844x390 entity-book dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 24,
-        "y": 24,
-        "w": 796,
-        "h": 342
-      }
-    },
-    {
-      "name": "844x390 entity-book background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "844x390 entity-book closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "844x390 rules dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 24,
-        "y": 24,
-        "w": 796,
-        "h": 342
-      }
-    },
-    {
-      "name": "844x390 rules background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "844x390 rules closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "844x390 magic-ball dialog bounds",
-      "passed": true,
-      "details": {
-        "inside": true,
-        "x": 152,
-        "y": 45.8125,
-        "w": 540,
-        "h": 298.375
-      }
-    },
-    {
-      "name": "844x390 magic-ball background scroll lock",
-      "passed": true
-    },
-    {
-      "name": "844x390 magic-ball closes and unlocks",
-      "passed": true
-    },
-    {
-      "name": "count change retains existing name",
-      "passed": true
-    },
-    {
-      "name": "double reveal results in a single reveal",
-      "passed": true
-    },
-    {
-      "name": "progress is 1/6",
-      "passed": true
-    },
-    {
-      "name": "all six characteristics reveal",
-      "passed": true
-    },
-    {
-      "name": "completion status and book affordance",
-      "passed": true
-    },
-    {
-      "name": "progress accessibility values",
-      "passed": true
-    },
-    {
-      "name": "keyboard player switch preserves focus",
-      "passed": true
-    },
-    {
-      "name": "other player remains concealed",
-      "passed": true
-    },
-    {
-      "name": "player state remains intact",
-      "passed": true
-    },
-    {
-      "name": "conceal reduces count to five",
-      "passed": true
-    },
-    {
-      "name": "second reveal count is two",
-      "passed": true
-    },
-    {
-      "name": "continue action visible",
-      "passed": true
-    },
-    {
-      "name": "continue restores six revealed traits in same session",
-      "passed": true
-    },
-    {
-      "name": "restart cancel preserves state",
-      "passed": true
-    },
-    {
-      "name": "confirmed restart resets state",
-      "passed": true
-    },
-    {
-      "name": "entity category demon",
-      "passed": true
-    },
-    {
-      "name": "entity category ghost",
-      "passed": true
-    },
-    {
-      "name": "entity category succubus",
-      "passed": true
-    },
-    {
-      "name": "entity next changes selection",
-      "passed": true
-    },
-    {
-      "name": "entity previous restores selection",
-      "passed": true
-    },
-    {
-      "name": "entity picker opens",
-      "passed": true
-    },
-    {
-      "name": "entity choice closes picker",
-      "passed": true
-    },
-    {
-      "name": "entity effect details expand",
-      "passed": true
-    },
-    {
-      "name": "entity Escape closes",
-      "passed": true
-    },
-    {
-      "name": "rules search finds matches",
-      "passed": true
-    },
-    {
-      "name": "search result opens chapter with highlighted matches",
-      "passed": true
-    },
-    {
-      "name": "rules search can be cleared",
-      "passed": true
-    },
-    {
-      "name": "last rules chapter is accessible",
-      "passed": true
-    },
-    {
-      "name": "rules Escape closes",
-      "passed": true
-    },
-    {
-      "name": "ball roll locks repeat input",
-      "passed": true
-    },
-    {
-      "name": "ball fallback produces valid roll",
-      "passed": true,
-      "details": "3"
-    },
-    {
-      "name": "ball roll clears transient animation classes",
-      "passed": true
-    },
-    {
-      "name": "closing mid-roll clears busy state",
-      "passed": true
-    },
-    {
-      "name": "ball reopens enabled",
-      "passed": true
-    },
-    {
-      "name": "ball Escape closes",
-      "passed": true
-    },
-    {
-      "name": "longest actual traits stay inside viewport",
-      "passed": true,
-      "details": [
-        {
-          "sel": "#traits > .trait",
-          "x": 17.29159927368164,
-          "right": 372.57837295532227,
-          "w": 355.2867736816406,
-          "h": 152.08352661132812,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.592086791992188,
-          "right": 372.4993133544922,
-          "w": 354.9072265625,
-          "h": 151.75341796875,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.592086791992188,
-          "right": 372.4993133544922,
-          "w": 354.9072265625,
-          "h": 151.75341796875,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.35926628112793,
-          "right": 372.5232677459717,
-          "w": 355.16400146484375,
-          "h": 152.369384765625,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.501659393310547,
-          "right": 372.40729904174805,
-          "w": 354.9056396484375,
-          "h": 175.741943359375,
-          "inside": true
-        },
-        {
-          "sel": "#traits > .trait",
-          "x": 17.323881149291992,
-          "right": 372.82784843444824,
-          "w": 355.50396728515625,
-          "h": 176.9732666015625,
-          "inside": true
-        },
-        {
-          "sel": ".trait-value",
-          "x": 42.96259307861328,
-          "right": 347.1805191040039,
-          "w": 304.2179260253906,
-          "h": 28.94873046875,
-          "inside": true
-        },
-        {
-          "sel": ".trait-value",
-          "x": 42.72601318359375,
-          "right": 347.0293884277344,
-          "w": 304.3033752441406,
-          "h": 52.4498291015625,
-          "inside": true
-        },
-        {
-          "sel": ".trait-value",
-          "x": 42.72601318359375,
-          "right": 347.0293884277344,
-          "w": 304.3033752441406,
-          "h": 52.4498291015625,
-          "inside": true
-        },
-        {
-          "sel": ".trait-value",
-          "x": 42.96324920654297,
-          "right": 347.3512191772461,
-          "w": 304.3879699707031,
-          "h": 52.979736328125,
-          "inside": true
-        },
-        {
-          "sel": ".trait-value",
-          "x": 42.90448760986328,
-          "right": 347.2924575805664,
-          "w": 304.3879699707031,
-          "h": 76.4814453125,
-          "inside": true
-        },
-        {
-          "sel": ".trait-value",
-          "x": 42.514915466308594,
-          "right": 347.15685272216797,
-          "w": 304.6419372558594,
-          "h": 77.54052734375,
-          "inside": true
-        }
-      ]
-    },
-    {
-      "name": "reduced motion home has no active animations",
-      "passed": true
-    },
-    {
-      "name": "reduced motion reveal still works",
-      "passed": true
-    },
-    {
-      "name": "reduced motion ball returns immediately",
-      "passed": true
-    },
-    {
-      "name": "no application page errors",
-      "passed": true,
-      "details": []
-    },
-    {
-      "name": "styles.css unchanged",
-      "passed": true
-    },
-    {
-      "name": "mobile-ball.js unchanged",
-      "passed": true
-    },
-    {
-      "name": "manifest.json unchanged",
-      "passed": true
-    },
-    {
-      "name": "all original assets unchanged",
-      "passed": true
-    },
-    {
-      "name": "all app code outside focused player-strip patch unchanged",
-      "passed": true
-    },
-    {
-      "name": "precache paths exist",
-      "passed": true,
-      "details": []
-    },
-    {
-      "name": "no font binaries packaged",
-      "passed": true
-    }
+  "version": "56.6.1",
+  "date": "2026-10-14",
+  "base": "56.6.0",
+  "environment": {
+    "browser": "Chromium, Playwright, headless",
+    "loading": "Local source HTML/CSS/JS/assets inlined in test harness via page.set_content; no live origin navigation.",
+    "original_source_modified_by_harness": false
+  },
+  "viewports": [
+    [
+      320,
+      568
+    ],
+    [
+      360,
+      780
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      430,
+      932
+    ],
+    [
+      768,
+      1024
+    ],
+    [
+      1280,
+      900
+    ],
+    [
+      1920,
+      1080
+    ],
+    [
+      844,
+      390
+    ]
   ],
-  "errors": []
+  "content_stress_test": {
+    "entities": 24,
+    "widths": [
+      320,
+      390,
+      1280
+    ],
+    "rules_chapters": 7
+  },
+  "summary": {
+    "qa_entities": {
+      "checks": 72,
+      "passed": 72,
+      "failed": 0
+    },
+    "qa_layout_0": {
+      "checks": 196,
+      "passed": 196,
+      "failed": 0
+    },
+    "qa_layout_1": {
+      "checks": 196,
+      "passed": 196,
+      "failed": 0
+    },
+    "qa_motion": {
+      "checks": 29,
+      "passed": 29,
+      "failed": 0
+    },
+    "qa_static": {
+      "checks": 121,
+      "passed": 121,
+      "failed": 0
+    }
+  },
+  "total_checks": 614,
+  "total_failures": 0,
+  "not_tested": [
+    "Physical iPhone/iPad Safari",
+    "Physical Android devices",
+    "Live deployment and asset fetch order",
+    "Service worker install/update and offline navigation",
+    "Real multiplayer sessions",
+    "GPU rendering/performance of original in-game ball",
+    "Persistence on a real deployed origin",
+    "Screen-reader audit"
+  ],
+  "checks": {
+    "qa_entities": [
+      {
+        "check": "320px entity white-delirium fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Белая горячка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity mosquito fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Назойливый комар",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity barabashka fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Барабашка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity gnome fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Сущность в виде гномика",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity evil-clown fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Злобный клоун",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity lawyer fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Адвокат",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity true-evil fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Истинное зло",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity queen-spades fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Пиковая дама",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity upstairs-neighbor fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Сосед сверху",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity fridge-thing fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Нечто в углу холодильника",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity crushed-ant fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Раздавленный муравей",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity sanya fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Саня Вернисотку",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity math-teacher fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Математичка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity bloody-mary fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Кровавая Мэри",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity goldfish fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Золотая рыбка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity called-girl fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Позвонившая",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity sleep-paralysis fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Сонный паралич",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity ex-boyfriend fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Бывший",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity ex-girlfriend fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Бывшая",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity night-butterfly fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Ночная бабочка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity evil-cupid fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Злой купидон",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity edik fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Эдик Каллин",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity last-piece fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Последний кусочек",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "320px entity moms-friend-son fits",
+        "passed": true,
+        "detail": {
+          "sw": 260,
+          "cw": 260,
+          "heading": "Сын маминой подруги",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity white-delirium fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Белая горячка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity mosquito fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Назойливый комар",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity barabashka fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Барабашка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity gnome fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Сущность в виде гномика",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity evil-clown fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Злобный клоун",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity lawyer fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Адвокат",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity true-evil fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Истинное зло",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity queen-spades fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Пиковая дама",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity upstairs-neighbor fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Сосед сверху",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity fridge-thing fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Нечто в углу холодильника",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity crushed-ant fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Раздавленный муравей",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity sanya fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Саня Вернисотку",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity math-teacher fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Математичка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity bloody-mary fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Кровавая Мэри",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity goldfish fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Золотая рыбка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity called-girl fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Позвонившая",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity sleep-paralysis fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Сонный паралич",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity ex-boyfriend fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Бывший",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity ex-girlfriend fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Бывшая",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity night-butterfly fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Ночная бабочка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity evil-cupid fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Злой купидон",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity edik fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Эдик Каллин",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity last-piece fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Последний кусочек",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "390px entity moms-friend-son fits",
+        "passed": true,
+        "detail": {
+          "sw": 324,
+          "cw": 324,
+          "heading": "Сын маминой подруги",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity white-delirium fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Белая горячка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity mosquito fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Назойливый комар",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity barabashka fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Барабашка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity gnome fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Сущность в виде гномика",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity evil-clown fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Злобный клоун",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity lawyer fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Адвокат",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity true-evil fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Истинное зло",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity queen-spades fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Пиковая дама",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity upstairs-neighbor fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Сосед сверху",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity fridge-thing fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Нечто в углу холодильника",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity crushed-ant fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Раздавленный муравей",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity sanya fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Саня Вернисотку",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity math-teacher fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Математичка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity bloody-mary fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Кровавая Мэри",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity goldfish fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Золотая рыбка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity called-girl fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Позвонившая",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity sleep-paralysis fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Сонный паралич",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity ex-boyfriend fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Бывший",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity ex-girlfriend fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Бывшая",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity night-butterfly fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Ночная бабочка",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity evil-cupid fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Злой купидон",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity edik fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Эдик Каллин",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity last-piece fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Последний кусочек",
+          "hasCards": 2
+        }
+      },
+      {
+        "check": "1280px entity moms-friend-son fits",
+        "passed": true,
+        "detail": {
+          "sw": 788,
+          "cw": 788,
+          "heading": "Сын маминой подруги",
+          "hasCards": 2
+        }
+      }
+    ],
+    "qa_layout_0": [
+      {
+        "check": "320x568 home horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 320,
+          "sw": 320
+        }
+      },
+      {
+        "check": "320x568 articulated book markup",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 grimoire opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 all category glyphs",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 grimoire within viewport",
+        "passed": true,
+        "detail": {
+          "x": 10,
+          "y": 12,
+          "width": 300,
+          "height": 544
+        }
+      },
+      {
+        "check": "320x568 entity category 0 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 270,
+          "scroll": 270,
+          "height": 337,
+          "scrollHeight": 765
+        }
+      },
+      {
+        "check": "320x568 category 0 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 effect story 0 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 effect 0 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 entity category 1 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 270,
+          "scroll": 270,
+          "height": 337,
+          "scrollHeight": 911
+        }
+      },
+      {
+        "check": "320x568 category 1 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 effect story 1 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 effect 1 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 entity category 2 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 270,
+          "scroll": 270,
+          "height": 337,
+          "scrollHeight": 968
+        }
+      },
+      {
+        "check": "320x568 category 2 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 effect story 2 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 effect 2 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 entity selector accessible",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 selector closes after choice",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 rules opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 seven rule chapters",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 rules chapter 1 fit",
+        "passed": true,
+        "detail": {
+          "client": 298,
+          "scroll": 298,
+          "height": 289,
+          "scrollHeight": 1543
+        }
+      },
+      {
+        "check": "320x568 rules chapter 1 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 rules chapter 2 fit",
+        "passed": true,
+        "detail": {
+          "client": 298,
+          "scroll": 298,
+          "height": 289,
+          "scrollHeight": 1078
+        }
+      },
+      {
+        "check": "320x568 rules chapter 2 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 rules chapter 3 fit",
+        "passed": true,
+        "detail": {
+          "client": 298,
+          "scroll": 298,
+          "height": 289,
+          "scrollHeight": 1265
+        }
+      },
+      {
+        "check": "320x568 rules chapter 3 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 rules chapter 4 fit",
+        "passed": true,
+        "detail": {
+          "client": 298,
+          "scroll": 298,
+          "height": 289,
+          "scrollHeight": 1799
+        }
+      },
+      {
+        "check": "320x568 rules chapter 4 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 rules chapter 5 fit",
+        "passed": true,
+        "detail": {
+          "client": 298,
+          "scroll": 298,
+          "height": 289,
+          "scrollHeight": 1837
+        }
+      },
+      {
+        "check": "320x568 rules chapter 5 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 rules chapter 6 fit",
+        "passed": true,
+        "detail": {
+          "client": 298,
+          "scroll": 298,
+          "height": 289,
+          "scrollHeight": 1565
+        }
+      },
+      {
+        "check": "320x568 rules chapter 6 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 rules chapter 7 fit",
+        "passed": true,
+        "detail": {
+          "client": 298,
+          "scroll": 298,
+          "height": 289,
+          "scrollHeight": 1583
+        }
+      },
+      {
+        "check": "320x568 rules chapter 7 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 rule search matches",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 search result opens chapter",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 empty search result state",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 clear restores rule page",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 modal scroll lock released",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 local game has six trait sheets",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 game horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 320,
+          "sw": 320
+        }
+      },
+      {
+        "check": "320x568 all traits reveal",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 reading meter is complete",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 trait closes",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 grimoire opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 rules opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 cancel restart keeps traits",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "320x568 no JavaScript errors",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "check": "360x780 home horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 360,
+          "sw": 360
+        }
+      },
+      {
+        "check": "360x780 articulated book markup",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 grimoire opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 all category glyphs",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 grimoire within viewport",
+        "passed": true,
+        "detail": {
+          "x": 10,
+          "y": 12,
+          "width": 340,
+          "height": 756
+        }
+      },
+      {
+        "check": "360x780 entity category 0 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 310,
+          "scroll": 310,
+          "height": 549,
+          "scrollHeight": 670
+        }
+      },
+      {
+        "check": "360x780 category 0 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 effect story 0 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 effect 0 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 entity category 1 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 310,
+          "scroll": 310,
+          "height": 549,
+          "scrollHeight": 843
+        }
+      },
+      {
+        "check": "360x780 category 1 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 effect story 1 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 effect 1 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 entity category 2 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 310,
+          "scroll": 310,
+          "height": 549,
+          "scrollHeight": 871
+        }
+      },
+      {
+        "check": "360x780 category 2 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 effect story 2 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 effect 2 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 entity selector accessible",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 selector closes after choice",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 rules opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 seven rule chapters",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 rules chapter 1 fit",
+        "passed": true,
+        "detail": {
+          "client": 338,
+          "scroll": 338,
+          "height": 501,
+          "scrollHeight": 1448
+        }
+      },
+      {
+        "check": "360x780 rules chapter 1 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 rules chapter 2 fit",
+        "passed": true,
+        "detail": {
+          "client": 338,
+          "scroll": 338,
+          "height": 501,
+          "scrollHeight": 1033
+        }
+      },
+      {
+        "check": "360x780 rules chapter 2 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 rules chapter 3 fit",
+        "passed": true,
+        "detail": {
+          "client": 338,
+          "scroll": 338,
+          "height": 501,
+          "scrollHeight": 1202
+        }
+      },
+      {
+        "check": "360x780 rules chapter 3 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 rules chapter 4 fit",
+        "passed": true,
+        "detail": {
+          "client": 338,
+          "scroll": 338,
+          "height": 501,
+          "scrollHeight": 1681
+        }
+      },
+      {
+        "check": "360x780 rules chapter 4 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 rules chapter 5 fit",
+        "passed": true,
+        "detail": {
+          "client": 338,
+          "scroll": 338,
+          "height": 501,
+          "scrollHeight": 1641
+        }
+      },
+      {
+        "check": "360x780 rules chapter 5 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 rules chapter 6 fit",
+        "passed": true,
+        "detail": {
+          "client": 338,
+          "scroll": 338,
+          "height": 501,
+          "scrollHeight": 1516
+        }
+      },
+      {
+        "check": "360x780 rules chapter 6 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 rules chapter 7 fit",
+        "passed": true,
+        "detail": {
+          "client": 338,
+          "scroll": 338,
+          "height": 501,
+          "scrollHeight": 1513
+        }
+      },
+      {
+        "check": "360x780 rules chapter 7 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 rule search matches",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 search result opens chapter",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 empty search result state",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 clear restores rule page",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 modal scroll lock released",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 local game has six trait sheets",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 game horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 360,
+          "sw": 360
+        }
+      },
+      {
+        "check": "360x780 all traits reveal",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 reading meter is complete",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 trait closes",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 grimoire opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 rules opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 cancel restart keeps traits",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "360x780 no JavaScript errors",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "check": "390x844 home horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 390,
+          "sw": 390
+        }
+      },
+      {
+        "check": "390x844 articulated book markup",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 grimoire opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 all category glyphs",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 grimoire within viewport",
+        "passed": true,
+        "detail": {
+          "x": 10,
+          "y": 12,
+          "width": 370,
+          "height": 820
+        }
+      },
+      {
+        "check": "390x844 entity category 0 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 334,
+          "scroll": 334,
+          "height": 613,
+          "scrollHeight": 672
+        }
+      },
+      {
+        "check": "390x844 category 0 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 effect story 0 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 effect 0 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 entity category 1 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 334,
+          "scroll": 334,
+          "height": 613,
+          "scrollHeight": 845
+        }
+      },
+      {
+        "check": "390x844 category 1 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 effect story 1 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 effect 1 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 entity category 2 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 334,
+          "scroll": 334,
+          "height": 613,
+          "scrollHeight": 881
+        }
+      },
+      {
+        "check": "390x844 category 2 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 effect story 2 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 effect 2 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 entity selector accessible",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 selector closes after choice",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 rules opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 seven rule chapters",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 rules chapter 1 fit",
+        "passed": true,
+        "detail": {
+          "client": 368,
+          "scroll": 368,
+          "height": 565,
+          "scrollHeight": 1349
+        }
+      },
+      {
+        "check": "390x844 rules chapter 1 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 rules chapter 2 fit",
+        "passed": true,
+        "detail": {
+          "client": 368,
+          "scroll": 368,
+          "height": 565,
+          "scrollHeight": 1009
+        }
+      },
+      {
+        "check": "390x844 rules chapter 2 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 rules chapter 3 fit",
+        "passed": true,
+        "detail": {
+          "client": 368,
+          "scroll": 368,
+          "height": 565,
+          "scrollHeight": 1177
+        }
+      },
+      {
+        "check": "390x844 rules chapter 3 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 rules chapter 4 fit",
+        "passed": true,
+        "detail": {
+          "client": 368,
+          "scroll": 368,
+          "height": 565,
+          "scrollHeight": 1483
+        }
+      },
+      {
+        "check": "390x844 rules chapter 4 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 rules chapter 5 fit",
+        "passed": true,
+        "detail": {
+          "client": 368,
+          "scroll": 368,
+          "height": 565,
+          "scrollHeight": 1547
+        }
+      },
+      {
+        "check": "390x844 rules chapter 5 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 rules chapter 6 fit",
+        "passed": true,
+        "detail": {
+          "client": 368,
+          "scroll": 368,
+          "height": 565,
+          "scrollHeight": 1443
+        }
+      },
+      {
+        "check": "390x844 rules chapter 6 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 rules chapter 7 fit",
+        "passed": true,
+        "detail": {
+          "client": 368,
+          "scroll": 368,
+          "height": 565,
+          "scrollHeight": 1513
+        }
+      },
+      {
+        "check": "390x844 rules chapter 7 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 rule search matches",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 search result opens chapter",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 empty search result state",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 clear restores rule page",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 modal scroll lock released",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 local game has six trait sheets",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 game horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 390,
+          "sw": 390
+        }
+      },
+      {
+        "check": "390x844 all traits reveal",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 reading meter is complete",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 trait closes",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 grimoire opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 rules opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 cancel restart keeps traits",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "390x844 no JavaScript errors",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "check": "430x932 home horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 430,
+          "sw": 430
+        }
+      },
+      {
+        "check": "430x932 articulated book markup",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 grimoire opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 all category glyphs",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 grimoire within viewport",
+        "passed": true,
+        "detail": {
+          "x": 10,
+          "y": 12,
+          "width": 410,
+          "height": 908
+        }
+      },
+      {
+        "check": "430x932 entity category 0 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 374,
+          "scroll": 374,
+          "height": 672,
+          "scrollHeight": 672
+        }
+      },
+      {
+        "check": "430x932 category 0 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 effect story 0 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 effect 0 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 entity category 1 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 374,
+          "scroll": 374,
+          "height": 698,
+          "scrollHeight": 782
+        }
+      },
+      {
+        "check": "430x932 category 1 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 effect story 1 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 effect 1 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 entity category 2 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 374,
+          "scroll": 374,
+          "height": 698,
+          "scrollHeight": 782
+        }
+      },
+      {
+        "check": "430x932 category 2 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 effect story 2 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 effect 2 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 entity selector accessible",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 selector closes after choice",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 rules opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 seven rule chapters",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 rules chapter 1 fit",
+        "passed": true,
+        "detail": {
+          "client": 408,
+          "scroll": 408,
+          "height": 653,
+          "scrollHeight": 1317
+        }
+      },
+      {
+        "check": "430x932 rules chapter 1 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 rules chapter 2 fit",
+        "passed": true,
+        "detail": {
+          "client": 408,
+          "scroll": 408,
+          "height": 653,
+          "scrollHeight": 963
+        }
+      },
+      {
+        "check": "430x932 rules chapter 2 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 rules chapter 3 fit",
+        "passed": true,
+        "detail": {
+          "client": 408,
+          "scroll": 408,
+          "height": 653,
+          "scrollHeight": 1120
+        }
+      },
+      {
+        "check": "430x932 rules chapter 3 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 rules chapter 4 fit",
+        "passed": true,
+        "detail": {
+          "client": 408,
+          "scroll": 408,
+          "height": 653,
+          "scrollHeight": 1447
+        }
+      },
+      {
+        "check": "430x932 rules chapter 4 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 rules chapter 5 fit",
+        "passed": true,
+        "detail": {
+          "client": 408,
+          "scroll": 408,
+          "height": 653,
+          "scrollHeight": 1397
+        }
+      },
+      {
+        "check": "430x932 rules chapter 5 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 rules chapter 6 fit",
+        "passed": true,
+        "detail": {
+          "client": 408,
+          "scroll": 408,
+          "height": 653,
+          "scrollHeight": 1367
+        }
+      },
+      {
+        "check": "430x932 rules chapter 6 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 rules chapter 7 fit",
+        "passed": true,
+        "detail": {
+          "client": 408,
+          "scroll": 408,
+          "height": 653,
+          "scrollHeight": 1393
+        }
+      },
+      {
+        "check": "430x932 rules chapter 7 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 rule search matches",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 search result opens chapter",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 empty search result state",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 clear restores rule page",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 modal scroll lock released",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 local game has six trait sheets",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 game horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 430,
+          "sw": 430
+        }
+      },
+      {
+        "check": "430x932 all traits reveal",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 reading meter is complete",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 trait closes",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 grimoire opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 rules opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 cancel restart keeps traits",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "430x932 no JavaScript errors",
+        "passed": true,
+        "detail": []
+      }
+    ],
+    "qa_layout_1": [
+      {
+        "check": "768x1024 home horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 768,
+          "sw": 753
+        }
+      },
+      {
+        "check": "768x1024 articulated book markup",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 grimoire opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 all category glyphs",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 grimoire within viewport",
+        "passed": true,
+        "detail": {
+          "x": 16.5,
+          "y": 24,
+          "width": 720,
+          "height": 976
+        }
+      },
+      {
+        "check": "768x1024 entity category 0 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 648,
+          "scroll": 648,
+          "height": 658,
+          "scrollHeight": 658
+        }
+      },
+      {
+        "check": "768x1024 category 0 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 effect story 0 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 effect 0 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 entity category 1 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 648,
+          "scroll": 648,
+          "height": 731,
+          "scrollHeight": 731
+        }
+      },
+      {
+        "check": "768x1024 category 1 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 effect story 1 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 effect 1 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 entity category 2 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 648,
+          "scroll": 648,
+          "height": 733,
+          "scrollHeight": 755
+        }
+      },
+      {
+        "check": "768x1024 category 2 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 effect story 2 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 effect 2 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 entity selector accessible",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 selector closes after choice",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 rules opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 seven rule chapters",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 rules chapter 1 fit",
+        "passed": true,
+        "detail": {
+          "client": 508,
+          "scroll": 508,
+          "height": 708,
+          "scrollHeight": 1225
+        }
+      },
+      {
+        "check": "768x1024 rules chapter 1 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 rules chapter 2 fit",
+        "passed": true,
+        "detail": {
+          "client": 508,
+          "scroll": 508,
+          "height": 708,
+          "scrollHeight": 994
+        }
+      },
+      {
+        "check": "768x1024 rules chapter 2 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 rules chapter 3 fit",
+        "passed": true,
+        "detail": {
+          "client": 508,
+          "scroll": 508,
+          "height": 708,
+          "scrollHeight": 1126
+        }
+      },
+      {
+        "check": "768x1024 rules chapter 3 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 rules chapter 4 fit",
+        "passed": true,
+        "detail": {
+          "client": 508,
+          "scroll": 508,
+          "height": 708,
+          "scrollHeight": 1445
+        }
+      },
+      {
+        "check": "768x1024 rules chapter 4 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 rules chapter 5 fit",
+        "passed": true,
+        "detail": {
+          "client": 508,
+          "scroll": 508,
+          "height": 708,
+          "scrollHeight": 1395
+        }
+      },
+      {
+        "check": "768x1024 rules chapter 5 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 rules chapter 6 fit",
+        "passed": true,
+        "detail": {
+          "client": 508,
+          "scroll": 508,
+          "height": 708,
+          "scrollHeight": 1415
+        }
+      },
+      {
+        "check": "768x1024 rules chapter 6 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 rules chapter 7 fit",
+        "passed": true,
+        "detail": {
+          "client": 508,
+          "scroll": 508,
+          "height": 708,
+          "scrollHeight": 1435
+        }
+      },
+      {
+        "check": "768x1024 rules chapter 7 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 rule search matches",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 search result opens chapter",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 empty search result state",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 clear restores rule page",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 modal scroll lock released",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 local game has six trait sheets",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 game horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 768,
+          "sw": 753
+        }
+      },
+      {
+        "check": "768x1024 all traits reveal",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 reading meter is complete",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 trait closes",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 grimoire opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 rules opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 cancel restart keeps traits",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "768x1024 no JavaScript errors",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "check": "1280x900 home horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 1280,
+          "sw": 1265
+        }
+      },
+      {
+        "check": "1280x900 articulated book markup",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 grimoire opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 all category glyphs",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 grimoire within viewport",
+        "passed": true,
+        "detail": {
+          "x": 202.5,
+          "y": 24,
+          "width": 860,
+          "height": 852
+        }
+      },
+      {
+        "check": "1280x900 entity category 0 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 788,
+          "scroll": 788,
+          "height": 594,
+          "scrollHeight": 664
+        }
+      },
+      {
+        "check": "1280x900 category 0 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 effect story 0 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 effect 0 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 entity category 1 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 788,
+          "scroll": 788,
+          "height": 594,
+          "scrollHeight": 713
+        }
+      },
+      {
+        "check": "1280x900 category 1 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 effect story 1 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 effect 1 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 entity category 2 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 788,
+          "scroll": 788,
+          "height": 594,
+          "scrollHeight": 713
+        }
+      },
+      {
+        "check": "1280x900 category 2 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 effect story 2 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 effect 2 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 entity selector accessible",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 selector closes after choice",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 rules opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 seven rule chapters",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 rules chapter 1 fit",
+        "passed": true,
+        "detail": {
+          "client": 828,
+          "scroll": 828,
+          "height": 640,
+          "scrollHeight": 1085
+        }
+      },
+      {
+        "check": "1280x900 rules chapter 1 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 rules chapter 2 fit",
+        "passed": true,
+        "detail": {
+          "client": 828,
+          "scroll": 828,
+          "height": 640,
+          "scrollHeight": 904
+        }
+      },
+      {
+        "check": "1280x900 rules chapter 2 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 rules chapter 3 fit",
+        "passed": true,
+        "detail": {
+          "client": 828,
+          "scroll": 828,
+          "height": 640,
+          "scrollHeight": 1053
+        }
+      },
+      {
+        "check": "1280x900 rules chapter 3 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 rules chapter 4 fit",
+        "passed": true,
+        "detail": {
+          "client": 828,
+          "scroll": 828,
+          "height": 640,
+          "scrollHeight": 1253
+        }
+      },
+      {
+        "check": "1280x900 rules chapter 4 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 rules chapter 5 fit",
+        "passed": true,
+        "detail": {
+          "client": 828,
+          "scroll": 828,
+          "height": 640,
+          "scrollHeight": 1170
+        }
+      },
+      {
+        "check": "1280x900 rules chapter 5 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 rules chapter 6 fit",
+        "passed": true,
+        "detail": {
+          "client": 828,
+          "scroll": 828,
+          "height": 640,
+          "scrollHeight": 1193
+        }
+      },
+      {
+        "check": "1280x900 rules chapter 6 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 rules chapter 7 fit",
+        "passed": true,
+        "detail": {
+          "client": 828,
+          "scroll": 828,
+          "height": 640,
+          "scrollHeight": 1272
+        }
+      },
+      {
+        "check": "1280x900 rules chapter 7 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 rule search matches",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 search result opens chapter",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 empty search result state",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 clear restores rule page",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 modal scroll lock released",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 local game has six trait sheets",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 game horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 1280,
+          "sw": 1265
+        }
+      },
+      {
+        "check": "1280x900 all traits reveal",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 reading meter is complete",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 trait closes",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 grimoire opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 rules opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 cancel restart keeps traits",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1280x900 no JavaScript errors",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "check": "1920x1080 home horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 1920,
+          "sw": 1905
+        }
+      },
+      {
+        "check": "1920x1080 articulated book markup",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 grimoire opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 all category glyphs",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 grimoire within viewport",
+        "passed": true,
+        "detail": {
+          "x": 522.5,
+          "y": 24,
+          "width": 860,
+          "height": 1032
+        }
+      },
+      {
+        "check": "1920x1080 entity category 0 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 788,
+          "scroll": 788,
+          "height": 664,
+          "scrollHeight": 664
+        }
+      },
+      {
+        "check": "1920x1080 category 0 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 effect story 0 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 effect 0 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 entity category 1 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 788,
+          "scroll": 788,
+          "height": 713,
+          "scrollHeight": 713
+        }
+      },
+      {
+        "check": "1920x1080 category 1 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 effect story 1 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 effect 1 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 entity category 2 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 788,
+          "scroll": 788,
+          "height": 713,
+          "scrollHeight": 713
+        }
+      },
+      {
+        "check": "1920x1080 category 2 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 effect story 2 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 effect 2 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 entity selector accessible",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 selector closes after choice",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 rules opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 seven rule chapters",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 rules chapter 1 fit",
+        "passed": true,
+        "detail": {
+          "client": 828,
+          "scroll": 828,
+          "height": 708,
+          "scrollHeight": 1085
+        }
+      },
+      {
+        "check": "1920x1080 rules chapter 1 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 rules chapter 2 fit",
+        "passed": true,
+        "detail": {
+          "client": 828,
+          "scroll": 828,
+          "height": 708,
+          "scrollHeight": 904
+        }
+      },
+      {
+        "check": "1920x1080 rules chapter 2 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 rules chapter 3 fit",
+        "passed": true,
+        "detail": {
+          "client": 828,
+          "scroll": 828,
+          "height": 708,
+          "scrollHeight": 1053
+        }
+      },
+      {
+        "check": "1920x1080 rules chapter 3 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 rules chapter 4 fit",
+        "passed": true,
+        "detail": {
+          "client": 828,
+          "scroll": 828,
+          "height": 708,
+          "scrollHeight": 1253
+        }
+      },
+      {
+        "check": "1920x1080 rules chapter 4 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 rules chapter 5 fit",
+        "passed": true,
+        "detail": {
+          "client": 828,
+          "scroll": 828,
+          "height": 708,
+          "scrollHeight": 1170
+        }
+      },
+      {
+        "check": "1920x1080 rules chapter 5 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 rules chapter 6 fit",
+        "passed": true,
+        "detail": {
+          "client": 828,
+          "scroll": 828,
+          "height": 708,
+          "scrollHeight": 1193
+        }
+      },
+      {
+        "check": "1920x1080 rules chapter 6 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 rules chapter 7 fit",
+        "passed": true,
+        "detail": {
+          "client": 828,
+          "scroll": 828,
+          "height": 708,
+          "scrollHeight": 1272
+        }
+      },
+      {
+        "check": "1920x1080 rules chapter 7 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 rule search matches",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 search result opens chapter",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 empty search result state",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 clear restores rule page",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 modal scroll lock released",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 local game has six trait sheets",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 game horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 1920,
+          "sw": 1905
+        }
+      },
+      {
+        "check": "1920x1080 all traits reveal",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 reading meter is complete",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 trait closes",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 grimoire opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 rules opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 cancel restart keeps traits",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "1920x1080 no JavaScript errors",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "check": "844x390 home horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 844,
+          "sw": 829
+        }
+      },
+      {
+        "check": "844x390 articulated book markup",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 grimoire opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 all category glyphs",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 grimoire within viewport",
+        "passed": true,
+        "detail": {
+          "x": 16.5,
+          "y": 24,
+          "width": 796,
+          "height": 342
+        }
+      },
+      {
+        "check": "844x390 entity category 0 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 724,
+          "scroll": 724,
+          "height": 161,
+          "scrollHeight": 658
+        }
+      },
+      {
+        "check": "844x390 category 0 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 effect story 0 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 effect 0 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 entity category 1 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 724,
+          "scroll": 724,
+          "height": 161,
+          "scrollHeight": 706
+        }
+      },
+      {
+        "check": "844x390 category 1 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 effect story 1 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 effect 1 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 entity category 2 horizontal fit",
+        "passed": true,
+        "detail": {
+          "client": 724,
+          "scroll": 724,
+          "height": 161,
+          "scrollHeight": 706
+        }
+      },
+      {
+        "check": "844x390 category 2 real paper background",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 effect story 2 opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 effect 2 bottom scroll reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 entity selector accessible",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 selector closes after choice",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 rules opens",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 seven rule chapters",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 rules chapter 1 fit",
+        "passed": true,
+        "detail": {
+          "client": 584,
+          "scroll": 584,
+          "height": 130,
+          "scrollHeight": 1183
+        }
+      },
+      {
+        "check": "844x390 rules chapter 1 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 rules chapter 2 fit",
+        "passed": true,
+        "detail": {
+          "client": 584,
+          "scroll": 584,
+          "height": 130,
+          "scrollHeight": 929
+        }
+      },
+      {
+        "check": "844x390 rules chapter 2 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 rules chapter 3 fit",
+        "passed": true,
+        "detail": {
+          "client": 584,
+          "scroll": 584,
+          "height": 130,
+          "scrollHeight": 1100
+        }
+      },
+      {
+        "check": "844x390 rules chapter 3 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 rules chapter 4 fit",
+        "passed": true,
+        "detail": {
+          "client": 584,
+          "scroll": 584,
+          "height": 130,
+          "scrollHeight": 1328
+        }
+      },
+      {
+        "check": "844x390 rules chapter 4 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 rules chapter 5 fit",
+        "passed": true,
+        "detail": {
+          "client": 584,
+          "scroll": 584,
+          "height": 130,
+          "scrollHeight": 1297
+        }
+      },
+      {
+        "check": "844x390 rules chapter 5 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 rules chapter 6 fit",
+        "passed": true,
+        "detail": {
+          "client": 584,
+          "scroll": 584,
+          "height": 130,
+          "scrollHeight": 1301
+        }
+      },
+      {
+        "check": "844x390 rules chapter 6 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 rules chapter 7 fit",
+        "passed": true,
+        "detail": {
+          "client": 584,
+          "scroll": 584,
+          "height": 130,
+          "scrollHeight": 1349
+        }
+      },
+      {
+        "check": "844x390 rules chapter 7 bottom reachable",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 rule search matches",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 search result opens chapter",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 empty search result state",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 clear restores rule page",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 modal scroll lock released",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 local game has six trait sheets",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 game horizontal fit",
+        "passed": true,
+        "detail": {
+          "w": 844,
+          "sw": 829
+        }
+      },
+      {
+        "check": "844x390 all traits reveal",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 reading meter is complete",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 trait closes",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 grimoire opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 rules opens in game",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 cancel restart keeps traits",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "844x390 no JavaScript errors",
+        "passed": true,
+        "detail": []
+      }
+    ],
+    "qa_motion": [
+      {
+        "check": "#open-rules-home cover hinge moves on hover",
+        "passed": true,
+        "detail": [
+          "matrix3d(0.994522, 0, 0.104528, 0, 0, 1, 0, 0, -0.104528, 0, 0.994522, 0, 0, 0, 6, 1)",
+          "matrix3d(0.698602, 0, 0.715511, 0, 0, 1, 0, 0, -0.715511, 0, 0.698602, 0, 0, 0, 6, 1)"
+        ]
+      },
+      {
+        "check": "#open-rules-home leaves articulate independently",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "#open-rules-home opens beyond intermediate position",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "#open-rules-home hinge returns to rest",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "#open-rules-home ribbon settles",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "#open-entity-book-home cover hinge moves on hover",
+        "passed": true,
+        "detail": [
+          "matrix3d(0.994522, 0, 0.104528, 0, 0, 1, 0, 0, -0.104528, 0, 0.994522, 0, 0, 0, 6, 1)",
+          "matrix3d(0.704802, 0, 0.709404, 0, 0, 1, 0, 0, -0.709404, 0, 0.704802, 0, 0, 0, 6, 1)"
+        ]
+      },
+      {
+        "check": "#open-entity-book-home leaves articulate independently",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "#open-entity-book-home opens beyond intermediate position",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "#open-entity-book-home hinge returns to rest",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "#open-entity-book-home ribbon settles",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "oracle shell rocks on hover",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "oracle die has lagging timeline",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "oracle liquid animates separately",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "oracle returns to initial pose",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "no home prop animations running at rest",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "oracle replay on second hover",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "keyboard opens focused grimoire cover",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "Enter opens grimoire dialog",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "Escape closes grimoire dialog",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "reduced motion disables book hinge animation",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "reduced motion disables oracle timeline",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "motion tests no JS errors",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "check": "touch has a cover press response",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "touch cancel releases cover",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "touch release does not stick",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "touch tap opens rules without animation gate",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "effect unfold animation completes on touch",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original trait press and reveal retained",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original trait reseal retained",
+        "passed": true,
+        "detail": null
+      }
+    ],
+    "qa_static": [
+      {
+        "check": "app.js syntax",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "tabletop.js syntax",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "fieldnotes.js syntax",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "service-worker.js syntax",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "mobile-ball.js syntax",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "app.js unchanged",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "mobile-ball.js unchanged",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "styles.css unchanged",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "tabletop.css unchanged",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "tabletop.js unchanged",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "manifest.json unchanged",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: tabletop-felt.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: pewter-grain.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: soft-kraft.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: torn-note-5.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: parchment-fibers.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: metal-handbrushed.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: bookcloth-weave.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: torn-note-2.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: paper-ink-flecks.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: ball-mobile-faces.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: ball-mobile-resin.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: leather-pressed.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: cotton-stock.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: torn-note-1.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: torn-note-3.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: torn-note-6.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: plastic-microtexture.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: ink-leather.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: liquid-caustics.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: black-gloss-shell.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: ball-mobile-back.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: wordmark.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: print-dust.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: flecked-vellum.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: laid-rag.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: torn-note-4.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: aged-cover.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: violet-bookcloth.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: felt-needled.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: ball-mobile-front.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "original asset unchanged: paper-tape.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "index visible copy unchanged",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "index dependency exists: apple-touch-icon.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "index dependency exists: manifest.json",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "index dependency exists: icon.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "index dependency exists: styles.css",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "index dependency exists: tabletop.css",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "index dependency exists: fieldnotes.css",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "index dependency exists: mobile-ball.js",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "index dependency exists: app.js",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "index dependency exists: tabletop.js",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "index dependency exists: fieldnotes.js",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./fieldnotes.css",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./fieldnotes.js",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/rag-stock.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/grimoire-hide.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/field-binder.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/mending-tape.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/fieldnote-edge-1.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/fieldnote-edge-2.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/fieldnote-edge-3.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/fieldnote-edge-4.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/fieldnote-edge-5.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/fieldnote-edge-6.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./tabletop.css",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./tabletop.js",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/tabletop-felt.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/cotton-stock.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/violet-bookcloth.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/ink-leather.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/pewter-grain.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/print-dust.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/wordmark.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./index.html",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./styles.css",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./app.js",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./mobile-ball.js",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./manifest.json",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./icon.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./icon-192.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./icon-512.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./icon-maskable-512.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./apple-touch-icon.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/parchment-fibers.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/aged-cover.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/laid-rag.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/flecked-vellum.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/soft-kraft.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/bookcloth-weave.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/paper-tape.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/liquid-caustics.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/leather-pressed.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/felt-needled.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/metal-handbrushed.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/paper-ink-flecks.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/plastic-microtexture.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/black-gloss-shell.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/torn-note-1.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/torn-note-2.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/torn-note-3.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/torn-note-4.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/torn-note-5.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/torn-note-6.png",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/ball-mobile-back.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/ball-mobile-front.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/ball-mobile-faces.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "precache entry exists: ./assets/ball-mobile-resin.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "fieldnotes.css dependency: assets/rag-stock.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "fieldnotes.css dependency: assets/fieldnote-edge-6.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "fieldnotes.css dependency: assets/grimoire-hide.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "fieldnotes.css dependency: assets/fieldnote-edge-3.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "fieldnotes.css dependency: assets/fieldnote-edge-2.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "fieldnotes.css dependency: assets/fieldnote-edge-4.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "fieldnotes.css dependency: assets/mending-tape.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "fieldnotes.css dependency: assets/field-binder.webp",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "fieldnotes.css dependency: assets/fieldnote-edge-1.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "fieldnotes.css dependency: assets/fieldnote-edge-5.svg",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "no bundled font files",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "check": "version stamp updated",
+        "passed": true,
+        "detail": null
+      }
+    ]
+  }
 }
