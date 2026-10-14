@@ -1,4 +1,4 @@
-/* 56.6.1 - damaged field notes, leather folio and articulated home props.
+/* 56.6.2 - field notes, original paper masks and articulated home props.
    All texture is pre-rendered. Decorations are pointer-transparent.
    Object animation is finite; book hinges only transition on interaction. */
 :root {
@@ -209,7 +209,7 @@ body[data-ui] #rules-dialog .rules-block-heading { align-items:baseline!importan
 body[data-ui] #rules-dialog .rules-block-heading > span { font:700 18px/1.2 var(--f-type)!important;color:#855a73!important;border-bottom:2px solid #855a7366;transform:rotate(-4deg); }
 body[data-ui] #rules-dialog .rules-block-heading h4 { font:800 24px/1.1 var(--t-display)!important;font-style:italic!important;text-transform:uppercase;color:#48313f!important; }
 body[data-ui] #rules-dialog .rules-block-body { font-size:15px!important;line-height:1.72!important;padding-left:0!important;color:#3d3037!important; }
-body[data-ui] #rules-dialog .rules-block-body :is(p,li) { overflow-wrap:break-word; }
+body[data-ui] #rules-dialog .rules-block-body :is(p,li) { overflow-wrap:normal; }
 body[data-ui] #rules-dialog .rules-note { position:relative;padding:14px 16px!important;background:linear-gradient(#cab58d33,#cbb59422)!important;border:0!important;border-left:3px solid #896078!important;border-radius:0!important;transform:rotate(-.3deg); }
 body[data-ui] #rules-dialog .rules-note::after { content:"";position:absolute;bottom:5px;left:17px;width:70px;height:1px;background:#79526977;transform:rotate(-2deg); }
 body[data-ui] #rules-dialog .rules-page-end { color:#b19b85!important;margin:0!important; }
@@ -219,12 +219,12 @@ body[data-ui] #rules-dialog .rules-result { background:#e9dfc566!important;box-s
 body[data-ui] #rules-dialog .rules-footer { background:#0e181477!important;border-color:#a7a48633!important;color:#b2b09a!important;font-family:var(--f-type)!important; }
 /* The character scraps retain the original reveal system and hit targets. */
 body[data-ui] #game-screen .traits .trait::before { background:linear-gradient(94deg,transparent 48.8%,#79595414 49.7%,#fff7db33 50%,transparent 50.5%),linear-gradient(178deg,#fff4de22,transparent 68%,#8b6c5822),var(--f-stock) center/460px!important; }
-body[data-ui] #game-screen .traits .trait:nth-child(1) { --tear-mask:url('assets/fieldnote-edge-1.svg')!important;transform:rotate(-1.05deg)!important; }
-body[data-ui] #game-screen .traits .trait:nth-child(2) { --tear-mask:url('assets/fieldnote-edge-2.svg')!important;transform:rotate(.65deg)!important; }
-body[data-ui] #game-screen .traits .trait:nth-child(3) { --tear-mask:url('assets/fieldnote-edge-3.svg')!important;transform:rotate(.75deg)!important; }
-body[data-ui] #game-screen .traits .trait:nth-child(4) { --tear-mask:url('assets/fieldnote-edge-4.svg')!important;transform:rotate(-.8deg)!important; }
-body[data-ui] #game-screen .traits .trait:nth-child(5) { --tear-mask:url('assets/fieldnote-edge-5.svg')!important;transform:rotate(-.55deg)!important; }
-body[data-ui] #game-screen .traits .trait:nth-child(6) { --tear-mask:url('assets/fieldnote-edge-6.svg')!important;transform:rotate(.9deg)!important; }
+body[data-ui] #game-screen .traits .trait:nth-child(1) { --tear-mask:url('assets/torn-note-1.png')!important;transform:rotate(-1.05deg)!important; }
+body[data-ui] #game-screen .traits .trait:nth-child(2) { --tear-mask:url('assets/torn-note-2.png')!important;transform:rotate(.65deg)!important; }
+body[data-ui] #game-screen .traits .trait:nth-child(3) { --tear-mask:url('assets/torn-note-3.png')!important;transform:rotate(.75deg)!important; }
+body[data-ui] #game-screen .traits .trait:nth-child(4) { --tear-mask:url('assets/torn-note-4.png')!important;transform:rotate(-.8deg)!important; }
+body[data-ui] #game-screen .traits .trait:nth-child(5) { --tear-mask:url('assets/torn-note-5.png')!important;transform:rotate(-.55deg)!important; }
+body[data-ui] #game-screen .traits .trait:nth-child(6) { --tear-mask:url('assets/torn-note-6.png')!important;transform:rotate(.9deg)!important; }
 body[data-ui] #game-screen .trait .paper-tape { width:56px!important;height:20px!important;background:var(--f-tape) center/135px!important;clip-path:var(--f-tape-rip)!important;border:0!important;opacity:1!important;top:-5px!important; }
 body[data-ui] #game-screen .trait-title { font-family:var(--f-type)!important;font-size:11px!important;letter-spacing:.08em!important; }
 body[data-ui] #game-screen .mystery-plaque { background:linear-gradient(90deg,#96778b28,#96778b0a)!important;color:#725166!important;transform:rotate(-2deg)!important; }
@@ -356,8 +356,8 @@ body[data-ui] #home-screen .mode-card .paper-fastener {
 body[data-ui] #entity-book-dialog :is(.entity-page-title,.entity-effects,.entity-effect-card,.entity-effect-top,.entity-effect-top > div) { min-width:0!important; }
 body[data-ui] #entity-book-dialog .entity-page-title,
 body[data-ui] #entity-book-dialog .entity-effect-top > div { flex:1 1 0!important; }
-body[data-ui] #entity-book-dialog .entity-effect-top h4 { overflow-wrap:anywhere;hyphens:auto; }
-body[data-ui] #entity-book-dialog .entity-name { overflow-wrap:anywhere;hyphens:auto; }
+body[data-ui] #entity-book-dialog .entity-effect-top h4 { overflow-wrap:normal;hyphens:none; }
+body[data-ui] #entity-book-dialog .entity-name { overflow-wrap:normal;hyphens:none; }
 body[data-ui] #entity-book-dialog .entity-effects { grid-template-columns:minmax(0,1fr)!important; }
 @media(prefers-reduced-motion:reduce) {
  body[data-ui] #home-screen .home-tools > button:is(:hover,:focus-visible,.prop-engaged) .book-cover { transform:translateZ(6px) rotateY(-6deg)!important; }

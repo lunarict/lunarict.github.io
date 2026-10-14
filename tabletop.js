@@ -1,4 +1,4 @@
-/* ODERZHIMYE 56.6 - presentation and accessibility, never game state.
+/* ODERZHIMYE 56.6.2 - presentation and accessibility, never game state.
  * No animation loop runs at rest. The original globe and card reveal keep
  * their own rendering timelines. This file has no external dependencies.
  */
@@ -38,7 +38,7 @@
     entered = true;
     const selectors = screen.id === 'home-screen'
       ? '.hero-copy, .mode-card, .home-tools > button, .home-continue:not(.hidden)'
-      : '.section-head, .compact-field, .name-grid > .field, .setup-card, .game-control-panel, .reading-head, #traits > .trait, .lobby-code-card, .lobby-layout > div';
+      : '.section-head, .compact-field, .name-grid > .field, .setup-card, .game-control-panel, #traits > .trait, .lobby-code-card, .lobby-layout > div';
     [...screen.querySelectorAll(selectors)].forEach((element, index) => {
       const material = element.matches('.mode-card, .trait, .home-tools > button');
       motion(element, material ? [

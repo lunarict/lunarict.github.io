@@ -1,0 +1,44 @@
+ODERZHIMYE / BATTLE OF EXORCISTS -- 56.6.3
+Based on the complete 56.6.2 release. UI-only revision.
+
+COMPACT SESSION PANEL
+- Moves rules, entity book, globe and restart into one 44px toolbar.
+- Reduces player tabs, combines player name and the six-stage reading meter.
+- Removes the separate tool row and unused vertical space.
+- Keeps full text labels on wide screens, accessible icon buttons on narrow ones.
+- Preserves 2-4 players, completion status and the original six torn trait masks.
+
+OBJECT ICONS AND DELAYED ACTIVATION
+- Rules now have a cloth-bound green book, both at home and in the game toolbar.
+- All six book/globe launchers share the same awaited animation pipeline.
+- Real cover, leaves and ribbon motions complete before a book dialog opens.
+- The sphere, facet and liquid settle before the globe dialog opens.
+- Waiting uses Animation.finished, not a guessed timeout or a synthetic click.
+- Blocks duplicate launches. Escape and navigation cancel a pending launch.
+- Touch, Enter and Space use the same route; reduced motion opens immediately.
+
+READABLE RULEBOOK
+- One tactile paper chapter with torn edges; no new nested scrap-card clutter.
+- Objective and game phases precede the story in the introductory chapter.
+- Clearer type hierarchy, restrained inline emphasis and selected key-rule washes.
+- Cleaner fact rows, two-column phase/threshold comparisons where space permits.
+- Removes decorative seals, repeated chapter numbering and redundant facts.
+- Existing rules text, search targets, chapters and gameplay remain intact.
+
+ENTITY SUITS
+- Red, blue and mauve ink gradients identify demons, ghosts and succubi.
+- Gradients stay at paper edges, binding, tabs and headings; central paper is neutral.
+- The original entities, HP values and effects are unchanged.
+
+WHOLE-WORD WRAPPING
+- Disables mid-word wrapping and automatic hyphenation in app copy.
+- Long headings are fitted only when one complete word exceeds available width.
+- Exceptionally long player names get a full-width line, not broken letters.
+
+UNCHANGED
+- Generator, rules database, entity database and core game-state code.
+- Actual mobile-ball.js renderer and all existing assets.
+
+Deployment: replace the complete site contents, including refinement.css and
+updated index.html, app.js, fieldnotes.js and service-worker.js. Reload the tab/PWA.
+See QA_REPORT_v56_6_3.txt for verified scope and important limitations.

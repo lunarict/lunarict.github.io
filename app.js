@@ -1708,13 +1708,18 @@ function selectRulesChapter(chapterId, query='', blockId='') {
   $('#rules-results').hidden=true;
   const paper=$('#rules-paper');
   paper.hidden=false;
-  let html=`<div class="rules-page-heading"><span class="rules-page-number">ГЛАВА ${String(idx+1).padStart(2,'0')} / 07</span><span class="rules-page-ornament" aria-hidden="true">◆ ─ ◆</span><h3>${ruleEscape(chapter.title)}</h3><p>${ruleEscape(chapter.subtitle)}</p></div>`;
-  if (chapter.facts.length) {
-    html+='<div class="rules-facts">'+chapter.facts.map(f=>`<div class="rules-fact"><strong>${ruleEscape(f[0])}</strong><span>${ruleEscape(f[1])}</span></div>`).join('')+'</div>';
+  paper.dataset.chapter=chapter.id;
+  let html=`<div class="rules-page-heading"><span class="rules-page-number">ГЛАВА ${String(idx+1).padStart(2,'0')} / 07</span><h3>${ruleEscape(chapter.title)}</h3><p>${ruleEscape(chapter.subtitle)}</p></div>`;
+  if (chapter.facts.length && !['intro','suits'].includes(chapter.id)) {
+    html+='<div class="rules-facts" style="--fact-count:'+chapter.facts.length+'">'+chapter.facts.map(f=>`<div class="rules-fact"><strong>${ruleEscape(f[0])}</strong><span>${ruleEscape(f[1])}</span></div>`).join('')+'</div>';
   }
   if (query) html+='<button id="rules-back-results" class="rules-back-results" type="button">← Ко всем результатам поиска</button>';
-  html+=chapter.blocks.map((b,i)=>`<section class="rules-block" id="rule-block-${b.id}" data-rules-block="${b.id}"><div class="rules-block-heading"><span>${String(i+1).padStart(2,'0')}</span><h4>${ruleEscape(b.title)}</h4></div><div class="rules-block-body">${b.html}</div></section>`).join('');
-  html+='<div class="rules-page-end" aria-hidden="true">✥</div>';
+  // Lead with the objective and the two phases; the original story follows.
+  const blocks=chapter.id==='intro'
+    ? ['win','phases','story'].map(id=>chapter.blocks.find(block=>block.id===id))
+    : chapter.blocks;
+  const keyRules=new Set(['win','deal','refill','unlock','matching','wards']);
+  html+=blocks.map(b=>`<section class="rules-block${keyRules.has(b.id)?' rule-key':''}${b.id==='story'?' rule-context':''}" id="rule-block-${b.id}" data-rules-block="${b.id}"><div class="rules-block-heading"><h4>${ruleEscape(b.title)}</h4></div><div class="rules-block-body">${b.html}</div></section>`).join('');
   paper.innerHTML=html;
   if (query) {
     markRuleMatches(paper,query);
@@ -1777,8 +1782,14 @@ function closeRules() {
   if (dialog.open) dialog.close();
 }
 function setupRulesEvents() {
-  $('#open-rules-home').addEventListener('click',openRules);
-  $('#open-rules-game').addEventListener('click',openRules);
+  $('#open-rules-home').addEventListener('click', event => {
+    if (window.ExorcistProps) window.ExorcistProps.activate(event.currentTarget, openRules);
+    else openRules();
+  });
+  $('#open-rules-game').addEventListener('click', event => {
+    if (window.ExorcistProps) window.ExorcistProps.activate(event.currentTarget, openRules);
+    else openRules();
+  });
   $('#rules-close').addEventListener('click',closeRules);
   $('#rules-dialog').addEventListener('click',(event)=>{if(event.target===$('#rules-dialog'))closeRules();});
   $('#rules-search').addEventListener('input',()=>{
@@ -1794,8 +1805,14 @@ function setupRulesEvents() {
 function setupEvents() {
   setupRulesEvents();
   $('#mode-local').addEventListener('click', openLocalSetup);
-  $('#open-entity-book-home').addEventListener('click', openEntityBook);
-  $('#open-entity-book-game').addEventListener('click', openEntityBook);
+  $('#open-entity-book-home').addEventListener('click', event => {
+    if (window.ExorcistProps) window.ExorcistProps.activate(event.currentTarget, openEntityBook);
+    else openEntityBook();
+  });
+  $('#open-entity-book-game').addEventListener('click', event => {
+    if (window.ExorcistProps) window.ExorcistProps.activate(event.currentTarget, openEntityBook);
+    else openEntityBook();
+  });
   $('#entity-picker-toggle').addEventListener('click', () => {
     const panel = $('#entity-picker-panel');
     if (!panel) return;
@@ -1804,8 +1821,14 @@ function setupEvents() {
   });
   $('#entity-prev').addEventListener('click', () => stepEntityBook(-1));
   $('#entity-next').addEventListener('click', () => stepEntityBook(1));
-  $('#open-magic-ball-home').addEventListener('click', openMagicBall);
-  $('#open-magic-ball-game').addEventListener('click', openMagicBall);
+  $('#open-magic-ball-home').addEventListener('click', event => {
+    if (window.ExorcistProps) window.ExorcistProps.activate(event.currentTarget, openMagicBall);
+    else openMagicBall();
+  });
+  $('#open-magic-ball-game').addEventListener('click', event => {
+    if (window.ExorcistProps) window.ExorcistProps.activate(event.currentTarget, openMagicBall);
+    else openMagicBall();
+  });
   $('#magic-ball').addEventListener('click', rollMagicBall);
   document.getElementById('magic-ball-ios-switch')?.addEventListener('change', rollMagicBall);
   window.addEventListener('resize', () => {if ($('#magic-ball-dialog')?.open) setupIOSBallTap();},{passive:true});

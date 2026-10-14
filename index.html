@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="app-revision" content="v56.6.1-torn-fieldnotes">
+  <meta name="app-revision" content="v56.6.3-refined-reading">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#09080d">
   <meta name="color-scheme" content="dark">
@@ -13,9 +13,11 @@
   <meta name="description" content="Генератор одержимых и лобби для настольной игры «Битва экзорцистов».">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=56.6.1">
-  <link rel="stylesheet" href="tabletop.css?v=56.6.1">
-  <link rel="stylesheet" href="fieldnotes.css?v=56.6.1">
+  <link rel="stylesheet" href="styles.css?v=56.6.3">
+  <link rel="stylesheet" href="tabletop.css?v=56.6.3">
+  <link rel="stylesheet" href="fieldnotes.css?v=56.6.3">
+  <link rel="stylesheet" href="folio.css?v=56.6.3">
+  <link rel="stylesheet" href="refinement.css?v=56.6.3">
   <title>Битва экзорцистов</title>
 </head>
 <body data-ui="tabletop">
@@ -71,7 +73,7 @@
     </section>
 
     <section id="game-screen" class="screen">
-      <div class="game-control-panel">
+      <div class="game-control-panel session-folio">
         <div class="game-control-row">
           <button id="leave-game" class="game-menu-button" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg>
@@ -79,9 +81,19 @@
           </button>
           <div class="game-control-actions">
             <button id="open-rules-game" class="game-help-button" type="button" aria-label="Открыть правила игры">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h11v16H7a3 3 0 0 1-3-3V6a2 2 0 0 1 2-2Z"/><path d="M4 17c0-1.5 1-2 3-2h10M8 8h6M8 11h4"/></svg>
+              <span class="session-mini-book session-manual" aria-hidden="true"><span class="session-mini-pages"></span><span class="session-mini-cover"><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg><span class="manual-cover-label"></span></span><span class="mini-ribbon"></span></span>
               <span>Правила</span>
             </button>
+        <div class="game-quick-tools" aria-label="Игровые инструменты">
+          <button id="open-entity-book-game" class="entity-book-launch compact" type="button" aria-label="Открыть Книгу сущностей">
+            <span class="session-mini-book" aria-hidden="true"><span class="session-mini-pages"></span><span class="session-mini-cover"><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg></span></span>
+            <span>Книга сущностей</span>
+          </button>
+          <button id="open-magic-ball-game" class="magic-ball-launch compact" type="button" aria-label="Открыть Магический шар">
+            <span class="session-mini-orb" aria-hidden="true"><span class="session-orb-window"><i></i></span></span>
+            <span>Магический шар</span>
+          </button>
+        </div>
             <button id="restart-button" class="game-restart-button" type="button" title="Новая партия" aria-label="Начать новую партию">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 9a8.3 8.3 0 1 0 1 5M20 4v5h-5"/></svg>
               <span>Новая партия</span>
@@ -92,21 +104,13 @@
         <nav class="player-nav" aria-label="Выбор игрока">
           <div id="player-strip" class="player-strip" role="group" aria-label="Переключить игрока"></div>
         </nav>
-        <div class="game-quick-tools" aria-label="Игровые инструменты">
-          <button id="open-entity-book-game" class="entity-book-launch compact" type="button" aria-label="Открыть Книгу сущностей">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c2.7-.7 5.3-.4 8 1.2v12c-2.7-1.6-5.3-1.9-8-1.2v-12Z"/><path d="M20 5.5c-2.7-.7-5.3-.4-8 1.2v12c2.7-1.6 5.3-1.9 8-1.2v-12Z"/><path d="M12 6.7V19"/></svg>
-            <span>Книга сущностей</span>
-          </button>
-          <button id="open-magic-ball-game" class="magic-ball-launch compact" type="button" aria-label="Открыть Магический шар">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="10" r="7"/><path d="M8 17h8l2.2 4H5.8L8 17Z"/><path d="M9.5 8.3 12 7l2.5 1.3v3L12 12.7l-2.5-1.4zM9.5 8.3l2.5 1.4 2.5-1.4M12 9.7v3"/></svg>
-            <span>Магический шар</span>
-          </button>
-        </div>
-      </div>
-      <div id="game-panel">
         <div class="reading-head"><div class="current-player"><p class="eyebrow">ЭКЗОРЦИСТ</p><h2 id="current-player-name">Игрок</h2><p id="control-hint"></p></div>
         <section class="status-card" aria-live="polite"><div class="status-line"><span class="status-label">Считка</span><strong id="progress-text">0 / 6</strong></div><div class="progress-track"><span id="progress-bar"></span></div><p id="phase-hint"></p></section>
-        </div><section id="traits" class="traits" aria-label="Характеристики одержимого"></section>
+        </div>
+
+      </div>
+      <div id="game-panel">
+        <section id="traits" class="traits" aria-label="Характеристики одержимого"></section>
       </div>
     </section>
 
@@ -203,14 +207,13 @@
   <dialog id="rules-dialog" class="rules-dialog" aria-labelledby="rules-title">
     <div class="rules-shell">
       <header class="rules-header">
-        <div class="rules-header-mark" aria-hidden="true"><svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M6 7c4-1 8 0 12 2v22c-4-2-8-3-12-2V7Zm24 0c-4-1-8 0-12 2v22c4-2 8-3 12-2V7Z"/><path d="M18 9v22M9.5 12h5M9.5 16h5M21.5 12h5M21.5 16h5"/></svg></div>
         <div class="rules-header-copy"><p class="eyebrow">БИТВА ЭКЗОРЦИСТОВ · СПРАВОЧНИК</p><h2 id="rules-title">ПРАВИЛА ИГРЫ</h2></div>
         <button id="rules-close" class="rules-close" type="button" aria-label="Закрыть правила">×</button>
       </header>
       <div class="rules-search-bar">
         <label class="rules-search-field" for="rules-search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.7" cy="10.7" r="6.5"/><path d="m15.8 15.8 5 5"/></svg>
-          <input id="rules-search" type="search" autocomplete="off" spellcheck="false" placeholder="Найти правило: порча, урон, масти…" aria-label="Поиск по всем правилам">
+          <input id="rules-search" type="search" autocomplete="off" spellcheck="false" placeholder="Найти правило" aria-label="Поиск по всем правилам">
         </label>
         <button id="rules-clear" class="rules-clear" type="button" aria-label="Очистить поиск" hidden>×</button>
       </div>
@@ -218,22 +221,20 @@
         <nav class="rules-toc" aria-label="Разделы правил">
           <span class="rules-toc-kicker">ОГЛАВЛЕНИЕ</span>
           <div id="rules-tabs" class="rules-tabs"></div>
-          <div class="rules-toc-seal" aria-hidden="true"><span>БЭ</span><small>СВОД ПРАВИЛ</small></div>
         </nav>
         <div id="rules-scroll" class="rules-scroll" tabindex="0" aria-label="Содержание правил">
           <div id="rules-results" class="rules-results" hidden aria-live="polite"></div>
           <article id="rules-paper" class="rules-paper" aria-live="polite"></article>
         </div>
       </div>
-      <footer class="rules-footer"><span>БИТВА ЭКЗОРЦИСТОВ</span><span>VII РАЗДЕЛОВ · ПОЛНЫЕ ПРАВИЛА</span></footer>
     </div>
   </dialog>
 
   <dialog id="share-dialog"><form method="dialog" class="dialog-card share-card gothic-panel"><button class="dialog-close" value="cancel" aria-label="Закрыть">×</button><p class="eyebrow">ПОДЕЛИТЬСЯ</p><h2 id="share-title">Битва экзорцистов</h2><p id="share-code-line" class="share-code-line hidden">Код: <strong id="share-code-value"></strong></p><div class="qr-shell"><img id="share-qr" alt="QR-код" hidden><span class="qr-placeholder">⌁</span></div><input id="share-url" class="share-url" type="text" readonly><p id="share-hint" class="share-hint"></p><div class="dialog-actions"><button id="copy-share" value="noop" type="button" class="ghost-button">Копировать</button><button id="native-share" value="noop" type="button" class="accent-button">Поделиться</button></div></form></dialog>
 
-  <script src="mobile-ball.js?v=56.6.1" defer></script>
-  <script src="app.js?v=56.6.1" defer></script>
-<script src="tabletop.js?v=56.6.1" defer></script>
-<script src="fieldnotes.js?v=56.6.1" defer></script>
+  <script src="mobile-ball.js?v=56.6.3" defer></script>
+  <script src="app.js?v=56.6.3" defer></script>
+<script src="tabletop.js?v=56.6.3" defer></script>
+<script src="fieldnotes.js?v=56.6.3" defer></script>
 </body>
 </html>
