@@ -1,0 +1,25 @@
+{
+  "version": "56.6.0",
+  "base": "56.5.0",
+  "date": "2026-10-14",
+  "ui_layer": [
+    "tabletop.css",
+    "tabletop.js"
+  ],
+  "protected_files": {
+    "styles.css": {
+      "sha256": "93d8521e64900ff7ff7443093450273feb4a6e0847d50101f331661a3a9360f4",
+      "unchanged": true
+    },
+    "mobile-ball.js": {
+      "sha256": "641218fede8ec966eae1a1ca10916b83243445803ce1bda153e29c9a24b15104",
+      "unchanged": true
+    },
+    "manifest.json": {
+      "sha256": "182a49b7e280a003be316d27d9fe28736e1c58d84a245e4f358197a070da1b05",
+      "unchanged": true
+    }
+  },
+  "new_material_bytes": 48132,
+  "verification": "QA_REPORT_v56_6_0.txt"
+}

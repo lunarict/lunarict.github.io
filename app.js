@@ -688,6 +688,8 @@ function traitAction(playerId, action, key) {
 
 function renderPlayerStrip() {
   const root = $('#player-strip');
+  const restoreFocus = root.contains(document.activeElement)
+    ? [...root.children].indexOf(document.activeElement.closest('.player-tab')) : -1;
   root.replaceChildren();
   if (!game) return;
   root.style.setProperty('--player-count', game.players.length);
@@ -709,6 +711,7 @@ function renderPlayerStrip() {
     btn.addEventListener('click', () => { viewPlayerId = player.id; renderGame(); });
     root.appendChild(btn);
   });
+  if (restoreFocus >= 0) root.children[restoreFocus]?.focus({preventScroll:true});
 }
 function movePlayer(delta) {
   if (!game?.players?.length) return;

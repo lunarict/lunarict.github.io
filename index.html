@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="app-revision" content="v56.5.0-original-palette-updated-personas">
+  <meta name="app-revision" content="v56.6.0-tactile-tabletop">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#09080d">
   <meta name="color-scheme" content="dark">
@@ -13,16 +13,17 @@
   <meta name="description" content="Генератор одержимых и лобби для настольной игры «Битва экзорцистов».">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=56.5.0">
+  <link rel="stylesheet" href="styles.css?v=56.6.0">
+  <link rel="stylesheet" href="tabletop.css?v=56.6.0">
   <title>Битва экзорцистов</title>
 </head>
-<body>
+<body data-ui="tabletop">
   <div class="ambient-fog" aria-hidden="true"><span></span><span></span><span></span></div>
   <main class="app-shell">
     <header class="topbar">
       <div class="brand">
         <span class="sigil" aria-hidden="true"><svg viewBox="0 0 48 48" class="radiant-eye"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"/><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"/><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"/></svg></span>
-        <div><p class="eyebrow">БИТВА ЭКЗОРЦИСТОВ</p><h1>Одержимые</h1></div>
+        <div><p class="eyebrow">БИТВА ЭКЗОРЦИСТОВ</p><h1 class="wordmark"><span class="sr-only">Одержимые</span><img src="assets/wordmark.svg" width="390" height="72" alt="" aria-hidden="true"></h1></div>
       </div>
       <span id="network-badge" class="network-badge hidden" aria-hidden="true">Локально</span>
     </header>
@@ -30,29 +31,14 @@
     <section id="home-screen" class="screen active">
       <div class="hero-copy"><h2>Выберите режим</h2></div>
       <div class="mode-grid">
-        <button id="mode-local" class="mode-card" type="button">
-          <span class="mode-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6.5" y="3" width="11" height="18" rx="2.5"/><circle cx="12" cy="17.8" r=".75"/></svg></span>
-          <strong>Одно устройство</strong><small>2–4 игрока на одном устройстве</small>
-        </button>
-        <button id="mode-online" class="mode-card" type="button">
-          <span class="mode-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="8" height="14" rx="2"/><rect x="12.5" y="5" width="8" height="14" rx="2"/></svg></span>
-          <strong>Несколько устройств</strong><small>Лобби по четырёхзначному коду</small>
-        </button>
+        <button id="mode-local" class="mode-card" type="button"><span class="mode-folio-corner" aria-hidden="true"></span><span class="mode-visual" aria-hidden="true"><span class="mode-stack-card"><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg></span><span class="mode-device"><svg viewBox="0 0 80 104" aria-hidden="true"><rect x="20" y="10" width="40" height="77" rx="6"/><path d="M33 18h14M25 74h30"/><circle cx="40" cy="80" r="1.5"/></svg></span></span><span class="mode-copy"><strong>Одно устройство</strong><small>2–4 игрока на одном устройстве</small></span><span class="mode-enter" aria-hidden="true">&#8599;</span><span class="material-sheen" aria-hidden="true"></span></button>
+        <button id="mode-online" class="mode-card" type="button"><span class="mode-folio-corner" aria-hidden="true"></span><span class="mode-visual" aria-hidden="true"><span class="mode-stack-card"><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg></span><span class="mode-device"><svg viewBox="0 0 96 104" aria-hidden="true"><rect x="9" y="14" width="36" height="72" rx="5"/><rect x="53" y="7" width="36" height="72" rx="5"/><path d="M20 22h14M64 15h14M14 74h26M58 67h26"/><circle cx="27" cy="79" r="1.3"/><circle cx="71" cy="72" r="1.3"/></svg></span></span><span class="mode-copy"><strong>Несколько устройств</strong><small>Лобби по четырёхзначному коду</small></span><span class="mode-enter" aria-hidden="true">&#8599;</span><span class="material-sheen" aria-hidden="true"></span></button>
       </div>
       <button id="continue-local" class="ghost-button hidden home-continue" type="button">Продолжить партию</button>
       <div class="home-tools" aria-label="Быстрые инструменты">
-        <button id="open-rules-home" class="rules-launch" type="button" aria-label="Открыть правила игры">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h11a2 2 0 0 1 2 2V21H7a3 3 0 0 1-3-3V6a2.5 2.5 0 0 1 2.5-2.5Z"/><path d="M4 17.8c0-1.6 1-2.4 3-2.4h11M8.3 8.3h6.3M8.3 11.5h4.4M18 6h2v13"/></svg>
-          <span>ПРАВИЛА ИГРЫ</span>
-        </button>
-        <button id="open-entity-book-home" class="entity-book-launch home-book" type="button" aria-label="Открыть Книгу сущностей">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c2.7-.7 5.3-.4 8 1.2v12c-2.7-1.6-5.3-1.9-8-1.2v-12Z"/><path d="M20 5.5c-2.7-.7-5.3-.4-8 1.2v12c2.7-1.6 5.3-1.9 8-1.2v-12Z"/><path d="M12 6.7V19"/></svg>
-          <span>КНИГА СУЩНОСТЕЙ</span>
-        </button>
-        <button id="open-magic-ball-home" class="magic-ball-launch home-ball" type="button" aria-label="Открыть Магический шар">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="10" r="7"/><path d="M8 17h8l2.2 4H5.8L8 17Z"/><path d="M9.5 8.3 12 7l2.5 1.3v3L12 12.7l-2.5-1.4zM9.5 8.3l2.5 1.4 2.5-1.4M12 9.7v3"/></svg>
-          <span>МАГИЧЕСКИЙ ШАР</span>
-        </button>
+        <button id="open-rules-home" class="rules-launch" type="button" aria-label="Открыть правила игры"><span class="tool-object manual-prop" aria-hidden="true"><span class="book-pages"></span><span class="book-cover"><span class="book-cover-line"></span><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg><span class="book-corner"></span></span><span class="book-ribbon"></span></span><span class="tool-label">ПРАВИЛА ИГРЫ</span><span class="tool-arrow" aria-hidden="true">&#8599;</span></button>
+        <button id="open-entity-book-home" class="entity-book-launch home-book" type="button" aria-label="Открыть Книгу сущностей"><span class="tool-object grimoire-prop" aria-hidden="true"><span class="book-pages"></span><span class="book-cover"><span class="book-cover-line"></span><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg><span class="book-corner"></span></span><span class="book-ribbon"></span></span><span class="tool-label">КНИГА СУЩНОСТЕЙ</span><span class="tool-arrow" aria-hidden="true">&#8599;</span></button>
+        <button id="open-magic-ball-home" class="magic-ball-launch home-ball" type="button" aria-label="Открыть Магический шар"><span class="tool-object oracle-prop" aria-hidden="true"><span class="oracle-shadow"></span><span class="oracle-mini"><span class="oracle-window"><span class="oracle-facet"><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg></span></span></span></span><span class="tool-label">МАГИЧЕСКИЙ ШАР</span><span class="tool-arrow" aria-hidden="true">&#8599;</span></button>
       </div>
     </section>
 
@@ -117,9 +103,9 @@
         </div>
       </div>
       <div id="game-panel">
-        <div class="current-player"><p class="eyebrow">ЭКЗОРЦИСТ</p><h2 id="current-player-name">Игрок</h2><p id="control-hint"></p></div>
+        <div class="reading-head"><div class="current-player"><p class="eyebrow">ЭКЗОРЦИСТ</p><h2 id="current-player-name">Игрок</h2><p id="control-hint"></p></div>
         <section class="status-card" aria-live="polite"><div class="status-line"><span class="status-label">Считка</span><strong id="progress-text">0 / 6</strong></div><div class="progress-track"><span id="progress-bar"></span></div><p id="phase-hint"></p></section>
-        <section id="traits" class="traits" aria-label="Характеристики одержимого"></section>
+        </div><section id="traits" class="traits" aria-label="Характеристики одержимого"></section>
       </div>
     </section>
 
@@ -244,7 +230,8 @@
 
   <dialog id="share-dialog"><form method="dialog" class="dialog-card share-card gothic-panel"><button class="dialog-close" value="cancel" aria-label="Закрыть">×</button><p class="eyebrow">ПОДЕЛИТЬСЯ</p><h2 id="share-title">Битва экзорцистов</h2><p id="share-code-line" class="share-code-line hidden">Код: <strong id="share-code-value"></strong></p><div class="qr-shell"><img id="share-qr" alt="QR-код" hidden><span class="qr-placeholder">⌁</span></div><input id="share-url" class="share-url" type="text" readonly><p id="share-hint" class="share-hint"></p><div class="dialog-actions"><button id="copy-share" value="noop" type="button" class="ghost-button">Копировать</button><button id="native-share" value="noop" type="button" class="accent-button">Поделиться</button></div></form></dialog>
 
-  <script src="mobile-ball.js?v=56.5.0" defer></script>
-  <script src="app.js?v=56.5.0" defer></script>
+  <script src="mobile-ball.js?v=56.6.0" defer></script>
+  <script src="app.js?v=56.6.0" defer></script>
+<script src="tabletop.js?v=56.6.0" defer></script>
 </body>
 </html>

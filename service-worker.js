@@ -1,6 +1,7 @@
-/* Offline shell cache, v56.5.0 original UI palette, new generator data. All referenced files exist in ZIP. */
-const CACHE = 'battle-exorcists-prod-v56-5.0.0';
+/* Offline shell cache, v56.6.0 tactile tabletop UI, original generator data. All referenced files exist in ZIP. */
+const CACHE = 'battle-exorcists-prod-v56-6.0.0';
 const PRECACHE = [
+  './tabletop.css', './tabletop.js', './assets/tabletop-felt.webp', './assets/cotton-stock.webp', './assets/violet-bookcloth.webp', './assets/ink-leather.webp', './assets/pewter-grain.webp', './assets/print-dust.webp', './assets/wordmark.svg',
   './', './index.html', './styles.css', './app.js', './mobile-ball.js', './manifest.json',
   './icon.svg', './icon-192.png', './icon-512.png',
   './icon-maskable-512.png', './apple-touch-icon.png',
