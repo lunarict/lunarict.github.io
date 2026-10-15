@@ -1,0 +1,52 @@
+ODERZHIMYE 56.6.7 - verification report
+
+ENVIRONMENT
+System Chromium controlled by Playwright. The app was loaded through an inline
+self-contained harness, with local assets embedded and service-worker boot
+suppressed ONLY in the harness. Shipping source keeps normal URLs and PWA boot.
+HTTP navigation is blocked in this environment. No physical iPhone was used.
+
+RESULTS
+Browser interaction/layout checks: 169 passed, 0 failed.
+Additional narrow-screen/scroll checks: 33 passed, 0 failed.
+Source, cache-path, asset and alpha-silhouette checks: 213 passed, 0 failed.
+Unhandled browser exceptions in tested flows: 0.
+
+COVERAGE
+Eight viewport widths: 320, 360, 390, 430, 600, 768, 1024, 1280 px.
+Additional 740 px check for the horizontal chapter rail breakpoint.
+All 7 rules chapters at each size; search, highlighted result, rapid chapter
+changes, Esc during a turn, reduced motion and modal activation ordering.
+All 24 entities and persistent suit tabs; picker, effect descriptions, repeated
+turns and outgoing ink preservation. All entity names/effect paragraphs checked
+again at 320 px. No measured horizontal text overflow in these cases.
+Six trait reveals, hide/reveal, player switching and state retention.
+Paper paint sampled after six scroll/height-resize sequences; no missing paper
+faces in those Chromium snapshots. Initial six silhouette alpha channels equal
+the resized original masks. All original asset files are byte-identical.
+
+TARGETED MEASUREMENTS, NOT AN IPHONE FPS BENCHMARK
+30 synthetic same-width window resize events:
+  Before: 30 typography-fit calls.
+  After:  0 typography-fit calls.
+Closed globe lifecycle fixture, WebGL context/renderAt replaced by test stubs:
+  Before: 11 renderAt calls.
+  After:  0 renderAt calls.
+The fixture dispatches 10 resize events; initial ResizeObserver delivery can
+add a baseline call. Visible globe still responds to resize in that fixture.
+This validates lifecycle guards, NOT actual GPU output or mobile frame rate.
+
+DATA
+Serialized names, traits, entities, suits and rules match the incoming release.
+SHA256: 2afc057343395d80ae41b809d207c8b3fad3ef708e62b37bcdd1f0d90648f682
+Globe shader/constants/math and renderAt implementation match the incoming
+release. Lifecycle guards differ as documented in the changelog.
+
+NOT VERIFIED HERE
+Physical iPhone/Safari rendering and scroll smoothness; actual hardware WebGL;
+real peer-to-peer party; deployed host, service-worker update and PWA offline
+installation. Chromium lacked WebGL in this environment. The attached motion
+clip records the actual DOM interface, not an on-device performance benchmark.
+
+Machine-readable detail: docs/verification.json, docs/stress-verification.json,
+docs/static-verification.json. Prior release notes: docs/history/v56_6_6/.

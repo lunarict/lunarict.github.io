@@ -60,14 +60,7 @@
   function syncDialogs(records) {
     const open = document.querySelector('dialog[open]');
     body.classList.toggle('ui-modal-open', Boolean(open));
-    for (const record of records || []) {
-      const dialog = record.target;
-      if (!dialog.open || dialog.id === 'magic-ball-dialog') continue;
-      motion(dialog, [
-        { opacity: 0, translate: '0 18px' },
-        { opacity: 1, translate: '0 0' }
-      ], { duration: 300, easing: 'cubic-bezier(.2,.72,.2,1)' });
-    }
+    // Opening and closing now share the reversible lifecycle in interactions.js.
   }
   const modalObserver = new MutationObserver(syncDialogs);
   document.querySelectorAll('dialog').forEach(dialog => {

@@ -144,6 +144,10 @@
   function stop(){cancelAll();for(const a of decoration)a.cancel();decoration.clear();}
   document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
   window.addEventListener('pagehide',stop);
-  window.addEventListener('resize',cancelAll,{passive:true});
+  let paperWidth=document.documentElement.clientWidth;
+  window.addEventListener('resize',()=>{
+    const width=document.documentElement.clientWidth;
+    if(width!==paperWidth){paperWidth=width;cancelAll();}
+  },{passive:true});
   reduced.addEventListener?.('change',()=>{if(reduced.matches)stop();});
 })();

@@ -1,0 +1,126 @@
+/* 56.6.6 - lilac ink, typographic textbook, finite interaction motion.
+   Paper remains neutral. The restored trait spring/globe are not overridden. */
+:root { --ghost:#b398d9; --ui-out:cubic-bezier(.18,.78,.23,1); }
+body[data-ui] #entity-book-dialog .entity-book-shell[data-category="ghost"] {
+  --book-accent:#b398d9!important; --f-ink:#71488f; --f-ink-soft:#71488f24;
+  --suit-rgb:126,83,162;
+}
+body[data-ui] #entity-book-dialog .entity-tab[data-category="ghost"] { --tab-rgb:126,83,162; }
+body[data-ui] #entity-book-dialog .entity-tab[data-category="ghost"] .category-glyph { color:#c7a5ed!important; }
+body[data-ui] #entity-book-dialog .entity-tab[data-category="ghost"] .entity-tab-mark { background:#c7a5ed!important; }
+body[data-ui] #rules-dialog .rules-suit.ghost { --rule-suit:#71488f; border-left-color:#71488f!important; }
+
+/* Reference-book binding: straight boards, cloth spine, printed title panel.
+   No pictogram, eye, secondary book or microscopic pretend writing. */
+body[data-ui] #home-screen .manual-prop .book-cover,
+body[data-ui] #game-screen .session-manual .session-mini-cover {
+  background:
+    linear-gradient(90deg,#273d33e8 0 8%,#c5c7a6b0 9%,#293f32cc 10.5%,transparent 13% 97%,#24382d60),
+    linear-gradient(145deg,#b5bea276,#7e937553 48%,#536b5761),
+    var(--f-binder) center/170px!important;
+  border-color:#b9c6a9!important;
+  border-radius:1px 2px 2px 1px!important;
+}
+body[data-ui] #home-screen .manual-prop .book-cover-line {
+  inset:8px 7px 10px 16px!important;
+  border:1px solid #d1d4b371!important;
+  box-shadow:none!important;
+}
+body[data-ui] #home-screen .manual-title-plate {
+  top:19%;left:20%;right:12%;height:47%;gap:4px;
+  border:1px solid #c3b99b;outline:1px solid #ebe3c46e;outline-offset:2px;
+  background:linear-gradient(105deg,#f4ecd725,#d0c5a71c),var(--t-paper-map) center/190px;
+  box-shadow:inset 0 1px 0 #fff9,0 1px 2px #182d1db0;
+}
+body[data-ui] #home-screen .manual-title-plate b {
+  font:800 14px/1.15 Georgia,'Times New Roman',serif!important;
+  letter-spacing:.015em!important;color:#2e3b30!important;
+}
+body[data-ui] #home-screen .manual-title-plate small {
+  font:700 11px/1.3 Georgia,'Times New Roman',serif!important;
+  letter-spacing:.16em!important;color:#48533d!important;
+}
+body[data-ui] #home-screen .manual-title-plate i {
+  height:3px;width:45%;margin-top:3px;
+  border-top:1px solid #566449;border-bottom:1px solid #78816587;
+}
+body[data-ui] #home-screen .manual-prop .manual-index-lines {
+  position:absolute;left:34%;right:25%;bottom:15%;height:5px;
+  border-top:1px solid #d1d0ab8c;border-bottom:1px solid #293f33ad;
+}
+body[data-ui] #home-screen .manual-index-lines i { display:none!important; }
+body[data-ui] #game-screen .session-manual .manual-index-lines {
+  position:absolute;display:flex;flex-direction:column;gap:3px;
+  top:17%;left:23%;right:13%;height:51%;padding:5px 3px 3px;
+  background:#e7ddbf;border:1px solid #aeb69b;
+  box-shadow:0 1px 1px #182c2380;
+}
+body[data-ui] #game-screen .session-manual .manual-index-lines i {
+  display:block;height:2px;background:#40553e;flex:0 0 2px;
+}
+body[data-ui] #game-screen .session-manual .manual-index-lines i:nth-child(2) { width:76%;align-self:center; }
+body[data-ui] #game-screen .session-manual .manual-index-lines i:nth-child(3) { height:1px;flex-basis:1px;width:55%;align-self:center;opacity:.65; }
+
+/* Managed native modal lifecycle. Remove competing legacy animations only
+   on these surfaces, not on their internal paper, books or live globe. */
+body[data-ui] dialog[data-motion-managed],
+body[data-ui] dialog[data-motion-managed][open],
+body[data-ui] dialog[data-motion-managed].book-closing {
+  animation:none!important;transition:none!important;
+  transform-origin:50% 35%;
+}
+body[data-ui] dialog[data-motion-managed]::backdrop {
+  background:#09080dd9!important;backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;animation:none!important;
+}
+body[data-ui] dialog[data-motion-managed][data-motion="opening"]::backdrop {
+  animation:ui-veil-in 330ms var(--ui-out) both!important;
+}
+body[data-ui] dialog[data-motion-managed][data-motion="closing"]::backdrop {
+  animation:ui-veil-out 200ms cubic-bezier(.4,0,.72,.35) both!important;
+}
+body[data-ui] dialog[data-motion="closing"] > * { pointer-events:none!important; }
+@keyframes ui-veil-in { from{opacity:var(--veil-from,0)}to{opacity:1} }
+@keyframes ui-veil-out { from{opacity:var(--veil-from,1)}to{opacity:0} }
+body[data-ui] #entity-book-dialog #entity-picker-panel { animation:none!important; }
+body[data-ui] #entity-book-dialog .entity-picker-fold { display:flow-root;flex:0 0 auto;min-height:0; }
+body[data-ui] #entity-book-dialog .entity-picker-fold[data-panel-motion] { overflow:hidden; }
+
+/* The existing cut-paper rotations stay intact: only visual affordances
+   interpolate here; press/release scale is owned by interactions.js. */
+body[data-ui] :is(button,summary):not(#magic-ball):not(.reveal-button):not(.close-button) {
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  transition-property:color,background-color,border-color,box-shadow,opacity,transform!important;
+  transition-duration:180ms,200ms,200ms,230ms,180ms,240ms!important;
+  transition-timing-function:var(--ui-out)!important;
+}
+body[data-ui] :is(input,select) {
+  transition:background-color 180ms ease,border-color 180ms ease,box-shadow 180ms ease!important;
+}
+body[data-ui] #entity-book-dialog .entity-picker-toggle::after {
+  transition:transform 230ms var(--ui-out)!important;
+}
+body[data-ui] #entity-book-dialog .entity-picker-toggle[aria-expanded="true"]::after { transform:rotate(180deg)!important; }
+body[data-ui] :is(.rules-tab,.entity-step,.entity-choice,.rules-result,.player-tab,.dialog-close,.rules-close,.entity-book-close,.magic-ball-close) { cursor:pointer; }
+@media(hover:hover) and (pointer:fine) {
+  body[data-ui] :is(.dialog-close,.rules-close,.entity-book-close,.magic-ball-close):hover {
+    border-color:#c8acbf!important;color:#fff0df!important;
+    box-shadow:inset 0 1px 0 #fff4,0 3px 0 #0a0710,0 5px 9px #0007!important;
+  }
+  body[data-ui] #entity-book-dialog :is(.entity-step,.entity-choice):hover { color:#f7eadf!important;border-color:#b297b2!important;background-color:#6d52672b!important; }
+  body[data-ui] #rules-dialog .rules-result:hover { background-color:#7164490e!important; }
+  body[data-ui] #rules-dialog .rules-tab:hover { color:#f1e3cc!important; }
+  body[data-ui] #game-screen .player-tab:not(.active):hover { color:#efe0ee!important; }
+}
+/* Touch focus stays quiet; keyboard navigation keeps an unambiguous ring. */
+body[data-ui][data-input="pointer"] :is(button,summary):focus { outline:none!important; }
+body[data-ui][data-input="keyboard"] :is(button,summary,input,select):focus-visible {
+  outline:2px solid #c4afd8!important;outline-offset:3px!important;
+}
+@media(prefers-reduced-motion:reduce) {
+  body[data-ui] dialog[data-motion-managed][data-motion]::backdrop { animation:none!important; }
+  body[data-ui] :is(button,summary):not(#magic-ball):not(.reveal-button):not(.close-button),
+  body[data-ui] :is(input,select),
+  body[data-ui] #entity-book-dialog .entity-picker-toggle::after { transition:none!important; }
+}

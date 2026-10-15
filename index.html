@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="app-revision" content="v56.6.5-readable-binding">
+  <meta name="app-revision" content="v56.6.7-bound-pages">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#09080d">
   <meta name="color-scheme" content="dark">
@@ -13,13 +13,15 @@
   <meta name="description" content="Генератор одержимых и лобби для настольной игры «Битва экзорцистов».">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=56.6.5">
-  <link rel="stylesheet" href="tabletop.css?v=56.6.5">
-  <link rel="stylesheet" href="fieldnotes.css?v=56.6.5">
-  <link rel="stylesheet" href="folio.css?v=56.6.5">
-  <link rel="stylesheet" href="refinement.css?v=56.6.5">
-  <link rel="stylesheet" href="ritual.css?v=56.6.5">
-  <link rel="stylesheet" href="readability.css?v=56.6.5">
+  <link rel="stylesheet" href="styles.css?v=56.6.7">
+  <link rel="stylesheet" href="tabletop.css?v=56.6.7">
+  <link rel="stylesheet" href="fieldnotes.css?v=56.6.7">
+  <link rel="stylesheet" href="folio.css?v=56.6.7">
+  <link rel="stylesheet" href="refinement.css?v=56.6.7">
+  <link rel="stylesheet" href="ritual.css?v=56.6.7">
+  <link rel="stylesheet" href="readability.css?v=56.6.7">
+  <link rel="stylesheet" href="polish.css?v=56.6.7">
+  <link rel="stylesheet" href="binding.css?v=56.6.7">
   <title>Битва экзорцистов</title>
 </head>
 <body data-ui="tabletop" data-input="pointer">
@@ -41,7 +43,7 @@
       </div>
       <button id="continue-local" class="ghost-button hidden home-continue" type="button">Продолжить партию</button>
       <div class="home-tools" aria-label="Быстрые инструменты">
-        <button id="open-rules-home" class="rules-launch" type="button" aria-label="Открыть правила игры"><span class="tool-object manual-prop" aria-hidden="true"><span class="book-pages"></span><span class="book-leaf leaf-one"></span><span class="book-leaf leaf-two"></span><span class="book-cover"><span class="book-cover-line"></span><span class="cover-wear"></span><span class="manual-title-plate"><b>ПРАВИЛА</b><i></i></span><svg class="manual-book-mark" viewBox="0 0 40 32" aria-hidden="true"><path d="M20 7C15 3 9 3 3 4v22c6-1 12 0 17 3 5-3 11-4 17-3V4c-6-1-12-1-17 3Zm0 0v22M7 9l8 2M7 14l8 2M7 19l8 2m10-10 8-2m-8 7 8-2m-8 7 8-2"/></svg></span><span class="book-ribbon"></span></span><span class="tool-label">ПРАВИЛА ИГРЫ</span><span class="tool-arrow" aria-hidden="true">&#8599;</span></button>
+        <button aria-label="Открыть правила игры" class="rules-launch" id="open-rules-home" type="button"><span aria-hidden="true" class="tool-object manual-prop"><span class="book-pages"></span><span class="book-leaf leaf-one"></span><span class="book-leaf leaf-two"></span><span class="book-cover"><span class="book-cover-line"></span><span class="cover-wear"></span><span class="manual-blind-frame"></span><span class="manual-spine-bands"><i></i><i></i><i></i></span></span><span class="book-ribbon"></span><span class="manual-thumb-tabs"><i></i><i></i><i></i></span></span><span class="tool-label">ПРАВИЛА ИГРЫ</span><span aria-hidden="true" class="tool-arrow">↗</span></button>
         <button id="open-entity-book-home" class="entity-book-launch home-book" type="button" aria-label="Открыть Книгу сущностей"><span class="tool-object grimoire-prop" aria-hidden="true"><span class="book-pages"></span><span class="book-leaf leaf-one"></span><span class="book-leaf leaf-two"></span><span class="book-cover"><span class="book-cover-line"></span><span class="cover-wear"></span><span class="cover-tape"></span><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg><span class="grimoire-stitches"></span><span class="grimoire-claw top-claw"></span><span class="grimoire-claw bottom-claw"></span><span class="grimoire-clasp"></span><span class="book-corner"></span></span><span class="book-ribbon"></span></span><span class="tool-label">КНИГА СУЩНОСТЕЙ</span><span class="tool-arrow" aria-hidden="true">&#8599;</span></button>
         <button id="open-magic-ball-home" class="magic-ball-launch home-ball" type="button" aria-label="Открыть Магический шар"><span class="tool-object oracle-prop" aria-hidden="true"><span class="oracle-shadow"></span><span class="oracle-mini"><span class="oracle-window"><span class="oracle-meniscus"></span><span class="oracle-facet"><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg></span></span></span></span><span class="tool-label">МАГИЧЕСКИЙ ШАР</span><span class="tool-arrow" aria-hidden="true">&#8599;</span></button>
       </div>
@@ -82,10 +84,10 @@
             <span>Меню</span>
           </button>
           <div class="game-control-actions">
-            <button id="open-rules-game" class="game-help-button" type="button" aria-label="Открыть правила игры">
-              <span class="session-mini-book session-manual" aria-hidden="true"><span class="session-mini-pages"></span><span class="session-mini-cover"><svg class="manual-book-mark" viewBox="0 0 40 32" aria-hidden="true"><path d="M20 7C15 3 9 3 3 4v22c6-1 12 0 17 3 5-3 11-4 17-3V4c-6-1-12-1-17 3Zm0 0v22M7 9l8 2M7 14l8 2M7 19l8 2m10-10 8-2m-8 7 8-2m-8 7 8-2"/></svg></span></span>
-              <span>Правила</span>
-            </button>
+            <button aria-label="Открыть правила игры" class="game-help-button" id="open-rules-game" type="button">
+<span aria-hidden="true" class="session-mini-book session-manual"><span class="session-mini-pages"></span><span class="session-mini-cover"><span class="manual-blind-frame"></span><span class="manual-spine-bands"><i></i><i></i><i></i></span></span><span class="manual-thumb-tabs"><i></i><i></i><i></i></span></span>
+<span>Правила</span>
+</button>
         <div class="game-quick-tools" aria-label="Игровые инструменты">
           <button id="open-entity-book-game" class="entity-book-launch compact" type="button" aria-label="Открыть Книгу сущностей">
             <span class="session-mini-book session-grimoire" aria-hidden="true"><span class="session-mini-pages"></span><span class="session-mini-cover"><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg><span class="grimoire-stitches"></span><span class="grimoire-claw top-claw"></span><span class="grimoire-claw bottom-claw"></span><span class="grimoire-clasp"></span></span></span>
@@ -190,7 +192,6 @@
         </div>
         <button id="entity-book-close" class="entity-book-close" type="button" aria-label="Закрыть Книгу сущностей">×</button>
       </header>
-      <nav id="entity-tabs" class="entity-tabs" aria-label="Категории сущностей"></nav>
       <section class="entity-selector" aria-label="Выбор сущности">
         <button id="entity-prev" class="entity-step" type="button" aria-label="Предыдущая сущность">‹</button>
         <button id="entity-picker-toggle" class="entity-picker-toggle" type="button" aria-expanded="false" aria-controls="entity-picker-panel">
@@ -199,9 +200,10 @@
         </button>
         <button id="entity-next" class="entity-step" type="button" aria-label="Следующая сущность">›</button>
       </section>
-      <section id="entity-picker-panel" class="entity-picker-panel" hidden aria-label="Все сущности выбранной категории">
+      <div class="entity-picker-fold"><section id="entity-picker-panel" class="entity-picker-panel" hidden aria-label="Все сущности выбранной категории">
         <div id="entity-choice-grid" class="entity-choice-grid"></div>
-      </section>
+      </section></div>
+      <nav id="entity-tabs" class="entity-tabs" aria-label="Категории сущностей"></nav>
       <div class="entity-leaves"><article id="entity-detail" class="entity-detail"></article></div>
     </section>
   </dialog>
@@ -234,10 +236,12 @@
 
   <dialog id="share-dialog"><form method="dialog" class="dialog-card share-card gothic-panel"><button class="dialog-close" value="cancel" aria-label="Закрыть">×</button><p class="eyebrow">ПОДЕЛИТЬСЯ</p><h2 id="share-title">Битва экзорцистов</h2><p id="share-code-line" class="share-code-line hidden">Код: <strong id="share-code-value"></strong></p><div class="qr-shell"><img id="share-qr" alt="QR-код" hidden><span class="qr-placeholder">⌁</span></div><input id="share-url" class="share-url" type="text" readonly><p id="share-hint" class="share-hint"></p><div class="dialog-actions"><button id="copy-share" value="noop" type="button" class="ghost-button">Копировать</button><button id="native-share" value="noop" type="button" class="accent-button">Поделиться</button></div></form></dialog>
 
-  <script src="mobile-ball.js?v=56.6.5" defer></script>
-  <script src="app.js?v=56.6.5" defer></script>
-<script src="tabletop.js?v=56.6.5" defer></script>
-<script src="fieldnotes.js?v=56.6.5" defer></script>
-<script src="ritual.js?v=56.6.5" defer></script>
+  <script src="mobile-ball.js?v=56.6.7" defer></script>
+  <script src="interactions.js?v=56.6.7" defer></script>
+  <script src="binding.js?v=56.6.7" defer></script>
+  <script src="app.js?v=56.6.7" defer></script>
+<script src="tabletop.js?v=56.6.7" defer></script>
+<script src="fieldnotes.js?v=56.6.7" defer></script>
+<script src="ritual.js?v=56.6.7" defer></script>
 </body>
 </html>

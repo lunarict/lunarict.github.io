@@ -1,6 +1,15 @@
-/* Offline shell cache, v56.6.5 readable binding UI, original generator data. All referenced files exist in ZIP. */
-const CACHE = 'battle-exorcists-prod-v56-6.5.0';
+/* Offline shell cache, v56.6.7 bound-page UI, original generator data. All referenced files exist in ZIP. */
+const CACHE = 'battle-exorcists-prod-v56-6.7.0';
 const PRECACHE = [
+  './binding.css', './binding.js',
+  './assets/paper-face-1.webp', './assets/paper-shadow-1.webp',
+  './assets/paper-face-2.webp', './assets/paper-shadow-2.webp',
+  './assets/paper-face-3.webp', './assets/paper-shadow-3.webp',
+  './assets/paper-face-4.webp', './assets/paper-shadow-4.webp',
+  './assets/paper-face-5.webp', './assets/paper-shadow-5.webp',
+  './assets/paper-face-6.webp', './assets/paper-shadow-6.webp',
+
+  './polish.css', './interactions.js',
   './readability.css',
   './ritual.css', './ritual.js',
   './refinement.css',

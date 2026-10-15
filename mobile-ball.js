@@ -180,19 +180,21 @@
       this.onRestored=()=>{
         try {
           this.initResources();this.lost=false;this.resize();
-          this.renderAt(TOTAL,this.face,this.face);this.gl.flush();
+          if(this.isVisible()){this.renderAt(TOTAL,this.face,this.face);this.gl.flush();}
           this.canvas.style.opacity='1';this.ball.classList.add('ball-gpu-active');
         } catch (_) { this.lost=true;this.ball.classList.remove('ball-gpu-active'); }
       };
       this.onVisibility=()=>{
-        if(document.hidden){cancelAnimationFrame(this.raf);this.raf=0;this.previous=null;}
+        if(!this.isVisible()){cancelAnimationFrame(this.raf);this.raf=0;this.previous=null;}
         else if(this.job){this.previous=null;this.raf=requestAnimationFrame(t=>this.tick(t));}
         else if(this.ready && !this.lost){this.renderAt(TOTAL,this.face,this.face);}
       };
       this.onResize=()=>{
-        if(this.resizeRAF)return;
+        if(!this.ready || !this.isVisible() || this.resizeRAF)return;
         this.resizeRAF=requestAnimationFrame(()=>{
-          this.resizeRAF=0;this.resize();
+          this.resizeRAF=0;
+          if(!this.ready || !this.isVisible())return;
+          this.resize();
           if(!this.lost)this.renderAt(this.job?this.elapsed:TOTAL,this.job?.from||this.face,this.job?.to||this.face);
         });
       };
@@ -202,6 +204,13 @@
       window.addEventListener('resize',this.onResize,{passive:true});
       this.observer=typeof ResizeObserver==='function'?new ResizeObserver(this.onResize):null;
       this.observer?.observe(ball);
+    }
+    isVisible() {
+      return !document.hidden && !!this.ball.closest('dialog')?.open;
+    }
+    resume() {
+      if(!this.isVisible() || !this.ready || this.lost || this.job)return;
+      this.resize();this.renderAt(TOTAL,this.face,this.face);this.gl.flush();
     }
     initResources() {
       const gl=this.gl;
@@ -281,7 +290,7 @@
       this.initResources();this.resize();
       await new Promise(resolve=>requestAnimationFrame(resolve));
       if(this.lost)throw new Error('Globe context lost during initialization');
-      this.renderAt(TOTAL,this.face,this.face);this.gl.flush();
+      if(this.isVisible()){this.renderAt(TOTAL,this.face,this.face);this.gl.flush();}
       this.ready=true;
       this.canvas.style.opacity='1';
       this.ball.classList.add('ball-gpu-active');
@@ -301,7 +310,7 @@
       this.raf=0;
       const job=this.job;
       if(!job||this.lost)return;
-      if(document.hidden){this.previous=null;return;}
+      if(!this.isVisible()){this.previous=null;return;}
       const dt=this.previous===null?0:Math.max(0,now-this.previous);
       this.previous=now;
       // A suspended tab or long unrelated task must not teleport the die.
@@ -319,7 +328,7 @@
       cancelAnimationFrame(this.raf);this.raf=0;this.previous=null;
       const job=this.job;this.job=null;this.face=face;
       this.ball.classList.remove('ball-gpu-moving');this.ball.style.removeProperty('transform');
-      if(this.ready&&!this.lost){this.renderAt(TOTAL,face,face);this.ball.style.removeProperty('transform');}
+      if(this.isVisible()&&this.ready&&!this.lost){this.renderAt(TOTAL,face,face);this.ball.style.removeProperty('transform');}
       if(job)job.resolve(false);
     }
     setFace(face) {this.cancel(face);}
