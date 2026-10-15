@@ -1,6 +1,7 @@
-/* Offline shell cache, v56.6.4 ritual paper UI, original generator data. All referenced files exist in ZIP. */
-const CACHE = 'battle-exorcists-prod-v56-6.4.0';
+/* Offline shell cache, v56.6.5 readable binding UI, original generator data. All referenced files exist in ZIP. */
+const CACHE = 'battle-exorcists-prod-v56-6.5.0';
 const PRECACHE = [
+  './readability.css',
   './ritual.css', './ritual.js',
   './refinement.css',
   './folio.css',

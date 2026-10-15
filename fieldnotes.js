@@ -240,7 +240,12 @@
         width=el.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-5;
       }
       if(longest>width+1){
-        const fitted=Math.max(9,Math.floor(size*width/longest*10)/10);
+        // Keep a readable floor. All ordinary phrases still wrap at spaces;
+        // only a single over-wide word is fitted, never the whole paragraph.
+        const floor=el.matches('.trait-value,.trait-content')?17:
+          el.matches('.home-tools .tool-label')?12:
+          el.matches('.rules-fact span,.entity-choice-name,#entity-picker-current')?14:18;
+        const fitted=Math.max(floor,Math.floor(size*width/longest*10)/10);
         el.style.setProperty('font-size',`${fitted}px`,'important');el.dataset.wordFit='true';
       }
     });

@@ -1,4 +1,4 @@
-/* 56.6.4. Clean paper, a six-seal reading track, physical paper turns.
+/* 56.6.4. Clean paper, a six-seal reading track, restored letterpress animation.
    All grain is prepainted; motion changes only transforms and opacity. */
 
 /* Colour belongs to the ink, tabs and binding, never to the paper stock. */
@@ -126,23 +126,9 @@ body[data-ui] #game-screen .reading-head.long-player-name .progress-track { grid
 body[data-ui].complete #game-screen .reading-head.long-player-name #phase-hint { grid-row:4!important; }
 body[data-ui] #game-screen #open-entity-book-game.boss-ready .session-grimoire .grimoire-emblem { filter:drop-shadow(0 0 2px #c58c644f); }
 
-/* Physical paper: the original six silhouettes and their layout never
-   change. The face is replaced only while edge-on, never mid-readable. */
-body[data-ui] #game-screen .traits { position:relative; }
-body[data-ui] #game-screen .traits .trait[data-paper-turning="true"] { z-index:20!important;will-change:translate,rotate,scale;transition:none!important; }
-body[data-ui] #game-screen .traits .trait[data-paper-turning="true"]::after { opacity:0!important; }
-body[data-ui] #game-screen .traits .trait[data-paper-turning="true"] :is(.trait-value,.trait-meta,.mystery-plaque,.trait-icon) {
-  animation:none!important;transition:none!important;opacity:1!important;filter:none!important;transform:none!important;
-}
-body[data-ui] #game-screen .traits .trait[data-paper-turning="true"] :is(button,.paper-tape) { pointer-events:none!important; }
-body[data-ui] #game-screen .paper-lift-crease { position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;
-  background:linear-gradient(90deg,transparent 38%,#3d243b24 71%,#fdf4da5c 86%,#7a5b571c);
-  -webkit-mask:var(--tear-mask) center/100% 100% no-repeat;mask:var(--tear-mask) center/100% 100% no-repeat; }
-body[data-ui] #game-screen .trait[data-tear-side="right"] .paper-lift-crease { background:linear-gradient(270deg,transparent 38%,#3d243b24 71%,#fdf4da5c 86%,#7a5b571c); }
-body[data-ui] #game-screen .paper-contact-shadow { position:absolute;z-index:0;pointer-events:none;opacity:0;filter:blur(5px);isolation:isolate;
-  background:#000;mask:var(--shadow-mask) center/100% 100% no-repeat;-webkit-mask:var(--shadow-mask) center/100% 100% no-repeat; }
-/* Hide the old text springs during the new two-sided paper turn. */
-body[data-ui] #game-screen .traits .trait[data-paper-turning="true"] :is(.reveal-button,.close-button) { visibility:hidden!important; }
+/* Keep the original letterpress face/ink CSS. Ignore repeated taps while
+   its spring is running; keyboard focus is restored to the new action. */
+body[data-ui] #game-screen .trait[data-paper-press="true"] button { pointer-events:none!important; }
 
 /* Touch feedback must not turn into a desktop focus frame on iOS.
    Keyboard navigation retains a deliberate, high-contrast focus marker. */
@@ -176,7 +162,7 @@ html body[data-ui][data-input="pointer"] #home-screen .home-tools>button:focus-v
   body[data-ui] #game-screen .progress-track #progress-bar { transition:none!important; }
   body[data-ui] #game-screen .traits .trait[data-paper-turning="true"] { will-change:auto!important; }
 }
-body[data-ui] #game-screen .traits { perspective:1600px; }
+
 body[data-ui] .grimoire-iris { transform-box:fill-box;transform-origin:center; }
 /* Scope out legacy progress-track span styling: seals are not fill strips. */
 body[data-ui] #game-screen .progress-track .ritual-step {

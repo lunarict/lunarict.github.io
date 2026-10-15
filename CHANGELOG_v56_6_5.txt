@@ -1,0 +1,22 @@
+ODERZHIMYE -- v56.6.5
+
+Based on the complete v56.6.4 archive. This is a targeted visual/readability revision.
+
+1. Characteristic reveal/hide restores v56.6.3's exact pressure/spring keyframes:
+   reveal 960ms, ink/state commit 286ms; hide 790ms, state commit 302ms.
+   The sideways tear, half-turn, moving crease/shadow and alternating direction are removed.
+   v56.6.4's cancellation, duplicate-activation guards and authoritative action remain.
+   Pointer cancellation also cleans the real reused card, not a detached placeholder.
+2. Both grimoire icons use the exact engraved-eye SVG from v56.6.3 again.
+   The leather is lighter and the edge/hardware has stronger tonal separation.
+3. Rules book is a regular cloth textbook: aligned cover/pages, squared spine,
+   title panel and open-book mark. No eye, folded cover corner or ribbon on the mini icon.
+4. Larger reading type in rules, entity descriptions/effects, characteristic values,
+   labels, tabs, setup forms, buttons and hints. Typical reading text is 17-19px.
+   Font fitting no longer collapses ordinary content to 9px.
+5. At 320px, long effect titles use a full-width row rather than splitting words.
+   Tablet rules thresholds use header + paragraph instead of nested skinny columns.
+6. Neutral paper, six source torn silhouettes, reading seals, touch-focus handling,
+   keyboard navigation and completed-animation-before-dialog behavior are retained.
+7. Game data, authoritative trait action, menu timelines and globe renderer are unchanged.
+8. New readability.css; index resource revisions and service worker cache bumped to 56.6.5.

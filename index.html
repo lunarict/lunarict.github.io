@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="app-revision" content="v56.6.4-ritual-paper">
+  <meta name="app-revision" content="v56.6.5-readable-binding">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#09080d">
   <meta name="color-scheme" content="dark">
@@ -13,12 +13,13 @@
   <meta name="description" content="Генератор одержимых и лобби для настольной игры «Битва экзорцистов».">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=56.6.4">
-  <link rel="stylesheet" href="tabletop.css?v=56.6.4">
-  <link rel="stylesheet" href="fieldnotes.css?v=56.6.4">
-  <link rel="stylesheet" href="folio.css?v=56.6.4">
-  <link rel="stylesheet" href="refinement.css?v=56.6.4">
-  <link rel="stylesheet" href="ritual.css?v=56.6.4">
+  <link rel="stylesheet" href="styles.css?v=56.6.5">
+  <link rel="stylesheet" href="tabletop.css?v=56.6.5">
+  <link rel="stylesheet" href="fieldnotes.css?v=56.6.5">
+  <link rel="stylesheet" href="folio.css?v=56.6.5">
+  <link rel="stylesheet" href="refinement.css?v=56.6.5">
+  <link rel="stylesheet" href="ritual.css?v=56.6.5">
+  <link rel="stylesheet" href="readability.css?v=56.6.5">
   <title>Битва экзорцистов</title>
 </head>
 <body data-ui="tabletop" data-input="pointer">
@@ -40,22 +41,8 @@
       </div>
       <button id="continue-local" class="ghost-button hidden home-continue" type="button">Продолжить партию</button>
       <div class="home-tools" aria-label="Быстрые инструменты">
-        <button id="open-rules-home" class="rules-launch" type="button" aria-label="Открыть правила игры"><span class="tool-object manual-prop" aria-hidden="true"><span class="book-pages"></span><span class="book-leaf leaf-one"></span><span class="book-leaf leaf-two"></span><span class="book-cover"><span class="book-cover-line"></span><span class="cover-wear"></span><span class="cover-tape"></span><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg><span class="book-corner"></span></span><span class="book-ribbon"></span></span><span class="tool-label">ПРАВИЛА ИГРЫ</span><span class="tool-arrow" aria-hidden="true">&#8599;</span></button>
-        <button id="open-entity-book-home" class="entity-book-launch home-book" type="button" aria-label="Открыть Книгу сущностей"><span class="tool-object grimoire-prop" aria-hidden="true"><span class="book-pages"></span><span class="book-leaf leaf-one"></span><span class="book-leaf leaf-two"></span><span class="book-cover"><span class="book-cover-line"></span><span class="cover-wear"></span><span class="cover-tape"></span><svg class="grimoire-emblem" viewBox="0 0 80 92" aria-hidden="true">
- <defs>
-  <linearGradient id="gr-home-metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d8ccad"/><stop offset=".36" stop-color="#766c67"/><stop offset=".5" stop-color="#c3b6a1"/><stop offset=".7" stop-color="#3c343b"/><stop offset="1" stop-color="#9d8e7d"/></linearGradient>
-  <radialGradient id="gr-home-iris" cx="37%" cy="29%" r="72%"><stop stop-color="#e1a57a"/><stop offset=".3" stop-color="#bd683f"/><stop offset=".6" stop-color="#89362f"/><stop offset="1" stop-color="#210b17"/></radialGradient>
-  <linearGradient id="gr-home-rim" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#91726e"/><stop offset=".25" stop-color="#4c2937"/><stop offset=".5" stop-color="#130b14"/><stop offset=".8" stop-color="#735052"/><stop offset="1" stop-color="#251723"/></linearGradient>
- </defs>
- <path class="grimoire-bracing" d="M16 32 25 24 22 14 33 22 39 7 44 22 59 13 54 29 66 34M15 60 24 68 21 78 33 71 40 86 47 71 58 79 55 65 65 60" fill="none" stroke="url(#gr-home-metal)" stroke-width="1.6"/>
- <path d="M8 46Q24 22 42 27Q63 30 73 44Q58 70 39 65Q22 63 8 46Z" fill="#08070b" stroke="#060409" stroke-width="5"/>
- <path d="M8 44Q25 22 42 28Q60 30 73 43Q59 65 40 64Q22 62 8 44Z" fill="url(#gr-home-rim)" stroke="#8c685f" stroke-width="1"/>
- <path d="M15 45Q30 32 42 34Q57 34 66 44Q53 57 40 57Q27 57 15 45Z" fill="#170d13"/>
- <g class="grimoire-iris"><ellipse cx="41" cy="45" rx="12" ry="12" fill="url(#gr-home-iris)" stroke="#bc7152" stroke-width=".8"/>
- <path d="M41 34Q46 45 41 57Q36 45 41 34Z" fill="#09070b"/><ellipse cx="37" cy="39" rx="2.8" ry="1.4" fill="#f9d8a9" opacity=".82"/><path d="M45 52 49 49" stroke="#d47b54" stroke-width="1.2"/></g>
- <path d="M13 44Q32 23 49 32M16 48Q30 63 46 60M61 34 70 42" fill="none" stroke="#b9917d" stroke-width="1.2" opacity=".6"/>
- <path d="m17 36-5-4m8 1-3-6m43 32 5 5m-8-2 1 7" stroke="#141019" stroke-width="2.4"/>
- </svg><span class="grimoire-stitches"></span><span class="grimoire-claw top-claw"></span><span class="grimoire-claw bottom-claw"></span><span class="grimoire-clasp"></span><span class="book-corner"></span></span><span class="book-ribbon"></span></span><span class="tool-label">КНИГА СУЩНОСТЕЙ</span><span class="tool-arrow" aria-hidden="true">&#8599;</span></button>
+        <button id="open-rules-home" class="rules-launch" type="button" aria-label="Открыть правила игры"><span class="tool-object manual-prop" aria-hidden="true"><span class="book-pages"></span><span class="book-leaf leaf-one"></span><span class="book-leaf leaf-two"></span><span class="book-cover"><span class="book-cover-line"></span><span class="cover-wear"></span><span class="manual-title-plate"><b>ПРАВИЛА</b><i></i></span><svg class="manual-book-mark" viewBox="0 0 40 32" aria-hidden="true"><path d="M20 7C15 3 9 3 3 4v22c6-1 12 0 17 3 5-3 11-4 17-3V4c-6-1-12-1-17 3Zm0 0v22M7 9l8 2M7 14l8 2M7 19l8 2m10-10 8-2m-8 7 8-2m-8 7 8-2"/></svg></span><span class="book-ribbon"></span></span><span class="tool-label">ПРАВИЛА ИГРЫ</span><span class="tool-arrow" aria-hidden="true">&#8599;</span></button>
+        <button id="open-entity-book-home" class="entity-book-launch home-book" type="button" aria-label="Открыть Книгу сущностей"><span class="tool-object grimoire-prop" aria-hidden="true"><span class="book-pages"></span><span class="book-leaf leaf-one"></span><span class="book-leaf leaf-two"></span><span class="book-cover"><span class="book-cover-line"></span><span class="cover-wear"></span><span class="cover-tape"></span><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg><span class="grimoire-stitches"></span><span class="grimoire-claw top-claw"></span><span class="grimoire-claw bottom-claw"></span><span class="grimoire-clasp"></span><span class="book-corner"></span></span><span class="book-ribbon"></span></span><span class="tool-label">КНИГА СУЩНОСТЕЙ</span><span class="tool-arrow" aria-hidden="true">&#8599;</span></button>
         <button id="open-magic-ball-home" class="magic-ball-launch home-ball" type="button" aria-label="Открыть Магический шар"><span class="tool-object oracle-prop" aria-hidden="true"><span class="oracle-shadow"></span><span class="oracle-mini"><span class="oracle-window"><span class="oracle-meniscus"></span><span class="oracle-facet"><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg></span></span></span></span><span class="tool-label">МАГИЧЕСКИЙ ШАР</span><span class="tool-arrow" aria-hidden="true">&#8599;</span></button>
       </div>
     </section>
@@ -96,26 +83,12 @@
           </button>
           <div class="game-control-actions">
             <button id="open-rules-game" class="game-help-button" type="button" aria-label="Открыть правила игры">
-              <span class="session-mini-book session-manual" aria-hidden="true"><span class="session-mini-pages"></span><span class="session-mini-cover"><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg><span class="manual-cover-label"></span></span></span>
+              <span class="session-mini-book session-manual" aria-hidden="true"><span class="session-mini-pages"></span><span class="session-mini-cover"><svg class="manual-book-mark" viewBox="0 0 40 32" aria-hidden="true"><path d="M20 7C15 3 9 3 3 4v22c6-1 12 0 17 3 5-3 11-4 17-3V4c-6-1-12-1-17 3Zm0 0v22M7 9l8 2M7 14l8 2M7 19l8 2m10-10 8-2m-8 7 8-2m-8 7 8-2"/></svg></span></span>
               <span>Правила</span>
             </button>
         <div class="game-quick-tools" aria-label="Игровые инструменты">
           <button id="open-entity-book-game" class="entity-book-launch compact" type="button" aria-label="Открыть Книгу сущностей">
-            <span class="session-mini-book session-grimoire" aria-hidden="true"><span class="session-mini-pages"></span><span class="session-mini-cover"><svg class="grimoire-emblem" viewBox="0 0 80 92" aria-hidden="true">
- <defs>
-  <linearGradient id="gr-small-metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d8ccad"/><stop offset=".36" stop-color="#766c67"/><stop offset=".5" stop-color="#c3b6a1"/><stop offset=".7" stop-color="#3c343b"/><stop offset="1" stop-color="#9d8e7d"/></linearGradient>
-  <radialGradient id="gr-small-iris" cx="37%" cy="29%" r="72%"><stop stop-color="#e1a57a"/><stop offset=".3" stop-color="#bd683f"/><stop offset=".6" stop-color="#89362f"/><stop offset="1" stop-color="#210b17"/></radialGradient>
-  <linearGradient id="gr-small-rim" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#91726e"/><stop offset=".25" stop-color="#4c2937"/><stop offset=".5" stop-color="#130b14"/><stop offset=".8" stop-color="#735052"/><stop offset="1" stop-color="#251723"/></linearGradient>
- </defs>
- <path class="grimoire-bracing" d="M16 32 25 24 22 14 33 22 39 7 44 22 59 13 54 29 66 34M15 60 24 68 21 78 33 71 40 86 47 71 58 79 55 65 65 60" fill="none" stroke="url(#gr-small-metal)" stroke-width="1.6"/>
- <path d="M8 46Q24 22 42 27Q63 30 73 44Q58 70 39 65Q22 63 8 46Z" fill="#08070b" stroke="#060409" stroke-width="5"/>
- <path d="M8 44Q25 22 42 28Q60 30 73 43Q59 65 40 64Q22 62 8 44Z" fill="url(#gr-small-rim)" stroke="#8c685f" stroke-width="1"/>
- <path d="M15 45Q30 32 42 34Q57 34 66 44Q53 57 40 57Q27 57 15 45Z" fill="#170d13"/>
- <g class="grimoire-iris"><ellipse cx="41" cy="45" rx="12" ry="12" fill="url(#gr-small-iris)" stroke="#bc7152" stroke-width=".8"/>
- <path d="M41 34Q46 45 41 57Q36 45 41 34Z" fill="#09070b"/><ellipse cx="37" cy="39" rx="2.8" ry="1.4" fill="#f9d8a9" opacity=".82"/><path d="M45 52 49 49" stroke="#d47b54" stroke-width="1.2"/></g>
- <path d="M13 44Q32 23 49 32M16 48Q30 63 46 60M61 34 70 42" fill="none" stroke="#b9917d" stroke-width="1.2" opacity=".6"/>
- <path d="m17 36-5-4m8 1-3-6m43 32 5 5m-8-2 1 7" stroke="#141019" stroke-width="2.4"/>
- </svg><span class="grimoire-stitches"></span><span class="grimoire-claw top-claw"></span><span class="grimoire-claw bottom-claw"></span><span class="grimoire-clasp"></span></span></span>
+            <span class="session-mini-book session-grimoire" aria-hidden="true"><span class="session-mini-pages"></span><span class="session-mini-cover"><svg class="engraved-eye" viewBox="0 0 48 48"><path class="eye-shape" d="M8.4 24.4c4.4-6.3 9.3-9.3 15.7-9.1 6 .1 11 3 15.7 8.5-4.7 6-9.8 9.1-15.8 9.3-6.3.1-11.1-2.8-15.6-8.7Z"></path><circle class="eye-iris" cx="24.2" cy="24.1" r="4.7"></circle><path class="eye-rays" d="M24 3.8l.4 6.4M24.4 37.8l-.3 6.3M3.7 24.4l6.2-.3M38.2 23.9l6.1.6M9.1 8.6l4.6 4.2M34.5 35l4.7 4.3M39.3 8.4l-4.6 4.5M13.3 35.3l-4.4 4.1M16.4 5.9l2.1 4.9M31.6 38l1.9 4.4M5.8 31.7l4.7-2M38.1 18.4l4.6-1.8"></path></svg><span class="grimoire-stitches"></span><span class="grimoire-claw top-claw"></span><span class="grimoire-claw bottom-claw"></span><span class="grimoire-clasp"></span></span></span>
             <span>Книга сущностей</span>
           </button>
           <button id="open-magic-ball-game" class="magic-ball-launch compact" type="button" aria-label="Открыть Магический шар">
@@ -261,10 +234,10 @@
 
   <dialog id="share-dialog"><form method="dialog" class="dialog-card share-card gothic-panel"><button class="dialog-close" value="cancel" aria-label="Закрыть">×</button><p class="eyebrow">ПОДЕЛИТЬСЯ</p><h2 id="share-title">Битва экзорцистов</h2><p id="share-code-line" class="share-code-line hidden">Код: <strong id="share-code-value"></strong></p><div class="qr-shell"><img id="share-qr" alt="QR-код" hidden><span class="qr-placeholder">⌁</span></div><input id="share-url" class="share-url" type="text" readonly><p id="share-hint" class="share-hint"></p><div class="dialog-actions"><button id="copy-share" value="noop" type="button" class="ghost-button">Копировать</button><button id="native-share" value="noop" type="button" class="accent-button">Поделиться</button></div></form></dialog>
 
-  <script src="mobile-ball.js?v=56.6.4" defer></script>
-  <script src="app.js?v=56.6.4" defer></script>
-<script src="tabletop.js?v=56.6.4" defer></script>
-<script src="fieldnotes.js?v=56.6.4" defer></script>
-<script src="ritual.js?v=56.6.4" defer></script>
+  <script src="mobile-ball.js?v=56.6.5" defer></script>
+  <script src="app.js?v=56.6.5" defer></script>
+<script src="tabletop.js?v=56.6.5" defer></script>
+<script src="fieldnotes.js?v=56.6.5" defer></script>
+<script src="ritual.js?v=56.6.5" defer></script>
 </body>
 </html>

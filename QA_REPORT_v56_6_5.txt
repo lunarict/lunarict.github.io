@@ -1,0 +1,31 @@
+ODERZHIMYE -- v56.6.5
+
+385 browser assertions passed; 0 failed. 29 source/integrity checks passed.
+
+Environment: installed Chromium, release JS/CSS and locally inlined assets.
+HTTP URL navigation is blocked in this execution environment. Test pages therefore
+used about:blank with release resources inlined and a base URL for asset resolution.
+The release files themselves do not contain that harness or altered asset addressing.
+
+Viewports: 320x720, 360x800, 390x844, 430x932, 640x400 (landscape),
+768x1024, 1024x768, 1280x900.
+
+Checked: all 24 entities at every width, all seven rules chapters, full-word text
+bounds, search, four-player tabs, long player names, toolbar touch targets >=44px,
+revealed/hidden cards, completion seals, same card node across transitions.
+
+Motion: restored 960ms reveal spring with delayed authoritative action;
+no sideways turn/crease layer; close/reopen, double tap, simultaneous reveals,
+player switch and new-deal cancellation, initial and reused-card pointercancel.
+All six animated home/game tools open their dialogs only after their timelines.
+Reduced motion, touch outline suppression and keyboard input modality checked.
+
+Integrity: exact old eye SVG in both grimoire icons; neutral stock; existing
+assets/masks, generator/authoritative action, rules/entity renderers, menu-motion
+code and mobile-ball.js preserved. JS syntax, HTML ids, referenced resources
+and service-worker precache paths validated.
+
+Not tested: physical iPhone/iOS Safari, native device GPU behavior, real peer-to-peer
+network party, live hosting, HTTP cache replacement or offline installation.
+A passing simulated viewport is not a claim of physical-device certification.
+Individual assertions are in docs/verification.json.

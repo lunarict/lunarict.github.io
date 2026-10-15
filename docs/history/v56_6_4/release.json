@@ -1,0 +1,22 @@
+{
+  "version": "56.6.4",
+  "base_version": "56.6.3",
+  "name": "Ritual paper, reading seals and grimoire",
+  "date": "2026-10-14",
+  "complete_build": true,
+  "new_runtime_files": [
+    "ritual.css",
+    "ritual.js"
+  ],
+  "changed_runtime_files": [
+    "index.html",
+    "app.js",
+    "fieldnotes.js",
+    "service-worker.js"
+  ],
+  "verification": "verification.json",
+  "browser_checks_passed": 171,
+  "browser_checks_failed": 0,
+  "integrity_checks_passed": 21,
+  "new_dependencies": []
+}

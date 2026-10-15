@@ -588,11 +588,11 @@ function applyTraitAction(playerId, action, key) {
   return null;
 }
 
-// 56.6.4: one existing paper node turns over at its edge-on midpoint.
+// 56.6.5: restored letterpress/spring on one existing paper node.
 // The UI owns motion; only traitAction changes authoritative game state.
 function beginTraitPaperAction(playerId, key, button, action) {
   const card = button?.closest('.trait');
-  if (!card || card.dataset.paperTurning === 'true' || !canControlPlayer(playerId)) return;
+  if (!card || card.dataset.paperPress === 'true' || !canControlPlayer(playerId)) return;
   const original = game?.players?.find(p => p.id === playerId)?.character?.traits?.[key];
   const target = action === 'reveal';
   if (!original || original.open === target) return;
@@ -761,12 +761,14 @@ function renderGame() {
       reveal.addEventListener('pointerdown', event => {
         if (event.pointerType !== 'mouse' || event.buttons) reveal.closest('.trait')?.classList.add('paper-fingerdown');
       });
-      reveal.addEventListener('pointercancel', () => card.classList.remove('paper-fingerdown'));
+      reveal.addEventListener('pointercancel', () => reveal.closest('.trait')?.classList.remove('paper-fingerdown'));
       reveal.addEventListener('pointerleave', () => {
-        if (!card.classList.contains('paper-pressing')) card.classList.remove('paper-fingerdown');
+        const pressedCard = reveal.closest('.trait');
+        if (!pressedCard?.classList.contains('paper-pressing')) pressedCard?.classList.remove('paper-fingerdown');
       });
       reveal.addEventListener('pointerup', () => window.setTimeout(() => {
-        if (!card.classList.contains('paper-pressing')) card.classList.remove('paper-fingerdown');
+        const pressedCard = reveal.closest('.trait');
+        if (!pressedCard?.classList.contains('paper-pressing')) pressedCard?.classList.remove('paper-fingerdown');
       }, 90));
       reveal.addEventListener('click', () => beginTraitReveal(player.id, item.key, reveal));
       card.appendChild(reveal);

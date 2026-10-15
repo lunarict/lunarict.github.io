@@ -1,22 +1,24 @@
 {
-  "version": "56.6.4",
-  "base_version": "56.6.3",
-  "name": "Ritual paper, reading seals and grimoire",
-  "date": "2026-10-14",
-  "complete_build": true,
-  "new_runtime_files": [
-    "ritual.css",
-    "ritual.js"
+  "version": "56.6.5",
+  "base": "56.6.4",
+  "name": "readable-binding",
+  "browser_assertions_passed": 385,
+  "source_checks_passed": 29,
+  "new_files": [
+    "readability.css"
   ],
   "changed_runtime_files": [
     "index.html",
     "app.js",
+    "ritual.js",
+    "ritual.css",
     "fieldnotes.js",
-    "service-worker.js"
+    "service-worker.js",
+    "readability.css"
   ],
-  "verification": "verification.json",
-  "browser_checks_passed": 171,
-  "browser_checks_failed": 0,
-  "integrity_checks_passed": 21,
-  "new_dependencies": []
+  "limits": [
+    "No physical iOS Safari test",
+    "No real network party",
+    "No live hosting/cache test"
+  ]
 }
